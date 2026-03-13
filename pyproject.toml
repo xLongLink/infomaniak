@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "infomaniak"
+version = "0.1.0"
+description = "CLI tool for managing Infomaniak services — DNS records, domains, and more."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [
+    { name = "Doruk Tan Ozturk", email = "peak@peaktwilight.com" },
+]
+keywords = ["infomaniak", "dns", "cli", "domain", "api"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: Name Service (DNS)",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "requests>=2.32.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/peaktwilight/infomaniak-cli"
+Repository = "https://github.com/peaktwilight/infomaniak-cli"
+Issues = "https://github.com/peaktwilight/infomaniak-cli/issues"
+
+[project.scripts]
+infomaniak-cli = "infomaniak_cli:main"
+
+[tool.setuptools]
+py-modules = ["infomaniak_cli"]
