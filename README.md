@@ -1,6 +1,7 @@
 # infomaniak
 
 [![PyPI version](https://img.shields.io/pypi/v/infomaniak)](https://pypi.org/project/infomaniak/)
+[![Tests](https://github.com/peaktwilight/infomaniak-cli/actions/workflows/test.yml/badge.svg)](https://github.com/peaktwilight/infomaniak-cli/actions/workflows/test.yml)
 [![Python versions](https://img.shields.io/pypi/pyversions/infomaniak)](https://pypi.org/project/infomaniak/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
