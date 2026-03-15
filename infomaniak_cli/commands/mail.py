@@ -68,24 +68,15 @@ def cmd_mail_mailboxes(args):
         print(f"  {dim('No mailboxes found.')}")
         return
 
-    headers = ["ID", "Email", "Size"]
+    headers = ["Email", "Type"]
     rows = []
     for m in mailboxes:
-        email = m.get("mailbox_name", "?")
-        domain = m.get("mailbox_domain", "")
-        if domain:
-            email = f"{email}@{domain}"
-        size_mb = m.get("size_used", 0)
-        if size_mb:
-            size_display = f"{size_mb / 1024 / 1024:.0f} MB" if size_mb > 1024 * 1024 else f"{size_mb / 1024:.0f} KB"
-        else:
-            size_display = dim("0")
+        email = m.get("mailbox", m.get("mailbox_idn", "?"))
+        mtype = m.get("type") or dim("standard")
+        if m.get("is_free_mail"):
+            mtype = dim("free")
 
-        rows.append([
-            m.get("id", "?"),
-            email,
-            size_display,
-        ])
+        rows.append([email, mtype])
 
     print(f"\n  {bold(f'Mailboxes ({len(rows)})')}\n")
     print_table(headers, rows)
