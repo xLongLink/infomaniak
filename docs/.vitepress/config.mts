@@ -17,7 +17,14 @@ export default defineConfig({
       {
         text: 'Backup',
         collapsed: true,
-        items: [{ text: 'Overview', link: '/backup/' }],
+        items: [
+          { text: 'Overview', link: '/backup/' },
+          { text: 'Product', link: '/backup/product' },
+          { text: 'Slots', link: '/backup/slots' },
+          { text: 'Administrator', link: '/backup/administrator' },
+          { text: 'Passwords', link: '/backup/passwords' },
+          { text: 'Billing', link: '/backup/billing' },
+        ],
       },
       {
         text: 'Cloud',
