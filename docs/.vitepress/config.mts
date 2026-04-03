@@ -7,6 +7,7 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/infomaniak/' : '/',
   cleanUrls: true,
   themeConfig: {
+    socialLinks: [{ icon: 'github', link: 'https://github.com/XLongLink/infomaniak' }],
     sidebar: [
       {
         text: 'AI',
@@ -46,7 +47,26 @@ export default defineConfig({
       {
         text: 'kChat',
         collapsed: true,
-        items: [{ text: 'Overview', link: '/kchat/' }],
+        items: [
+          { text: 'Overview', link: '/kchat/' },
+          { text: 'Users', link: '/kchat/users' },
+          { text: 'Bots', link: '/kchat/bots' },
+          { text: 'Teams', link: '/kchat/teams' },
+          { text: 'Channels', link: '/kchat/channels' },
+          { text: 'Posts', link: '/kchat/posts' },
+          { text: 'Threads', link: '/kchat/threads' },
+          { text: 'Files', link: '/kchat/files' },
+          { text: 'Preferences', link: '/kchat/preferences' },
+          { text: 'Status', link: '/kchat/status' },
+          { text: 'Emoji', link: '/kchat/emoji' },
+          { text: 'Reactions', link: '/kchat/reactions' },
+          { text: 'Webhooks', link: '/kchat/webhooks' },
+          { text: 'Commands', link: '/kchat/commands' },
+          { text: 'System', link: '/kchat/system' },
+          { text: 'Groups', link: '/kchat/groups' },
+          { text: 'Roles', link: '/kchat/roles' },
+          { text: 'Insights', link: '/kchat/insights' },
+        ],
       },
       {
         text: 'kDrive',
