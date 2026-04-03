@@ -4,7 +4,7 @@ export default defineConfig({
   title: 'Infomaniak SDK for Python',
   description: 'Python SDK documentation for the Infomaniak API.',
   srcDir: 'src',
-  base: '/infomaniak/',
+  base: process.env.NODE_ENV === 'production' ? '/infomaniak/' : '/',
   cleanUrls: true,
   themeConfig: {
     sidebar: [
