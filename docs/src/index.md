@@ -1,18 +1,8 @@
----
-layout: home
+# Overview
 
-hero:
-  name: Infomaniak SDK for Python
-  text: API client reference
-  tagline: Documentation for the Python SDK built from the Infomaniak API structure.
-  actions:
-    - theme: brand
-      text: Browse Core Resources
-      link: /core/
-    - theme: alt
-      text: View Repository
-      link: https://github.com/XLongLink/infomaniak
----
+Welcome to the Infomaniak SDK for Python documentation.
+
+This documentation mirrors the SDK resource layout so you can navigate API domains the same way you use the client.
 
 ## Structure
 
@@ -21,4 +11,14 @@ The SDK documentation mirrors the resource tree in `infomaniak/resources`.
 - `core/` contains shared endpoints for profile, locale, events, and user-related resources.
 - `kmeet/` contains conference-planning and room-related resources.
 
-Use the navigation to explore the available resources and their models.
+Use the navigation sidebar to explore the available resources and their models.
+
+## Quick start
+
+```py
+from infomaniak import Client
+
+client = Client(token="<token>")
+
+profile = client.core.profile.get_current_profile()
+```
