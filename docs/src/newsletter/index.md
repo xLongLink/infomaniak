@@ -1,5 +1,17 @@
-# Newsletter Overview
+# Newsletter
 
-This section contains the `newsletter` resources for the Infomaniak Python SDK.
+Manage `client.newsletter` endpoints.
 
-Use this overview as the entry point for `newsletter` endpoints.
+## Nested Resources
+
+- `campaigns`
+- `credits`
+- `dashboard`
+- `domains`
+- `fields`
+- `groups`
+- `operations`
+- `segments`
+- `subscribers`
+- `templates`
+- `webforms`
