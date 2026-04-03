@@ -6,6 +6,7 @@ class Plan(Resouce):
 
     def plan_a_conference(self) -> None:
         """Placeholder for conference planning endpoints."""
+        # https://developer.infomaniak.com/docs/api/post/1/kmeet/rooms
         raise NotImplementedError("kMeet plan endpoints are not implemented yet.")
 
 

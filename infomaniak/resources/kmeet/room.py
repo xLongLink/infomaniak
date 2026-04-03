@@ -6,6 +6,7 @@ class Room(Resouce):
 
     def get_room_settings(self) -> None:
         """Placeholder for room settings endpoints."""
+        # https://developer.infomaniak.com/docs/api/get/1/kmeet/rooms/%7Broom_id%7D/settings
         raise NotImplementedError("kMeet room endpoints are not implemented yet.")
 
 
