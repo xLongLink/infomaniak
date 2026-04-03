@@ -1,11 +1,16 @@
 # kChat Bots
 
-This page documents the `infomaniak/resources/kchat/bots.py` resource.
+Placeholder resource for `client.kchat.bots`.
 
 ## Methods
 
-- `non_implemented()`
+- `create()`
+- `list()`
+- `update()`
+- `display()`
+- `disable()`
+- `enable()`
 
 ## Status
 
-`non_implemented()` is currently a placeholder and raises `NotImplementedError`.
+All methods currently raise `NotImplementedError` placeholders.

@@ -1,11 +1,15 @@
 # kChat Files
 
-This page documents the `infomaniak/resources/kchat/files.py` resource.
+Placeholder resource for `client.kchat.files`.
 
 ## Methods
 
-- `non_implemented()`
+- `upload()`
+- `get()`
+- `thumbnail()`
+- `preview()`
+- `metadata()`
 
 ## Status
 
-`non_implemented()` is currently a placeholder and raises `NotImplementedError`.
+All methods currently raise `NotImplementedError` placeholders.

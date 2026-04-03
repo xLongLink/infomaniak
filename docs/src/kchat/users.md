@@ -1,11 +1,25 @@
 # kChat Users
 
-This page documents the `infomaniak/resources/kchat/users.py` resource.
+Placeholder resource for `client.kchat.users`.
 
 ## Methods
 
-- `non_implemented()`
+- `list()`
+- `by_ids()`
+- `by_group_channels_ids()`
+- `by_usernames()`
+- `search()`
+- `autocomplete()`
+- `display()`
+- `patch()`
+- `roles.update()`
+- `profile.image.get()`
+- `profile.image.default()`
+- `username.display()`
+- `email.display()`
+- `typing.publish()`
+- `channels.list()`
 
 ## Status
 
-`non_implemented()` is currently a placeholder and raises `NotImplementedError`.
+All methods currently raise `NotImplementedError` placeholders.
