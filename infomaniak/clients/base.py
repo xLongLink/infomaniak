@@ -25,13 +25,42 @@ class BaseClient(RootClient):
             transport=transport,
         )
 
-    def _request(
+    def request(
         self,
         method: str,
         path: str,
         **kwargs: Any,
     ) -> httpx.Response:
         return self._client.request(method, path, **kwargs)
+
+    def _request(
+        self,
+        method: str,
+        path: str,
+        **kwargs: Any,
+    ) -> httpx.Response:
+        return self.request(method, path, **kwargs)
+
+    def get(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("GET", path, **kwargs)
+
+    def post(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("POST", path, **kwargs)
+
+    def put(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("PUT", path, **kwargs)
+
+    def patch(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("PATCH", path, **kwargs)
+
+    def delete(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("DELETE", path, **kwargs)
+
+    def head(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("HEAD", path, **kwargs)
+
+    def options(self, path: str, **kwargs: Any) -> httpx.Response:
+        return self.request("OPTIONS", path, **kwargs)
 
     def close(self) -> None:
         self._client.close()
@@ -46,5 +75,4 @@ class BaseClient(RootClient):
         tb: Any,
     ) -> None:
         self.close()
-
 

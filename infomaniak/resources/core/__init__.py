@@ -1,21 +1,12 @@
-class Core:
+from infomaniak.resource import Resouce, AsyncResource
+
+
+class Core(Resouce):
     """Core resources for Infomaniak services."""
 
-    def __init__(self, client):
-        self._client = client
+    def __new__(cls) -> Self:
+        return super().__new__()
 
-    def user(self):
-        """Get the current authenticated user."""
-        return self._client._request("GET", "/user")
-    
 
-class AsyncCore:
+class AsyncCore(AsyncResource):
     """Async core resources for Infomaniak services."""
-
-    def __init__(self, client):
-        self._client = client
-
-    async def user(self):
-        """Get the current authenticated user."""
-        return await self._client._request("GET", "/user")
-    

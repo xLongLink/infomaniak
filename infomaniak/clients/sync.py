@@ -25,13 +25,42 @@ class AsyncBaseClient(RootClient):
             transport=transport,
         )
 
-    async def _request(
+    async def request(
         self,
         method: str,
         path: str,
         **kwargs: Any,
     ) -> httpx.Response:
         return await self._client.request(method, path, **kwargs)
+
+    async def _request(
+        self,
+        method: str,
+        path: str,
+        **kwargs: Any,
+    ) -> httpx.Response:
+        return await self.request(method, path, **kwargs)
+
+    async def get(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("GET", path, **kwargs)
+
+    async def post(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("POST", path, **kwargs)
+
+    async def put(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("PUT", path, **kwargs)
+
+    async def patch(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("PATCH", path, **kwargs)
+
+    async def delete(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("DELETE", path, **kwargs)
+
+    async def head(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("HEAD", path, **kwargs)
+
+    async def options(self, path: str, **kwargs: Any) -> httpx.Response:
+        return await self.request("OPTIONS", path, **kwargs)
 
     async def aclose(self) -> None:
         await self._client.aclose()
