@@ -46,3 +46,5 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+.vitepress/
