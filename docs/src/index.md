@@ -19,5 +19,6 @@ hero:
 The SDK documentation mirrors the resource tree in `infomaniak/resources`.
 
 - `core/` contains shared endpoints for profile, locale, events, and user-related resources.
+- `kmeet/` contains conference-planning and room-related resources.
 
 Use the navigation to explore the available resources and their models.
