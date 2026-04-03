@@ -4,8 +4,8 @@ import json
 
 import pytest
 
-from infomaniak_cli import output
-from infomaniak_cli.commands.status import cmd_status
+from infomaniak import output
+from infomaniak.commands.status import cmd_status
 
 
 class TestStatus:

@@ -1,6 +1,6 @@
 """Tests for zone file generation."""
 
-from infomaniak_cli.commands.zone import cmd_dns_zone
+from infomaniak.commands.zone import cmd_dns_zone
 
 
 class TestDnsZone:

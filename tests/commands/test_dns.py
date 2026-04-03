@@ -5,7 +5,7 @@ import json
 import pytest
 from unittest.mock import patch
 
-from infomaniak_cli.commands.dns import (
+from infomaniak.commands.dns import (
     cmd_dns_add,
     cmd_dns_backup,
     cmd_dns_clone,
@@ -180,7 +180,7 @@ class TestDnsImport:
 
 class TestDnsDiff:
     def test_no_differences(self, tmp_path, capsys, mock_token, mock_api, fake_args, monkeypatch):
-        from infomaniak_cli import output
+        from infomaniak import output
         monkeypatch.setattr(output, "_COLOR", False)
         _, response = mock_api
         records = [
@@ -197,7 +197,7 @@ class TestDnsDiff:
         assert "No differences" in captured.out
 
     def test_shows_differences(self, tmp_path, capsys, mock_token, mock_api, fake_args, monkeypatch):
-        from infomaniak_cli import output
+        from infomaniak import output
         monkeypatch.setattr(output, "_COLOR", False)
         _, response = mock_api
         live_records = [
@@ -361,7 +361,7 @@ class TestDnsSync:
         assert "Already in sync" in captured.out
 
     def test_dry_run_shows_plan(self, tmp_path, capsys, mock_token, mock_api, fake_args, monkeypatch):
-        from infomaniak_cli import output
+        from infomaniak import output
         monkeypatch.setattr(output, "_COLOR", False)
         _, response = mock_api
         live = [

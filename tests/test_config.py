@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from infomaniak_cli import config
+from infomaniak import config
 
 
 class TestLoadConfig:

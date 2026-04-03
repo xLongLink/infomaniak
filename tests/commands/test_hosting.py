@@ -1,6 +1,6 @@
 """Tests for hosting commands."""
 
-from infomaniak_cli.commands.hosting import cmd_hosting_list
+from infomaniak.commands.hosting import cmd_hosting_list
 
 
 class TestHostingList:

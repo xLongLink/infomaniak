@@ -1,7 +1,7 @@
 """Tests for DNS audit command."""
 
-from infomaniak_cli import output
-from infomaniak_cli.commands.audit import cmd_dns_audit
+from infomaniak import output
+from infomaniak.commands.audit import cmd_dns_audit
 
 
 class TestDnsAudit:

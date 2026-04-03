@@ -1,6 +1,6 @@
 """Tests for drive commands."""
 
-from infomaniak_cli.commands.drive import cmd_drive_list
+from infomaniak.commands.drive import cmd_drive_list
 
 
 class TestDriveList:

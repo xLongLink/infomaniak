@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from infomaniak_cli.commands.mail import cmd_mail_list
+from infomaniak.commands.mail import cmd_mail_list
 
 
 class TestMailList:

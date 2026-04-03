@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from infomaniak_cli.commands.account import cmd_account
+from infomaniak.commands.account import cmd_account
 
 
 class TestAccount:

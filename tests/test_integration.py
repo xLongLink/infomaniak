@@ -6,7 +6,7 @@ import sys
 
 import pytest
 
-CLI = [sys.executable, "-m", "infomaniak_cli"]
+CLI = [sys.executable, "-m", "infomaniak"]
 
 
 def run(*args, env_override=None, input_text=None):
@@ -162,8 +162,8 @@ class TestDnsExportImport:
 
 
 class TestModuleExecution:
-    def test_python_m_infomaniak_cli(self):
-        """Verify python -m infomaniak_cli works."""
+    def test_python_m_infomaniak(self):
+        """Verify python -m infomaniak works."""
         code, out, err = run("--version")
         assert code == 0
         assert "infomaniak" in out

@@ -43,10 +43,10 @@ Issues = "https://github.com/peaktwilight/infomaniak-cli/issues"
 dev = ["pytest>=7.0", "pytest-cov"]
 
 [project.scripts]
-infomaniak = "infomaniak_cli.cli:main"
+infomaniak = "infomaniak.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["infomaniak_cli*"]
+include = ["infomaniak*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

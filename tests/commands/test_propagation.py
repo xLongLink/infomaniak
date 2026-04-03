@@ -2,15 +2,15 @@
 
 from unittest.mock import patch
 
-from infomaniak_cli import output
-from infomaniak_cli.commands.propagation import cmd_dns_propagation
+from infomaniak import output
+from infomaniak.commands.propagation import cmd_dns_propagation
 
 
 class TestDnsPropagation:
     def test_all_agree(self, capsys, fake_args, monkeypatch):
         monkeypatch.setattr(output, "_COLOR", False)
 
-        with patch("infomaniak_cli.commands.propagation._resolve") as mock_resolve:
+        with patch("infomaniak.commands.propagation._resolve") as mock_resolve:
             mock_resolve.return_value = ["1.2.3.4"]
 
             cmd_dns_propagation(fake_args(domain="example.com", name="@", type="A"))
@@ -28,7 +28,7 @@ class TestDnsPropagation:
                 return ["1.2.3.4"]
             return ["5.6.7.8"]
 
-        with patch("infomaniak_cli.commands.propagation._resolve", side_effect=mock_resolve):
+        with patch("infomaniak.commands.propagation._resolve", side_effect=mock_resolve):
             cmd_dns_propagation(fake_args(domain="example.com", name="@", type="A"))
             captured = capsys.readouterr()
             assert "Inconsistent" in captured.out
@@ -36,7 +36,7 @@ class TestDnsPropagation:
     def test_with_subdomain(self, capsys, fake_args, monkeypatch):
         monkeypatch.setattr(output, "_COLOR", False)
 
-        with patch("infomaniak_cli.commands.propagation._resolve") as mock_resolve:
+        with patch("infomaniak.commands.propagation._resolve") as mock_resolve:
             mock_resolve.return_value = ["1.2.3.4"]
 
             cmd_dns_propagation(fake_args(domain="example.com", name="www", type="A"))

@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from infomaniak_cli.commands.products import cmd_products
+from infomaniak.commands.products import cmd_products
 
 
 class TestProducts:
@@ -34,7 +34,7 @@ class TestProducts:
         assert call_params.get("service_name") == "email_hosting"
 
     def test_status_indicators(self, capsys, mock_token, mock_account_id, mock_api, fake_args, monkeypatch):
-        from infomaniak_cli import output
+        from infomaniak import output
         monkeypatch.setattr(output, "_COLOR", False)
 
         _, response = mock_api

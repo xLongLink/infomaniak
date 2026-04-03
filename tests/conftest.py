@@ -33,7 +33,7 @@ def fake_args():
 @pytest.fixture
 def mock_api():
     """Mock the requests.request call used by api_request."""
-    with patch("infomaniak_cli.api.requests.request") as mock_req:
+    with patch("infomaniak.api.requests.request") as mock_req:
         response = MagicMock()
         response.status_code = 200
         response.text = ""

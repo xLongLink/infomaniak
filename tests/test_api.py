@@ -3,7 +3,7 @@
 import pytest
 from unittest.mock import MagicMock, patch
 
-from infomaniak_cli.api import api_request, api_request_paginated
+from infomaniak.api import api_request, api_request_paginated
 
 
 class TestApiRequest:

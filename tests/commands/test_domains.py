@@ -4,8 +4,8 @@ import json
 import time
 
 import pytest
-from infomaniak_cli import output
-from infomaniak_cli.commands.domains import cmd_domains
+from infomaniak import output
+from infomaniak.commands.domains import cmd_domains
 
 
 class TestDomains:

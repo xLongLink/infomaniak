@@ -3,7 +3,7 @@
 import pytest
 from unittest.mock import patch
 
-from infomaniak_cli.cli import main
+from infomaniak.cli import main
 
 
 class TestCli:

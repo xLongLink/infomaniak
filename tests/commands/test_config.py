@@ -1,7 +1,7 @@
 """Tests for config commands."""
 
-from infomaniak_cli import config
-from infomaniak_cli.commands.config import cmd_config_show
+from infomaniak import config
+from infomaniak.commands.config import cmd_config_show
 
 
 class TestConfigShow:

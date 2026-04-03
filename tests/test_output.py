@@ -2,7 +2,7 @@
 
 import pytest
 
-from infomaniak_cli import output
+from infomaniak import output
 
 
 class TestColors:
