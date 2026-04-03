@@ -1,11 +1,15 @@
 # kChat Groups
 
-This page documents the `infomaniak/resources/kchat/groups.py` resource.
+Placeholder resource for `client.kchat.groups`.
 
 ## Methods
 
-- `non_implemented()`
+- `list()`
+- `channel_groups()`
+- `team_groups()`
+- `team_channel_groups()`
+- `user_groups()`
 
 ## Status
 
-`non_implemented()` is currently a placeholder and raises `NotImplementedError`.
+All methods currently raise `NotImplementedError` placeholders.

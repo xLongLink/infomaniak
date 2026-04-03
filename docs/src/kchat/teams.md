@@ -1,11 +1,24 @@
 # kChat Teams
 
-This page documents the `infomaniak/resources/kchat/teams.py` resource.
+Placeholder resource for `client.kchat.teams`.
 
 ## Methods
 
-- `non_implemented()`
+- `list()`
+- `display()`
+- `by_name()`
+- `user_teams()`
+- `members.list()`
+- `members.for_user()`
+- `members.display()`
+- `members.by_ids()`
+- `stats()`
+- `members.roles.update()`
+- `unreads()`
+- `unreads.for_user()`
+- `invite_guests()`
+- `files.search()`
 
 ## Status
 
-`non_implemented()` is currently a placeholder and raises `NotImplementedError`.
+All methods currently raise `NotImplementedError` placeholders.

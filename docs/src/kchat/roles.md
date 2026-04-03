@@ -1,11 +1,14 @@
 # kChat Roles
 
-This page documents the `infomaniak/resources/kchat/roles.py` resource.
+Placeholder resource for `client.kchat.roles`.
 
 ## Methods
 
-- `non_implemented()`
+- `list()`
+- `display()`
+- `by_name()`
+- `by_names()`
 
 ## Status
 
-`non_implemented()` is currently a placeholder and raises `NotImplementedError`.
+All methods currently raise `NotImplementedError` placeholders.
