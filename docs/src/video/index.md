@@ -1,5 +1,20 @@
 # Video Overview
 
-This section contains the `video` resources for the Infomaniak Python SDK.
+Manage `client.video` endpoints.
 
-Use this overview as the entry point for `video` endpoints.
+## Nested Resources
+
+- `channel`
+- `countries`
+- `event`
+- `integrations`
+- `live`
+- `options`
+- `order`
+- `players`
+- `prices`
+- `restrictions`
+- `stats`
+- `stream`
+- `thumbnail`
+- `timezones`
