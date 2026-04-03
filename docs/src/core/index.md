@@ -1,19 +1,5 @@
-# Core
+# Core Overview
 
-Core resources group the shared API endpoints exposed under `infomaniak/resources/core`.
+This section contains the `core` resources for the Infomaniak Python SDK.
 
-## Tree
-
-```text
-core/
-  actions
-  countries
-  events
-  languages
-  profile
-  user
-    acccounts
-    teams
-```
-
-Use this section as the entry point for the shared account, profile, locale, and user-related resources.
+Use this overview as the entry point for `core` endpoints.
