@@ -1,7 +1,8 @@
 # Core Languages
 
-This page documents the `infomaniak/resources/core/languages` resource.
+Manage `client.core.languages` endpoints.
 
-## Status
+## Methods
 
-The documentation structure is in place and should stay aligned with the SDK resource tree.
+- `list()`
+- `display()`

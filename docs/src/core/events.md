@@ -1,7 +1,8 @@
 # Core Events
 
-This page documents the `infomaniak/resources/core/events` resource.
+Manage `client.core.events` endpoints.
 
-## Status
+## Methods
 
-The documentation structure is in place and should stay aligned with the SDK resource tree.
+- `list()`
+- `display()`
