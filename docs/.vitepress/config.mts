@@ -7,6 +7,7 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/infomaniak/' : '/',
   cleanUrls: true,
   themeConfig: {
+    socialLinks: [{ icon: 'github', link: 'https://github.com/XLongLink/infomaniak' }],
     sidebar: [
       {
         text: 'AI',
