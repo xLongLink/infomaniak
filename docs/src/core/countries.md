@@ -1,7 +1,8 @@
 # Core Countries
 
-This page documents the `infomaniak/resources/core/countries` resource.
+Manage `client.core.countries` endpoints.
 
-## Status
+## Methods
 
-The documentation structure is in place and should stay aligned with the SDK resource tree.
+- `list()`
+- `display()`

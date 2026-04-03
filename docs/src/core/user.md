@@ -1,10 +1,13 @@
 # Core User
 
-This page documents the `infomaniak/resources/core/user` resource.
+Manage `client.core.user` endpoints.
+
+## Methods
+
+- `invite(...)`
+- `cancel(account, invitation)`
 
 ## Nested Resources
 
-- `acccounts`
+- `accounts`
 - `teams`
-
-The documentation tree mirrors the nested SDK resource tree.

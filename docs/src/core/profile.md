@@ -1,7 +1,11 @@
 # Core Profile
 
-This page documents the `infomaniak/resources/core/profile` resource.
+Manage `client.core.profile` endpoints.
 
-## Status
+## Nested Resources
 
-The documentation structure is in place and should stay aligned with the SDK resource tree.
+- `password`
+- `email`
+- `phone`
+- `avatar`
+- `info`
