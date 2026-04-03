@@ -10,6 +10,7 @@ from infomaniak.resources.kmeet import AsyncKmeet, Kmeet
 from infomaniak.resources.newsletter import AsyncNewsletter, Newsletter
 from infomaniak.resources.radio import AsyncRadio, Radio
 from infomaniak.resources.url import AsyncUrl, Url
+from infomaniak.resources.video import AsyncVideo, Video
 
 
 class Client(BaseClient):
@@ -27,6 +28,7 @@ class Client(BaseClient):
         self.newsletter = Newsletter(self)
         self.radio = Radio(self)
         self.url = Url(self)
+        self.video = Video(self)
 
 
 class AsyncClient(AsyncBaseClient):
@@ -44,3 +46,4 @@ class AsyncClient(AsyncBaseClient):
         self.newsletter = AsyncNewsletter(self)
         self.radio = AsyncRadio(self)
         self.url = AsyncUrl(self)
+        self.video = AsyncVideo(self)
