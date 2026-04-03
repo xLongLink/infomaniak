@@ -5,46 +5,44 @@ from infomaniak.constants import API
 from .__root__ import RootClient
 
 
-class BaseClient(RootClient):
-    """Shared sync transport for all SDK resources."""
+class AsyncBaseClient(RootClient):
+    """Shared async transport for all SDK resources."""
 
     def __init__(
         self,
         token: str | None = None,
         base_url: str = API,
         timeout: float = 30.0,
-        transport: httpx.BaseTransport | None = None,
+        transport: httpx.AsyncBaseTransport | None = None,
         headers: dict[str, str] | None = None,
     ) -> None:
         super().__init__(token, base_url, timeout, transport, headers)
 
-        self._client: httpx.Client = httpx.Client(
+        self._client: httpx.AsyncClient = httpx.AsyncClient(
             base_url=self._base_url,
             headers=self._headers,
             timeout=self._timeout,
             transport=transport,
         )
 
-    def _request(
+    async def _request(
         self,
         method: str,
         path: str,
         **kwargs: Any,
     ) -> httpx.Response:
-        return self._client.request(method, path, **kwargs)
+        return await self._client.request(method, path, **kwargs)
 
-    def close(self) -> None:
-        self._client.close()
+    async def aclose(self) -> None:
+        await self._client.aclose()
 
-    def __enter__(self) -> "BaseClient":
+    async def __aenter__(self) -> "AsyncBaseClient":
         return self
 
-    def __exit__(
+    async def __aexit__(
         self,
         exc_type: type[BaseException] | None,
         exc: BaseException | None,
         tb: Any,
     ) -> None:
-        self.close()
-
-
+        await self.aclose()

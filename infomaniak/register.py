@@ -1,4 +1,4 @@
-from infomaniak.clients.base import AsyncBaseClient, BaseClient
+from infomaniak.clients import AsyncBaseClient, BaseClient
 
 # Load and connect resources to the clients
 from infomaniak.resources.core import AsyncCore, Core

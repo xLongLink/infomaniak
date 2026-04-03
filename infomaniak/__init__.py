@@ -2,4 +2,4 @@
 __openapi__ = "3.1.0"
 
 
-from infomaniak.base import AsyncClient, Client
+from infomaniak.register import AsyncClient, Client
