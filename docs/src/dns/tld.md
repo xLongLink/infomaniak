@@ -1,45 +1,58 @@
 # Top Level Domain
 
-The `dns.tld` resource provides methods to list available TLDs and show one TLD.
+The `dns.tld` resource provides access to top-level domain (TLD) metadata, including lifecycle, support capabilities, transfer details, and optional registration fields.
 
 ## List Top Level Domains
 
-**params:**
-- `length` (`bool`, optional): Include allowed domain length constraints for each TLD when set to `True`.
-- `periods` (`bool`, optional): Include supported registration periods for each TLD when set to `True`.
-- `group` (`bool`, optional): Include group metadata for each TLD when set to `True`.
-- `transfer_method` (`bool`, optional): Include supported transfer methods for each TLD when set to `True`.
-- `is_idn` (`bool`, optional): Include internationalized-domain support information when set to `True`.
-- `support` (`bool`, optional): Include support-level details for each TLD when set to `True`.
-- `time` (`bool`, optional): Include timing metadata (for example activation delays) when set to `True`.
-- `groups` (`list[int] | None`, optional): Filter the returned TLDs to the provided group identifiers.
+- `length`: Include allowed domain length constraints for each TLD when set to `True`.
+- `periods`: Include lifecycle periods (`renew_grace`, `redemption`, `deletion`) when set to `True`.
+- `group`: Include TLD group information when set to `True`.
+- `transfer_method`: Include transfer method details when set to `True`.
+- `is_idn`: Include internationalized-domain support data when set to `True`.
+- `support`: Include support capability flags (for example DNSSEC and transfer lock) when set to `True`.
+- `time`: Include registration and transfer timing information when set to `True`.
+- `groups`: Restrict the returned list to specific group identifiers.
 
-**returns:** `list[Tld]` containing all matching top-level domains.
+**returns:** `list[Tld]` with matching top-level domains.
 
 ```py
 from infomaniak import Client
 
 client = Client(token="<token>")
-tlds = client.dns.tld.list(length=True, periods=True)
+tlds = client.dns.tld.list(length=True, periods=True, support=True)
 ```
 
 ## Show Top Level Domain
 
-**params:**
-- `tld` (`str`): TLD code to retrieve, for example `ch` or `com`.
-- `length` (`bool`, optional): Include allowed domain length constraints when set to `True`.
-- `periods` (`bool`, optional): Include supported registration periods when set to `True`.
-- `group` (`bool`, optional): Include group metadata when set to `True`.
-- `transfer_method` (`bool`, optional): Include supported transfer methods when set to `True`.
-- `is_idn` (`bool`, optional): Include internationalized-domain support information when set to `True`.
-- `support` (`bool`, optional): Include support-level details when set to `True`.
-- `time` (`bool`, optional): Include timing metadata (for example activation delays) when set to `True`.
+- `tld`: TLD code to retrieve, for example `ch` or `com`.
+- `length`: Include allowed domain length constraints when set to `True`.
+- `periods`: Include lifecycle periods when set to `True`.
+- `group`: Include TLD group information when set to `True`.
+- `transfer_method`: Include transfer method details when set to `True`.
+- `is_idn`: Include internationalized-domain support data when set to `True`.
+- `support`: Include support capability flags when set to `True`.
+- `time`: Include registration and transfer timing information when set to `True`.
 
-**returns:** `Tld` with details for the requested top-level domain.
+**returns:** `Tld` for the requested top-level domain.
 
 ```py
 from infomaniak import Client
 
 client = Client(token="<token>")
-ch_tld = client.dns.tld.show("ch", length=True, support=True)
+ch_tld = client.dns.tld.show("ch", length=True, support=True, time=True)
 ```
+
+## Request Models
+
+This resource does not use dedicated request model classes. Parameters are passed directly as method arguments.
+
+## Returned Models
+
+- `Tld`: Main TLD payload.
+- `TldGroup`: TLD group metadata.
+- `TldPeriods`: Lifecycle periods.
+- `TldSupport`: Supported capabilities.
+- `TldOutgoingTransferNeed`: Outgoing transfer requirements.
+- `TldFields`: Additional registration/transfer fields.
+- `TldField`, `TldFieldOption`, `TldFieldCondition`, `TldContactField`: Field definitions and constraints.
+- `IDNTable`: Internationalized domain name tables.
