@@ -9,8 +9,8 @@ export default defineConfig({
   themeConfig: {
     socialLinks: [{ icon: 'github', link: 'https://github.com/XLongLink/infomaniak' }],
     sidebar: [
-      { text: 'Cloud', link: '/cloud/', collapsed: true, items: [{ text: 'TODO', link: '/cloud/' }] },
-      { text: 'DNS', link: '/dns/', collapsed: true, items: [{ text: 'TODO', link: '/dns/' }] },
+      { text: 'Cloud', link: '/cloud/', collapsed: true, items: [{ text: 'Projects', link: '/cloud/projects' }] },
+      { text: 'DNS', link: '/dns/', collapsed: true, items: [{ text: 'Domain', link: '/dns/domain' }, { text: 'Top Level Domain', link: '/dns/tld' }, { text: 'Zone', link: '/dns/zone' }] },
     ],
     search: {
       provider: 'local',
