@@ -197,6 +197,53 @@ export default defineConfig({
         text: 'Mail',
         link: '/mail/',
         collapsed: true,
+        items: [
+          { text: 'Mailbox Management', link: '/mail/mailbox_management' },
+          {
+            text: 'Mailboxes',
+            collapsed: true,
+            items: [
+              { text: 'Accesses', link: '/mail/mailboxes/accesses' },
+              { text: 'Aliases', link: '/mail/mailboxes/aliases' },
+              { text: 'Auto Reply', link: '/mail/mailboxes/auto_reply' },
+              { text: 'Filters', link: '/mail/mailboxes/filters' },
+              { text: 'Folders', link: '/mail/mailboxes/folders' },
+              { text: 'Forwarding', link: '/mail/mailboxes/forwarding' },
+              { text: 'Signatures', link: '/mail/mailboxes/signatures' },
+              { text: 'Users', link: '/mail/mailboxes/users' },
+              {
+                text: 'Accesses',
+                collapsed: true,
+                items: [
+                  { text: 'Devices', link: '/mail/mailboxes/accesses/devices' },
+                  { text: 'Invitations', link: '/mail/mailboxes/accesses/invitations' },
+                  {
+                    text: 'Webmail',
+                    collapsed: true,
+                    items: [
+                      { text: 'Team', link: '/mail/mailboxes/accesses/webmail/team' },
+                      { text: 'User', link: '/mail/mailboxes/accesses/webmail/user' },
+                    ],
+                  },
+                ],
+              },
+              {
+                text: 'Filters',
+                collapsed: true,
+                items: [
+                  { text: 'Scripts', link: '/mail/mailboxes/filters/scripts' },
+                ],
+              },
+              {
+                text: 'Signatures',
+                collapsed: true,
+                items: [
+                  { text: 'Templates', link: '/mail/mailboxes/signatures/templates' },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         text: 'Newsletter',

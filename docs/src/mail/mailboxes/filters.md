@@ -13,4 +13,4 @@ Manage `client.mail.mailboxes.filters` endpoints.
 
 ## Nested Resources
 
-- `scripts`
+- [`scripts`](./filters/scripts)

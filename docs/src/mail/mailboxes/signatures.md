@@ -14,4 +14,4 @@ Manage `client.mail.mailboxes.signatures` endpoints.
 
 ## Nested Resources
 
-- `templates`
+- [`templates`](./signatures/templates)
