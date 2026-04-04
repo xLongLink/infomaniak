@@ -44,6 +44,22 @@ class CreatePublicCloudProjectResponse:
 
 
 @dataclass(slots=True)
+class PublicCloudProjectAsyncActionResponse:
+    """Async action response payload for project update and deletion."""
+
+    result: Literal["asynchronous", "delayed", "success", "error"]
+    data: bool | str
+
+
+@dataclass(slots=True)
+class PublicCloudProjectInvitationResponse:
+    """Create public cloud project invitation response payload."""
+
+    result: Literal["asynchronous", "delayed", "success", "error"]
+    data: int | str
+
+
+@dataclass(slots=True)
 class PublicCloudProjectListResponse:
     """List public cloud projects response payload with pagination metadata."""
 
