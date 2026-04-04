@@ -3,6 +3,7 @@ from __future__ import annotations
 from dacite import from_dict
 from typing import Any
 from .records import Records, AsyncRecords
+from infomaniak.utils import _with
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.dns.zone import DNSZone
 
@@ -15,18 +16,13 @@ def _build_with_values(
     idn: bool,
     label: bool = False,
 ) -> str | None:
-    with_values: list[str] = []
-    if skel:
-        with_values.append("skel")
-    if records:
-        with_values.append("records")
-    if records_description:
-        with_values.append("records_description")
-    if idn:
-        with_values.append("idn")
-    if label:
-        with_values.append("label")
-    return ",".join(with_values) if with_values else None
+    return _with(
+        skel=skel,
+        records=records,
+        records_description=records_description,
+        idn=idn,
+        label=label,
+    )
 
 
 def _extract_zone_payload(

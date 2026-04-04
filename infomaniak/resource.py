@@ -2,7 +2,7 @@ from infomaniak.clients import BaseClient, AsyncBaseClient
 
 
 class Resouce:
-    def __init__(self, client: AsyncBaseClient):
+    def __init__(self, client: BaseClient):
         self._client = client
 
 
