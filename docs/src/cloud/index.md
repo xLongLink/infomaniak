@@ -10,6 +10,7 @@ This section contains the `cloud` resources for the Infomaniak Python SDK.
 
 - `database`
 - `kubernetes`
+- `projects`
 
 ## SDK Function Coverage
 
@@ -66,3 +67,6 @@ This section contains the `cloud` resources for the Infomaniak Python SDK.
 | [`cloud.kubernetes.pools.get`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/kubernetes/pools.py)        |               | No          |
 | [`cloud.kubernetes.pools.update`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/kubernetes/pools.py)     |               | No          |
 | [`cloud.kubernetes.pools.delete`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/kubernetes/pools.py)     |               | No          |
+| [`cloud.projects.create`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/projects.py)                         |               | Yes         |
+| [`cloud.projects.list`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/projects.py)                           |               | Yes         |
+| [`cloud.projects.get`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/projects.py)                            |               | Yes         |

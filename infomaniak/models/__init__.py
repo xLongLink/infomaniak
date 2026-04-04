@@ -5,6 +5,12 @@ from infomaniak.models.backup import (
     BackupProduct,
     BackupSlot,
 )
+from infomaniak.models.cloud import (
+    CreatePublicCloudProjectResponse,
+    PublicCloudProject,
+    PublicCloudProjectListResponse,
+    PublicCloudProjectTag,
+)
 from infomaniak.models.core.user import (
     AccountInvitation,
     AccountInvitationTeam,
@@ -17,6 +23,10 @@ __all__ = [
     "BackupProduct",
     "BackupSlot",
     "BackupBillingPlan",
+    "CreatePublicCloudProjectResponse",
+    "PublicCloudProjectTag",
+    "PublicCloudProject",
+    "PublicCloudProjectListResponse",
     "AccountInvitation",
     "AccountInvitationTeam",
     "DNSRecord",
