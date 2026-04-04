@@ -1,57 +1,256 @@
+from __future__ import annotations
+
+from typing import Literal
+
+from dacite import from_dict
+
+from infomaniak.models.dns.zone import DNSRecord
 from infomaniak.resource import AsyncResource, Resouce
+
+DNSRecordType = Literal[
+    "A",
+    "AAAA",
+    "CAA",
+    "CNAME",
+    "DNAME",
+    "DNSKEY",
+    "DS",
+    "MX",
+    "NS",
+    "PTR",
+    "SMIMEA",
+    "SOA",
+    "SRV",
+    "SSHFP",
+    "TLSA",
+    "TXT",
+]
 
 
 class Records(Resouce):
     """DNS zone records endpoints."""
 
-    def list(self) -> None:
-        """List DNS records for one zone."""
-        raise NotImplementedError("DNS.zone.records.list is not implemented yet.")
+    def list(
+        self,
+        zone: str,
+        *,
+        source: str | None = None,
+        types: list[DNSRecordType] | None = None,
+        search: str | None = None,
+        with_: str | None = None,
+        page: int | None = None,
+        per_page: int | None = None,
+        order_by: Literal["id", "source_idn", "target", "type", "ttl", "updated_at"] | None = None,
+        order: Literal["asc", "desc"] | None = None,
+    ) -> list[DNSRecord]:
+        """Retrieve all DNS records for a given zone."""
+        url = f"/2/zones/{zone}/records"
+        params: dict[str, str | int | list[str]] = {}
 
-    def store(self) -> None:
-        """Store a DNS record."""
-        raise NotImplementedError("DNS.zone.records.store is not implemented yet.")
+        if source is not None:
+            params["filter[source]"] = source
+        if types is not None:
+            params["filter[types][]"] = types
+        if search is not None:
+            params["search"] = search
+        if with_ is not None:
+            params["with"] = with_
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+        if order_by is not None:
+            params["order_by"] = order_by
+        if order is not None:
+            params["order"] = order
 
-    def display(self) -> None:
-        """Display one DNS record."""
-        raise NotImplementedError("DNS.zone.records.display is not implemented yet.")
+        response = self._client.get(url, params=params or None)
+        return [from_dict(DNSRecord, record) for record in response.json()["data"]]
 
-    def update(self) -> None:
-        """Update one DNS record."""
-        raise NotImplementedError("DNS.zone.records.update is not implemented yet.")
+    def store(
+        self,
+        zone: str,
+        target: str,
+        ttl: int,
+        type_: DNSRecordType,
+        *,
+        source: str | None = None,
+        with_: str | None = None,
+    ) -> DNSRecord:
+        """Create a DNS record in a given zone."""
+        url = f"/2/zones/{zone}/records"
+        params = {"with": with_} if with_ is not None else None
+        payload: dict[str, str | int] = {
+            "target": target,
+            "ttl": ttl,
+            "type": type_,
+        }
+        if source is not None:
+            payload["source"] = self._normalize_source(zone, source)
+        response = self._client.post(url, json=payload, params=params)
+        return from_dict(DNSRecord, response.json()["data"])
 
-    def delete(self) -> None:
-        """Delete one DNS record."""
-        raise NotImplementedError("DNS.zone.records.delete is not implemented yet.")
+    def display(self, zone: str, record: int) -> DNSRecord:
+        """Retrieve one DNS record for a given zone."""
+        url = f"/2/zones/{zone}/records/{record}"
+        response = self._client.get(url)
+        return from_dict(DNSRecord, response.json()["data"])
 
-    def check(self) -> None:
-        """Check whether a DNS record exists and resolves."""
-        raise NotImplementedError("DNS.zone.records.check is not implemented yet.")
+    def update(self, zone: str, record: int, target: str, ttl: int, *, with_: str | None = None) -> DNSRecord:
+        """Update a DNS record."""
+        url = f"/2/zones/{zone}/records/{record}"
+        params = {"with": with_} if with_ is not None else None
+        response = self._client.put(url, json={"target": target, "ttl": ttl}, params=params)
+        return from_dict(DNSRecord, response.json()["data"])
+
+    def delete(self, zone: str, record: int) -> bool:
+        """Delete a DNS record."""
+        url = f"/2/zones/{zone}/records/{record}"
+        response = self._client.delete(url)
+        return bool(response.json()["data"])
+
+    def check(self, zone: str, record: int) -> bool:
+        """Verify that a DNS record exists and resolves."""
+        url = f"/2/zones/{zone}/records/{record}/check"
+        response = self._client.get(url)
+        return bool(response.json()["data"])
+
+    def match(self, zone: str, source: str, type_: DNSRecordType, target: str, ttl: int = 3600) -> DNSRecord:
+        """Ensure one DNS record exists with the expected target and TTL."""
+        normalized_source = self._normalize_source(zone, source)
+        records = self.list(zone, source=normalized_source, types=[type_])
+        for record in records:
+            if record.source == normalized_source and record.type == type_:
+                if record.target != target or record.ttl != ttl:
+                    return self.update(zone, record.id, target, ttl)
+                return record
+        return self.store(zone, target, ttl, type_, source=normalized_source)
+
+    @staticmethod
+    def _normalize_source(zone: str, source: str) -> str:
+        suffix = f".{zone}"
+        if source.endswith(suffix):
+            return source.removesuffix(suffix)
+        return source
 
 
 class AsyncRecords(AsyncResource):
     """Async DNS zone records endpoints."""
 
-    async def list(self) -> None:
-        """List DNS records for one zone."""
-        raise NotImplementedError("AsyncDNS.zone.records.list is not implemented yet.")
+    async def list(
+        self,
+        zone: str,
+        *,
+        source: str | None = None,
+        types: list[DNSRecordType] | None = None,
+        search: str | None = None,
+        with_: str | None = None,
+        page: int | None = None,
+        per_page: int | None = None,
+        order_by: Literal["id", "source_idn", "target", "type", "ttl", "updated_at"] | None = None,
+        order: Literal["asc", "desc"] | None = None,
+    ) -> list[DNSRecord]:
+        """Retrieve all DNS records for a given zone."""
+        url = f"/2/zones/{zone}/records"
+        params: dict[str, str | int | list[str]] = {}
 
-    async def store(self) -> None:
-        """Store a DNS record."""
-        raise NotImplementedError("AsyncDNS.zone.records.store is not implemented yet.")
+        if source is not None:
+            params["filter[source]"] = source
+        if types is not None:
+            params["filter[types][]"] = types
+        if search is not None:
+            params["search"] = search
+        if with_ is not None:
+            params["with"] = with_
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+        if order_by is not None:
+            params["order_by"] = order_by
+        if order is not None:
+            params["order"] = order
 
-    async def display(self) -> None:
-        """Display one DNS record."""
-        raise NotImplementedError("AsyncDNS.zone.records.display is not implemented yet.")
+        response = await self._client.get(url, params=params or None)
+        return [from_dict(DNSRecord, record) for record in response.json()["data"]]
 
-    async def update(self) -> None:
-        """Update one DNS record."""
-        raise NotImplementedError("AsyncDNS.zone.records.update is not implemented yet.")
+    async def store(
+        self,
+        zone: str,
+        target: str,
+        ttl: int,
+        type_: DNSRecordType,
+        *,
+        source: str | None = None,
+        with_: str | None = None,
+    ) -> DNSRecord:
+        """Create a DNS record in a given zone."""
+        url = f"/2/zones/{zone}/records"
+        params = {"with": with_} if with_ is not None else None
+        payload: dict[str, str | int] = {
+            "target": target,
+            "ttl": ttl,
+            "type": type_,
+        }
+        if source is not None:
+            payload["source"] = self._normalize_source(zone, source)
+        response = await self._client.post(url, json=payload, params=params)
+        return from_dict(DNSRecord, response.json()["data"])
 
-    async def delete(self) -> None:
-        """Delete one DNS record."""
-        raise NotImplementedError("AsyncDNS.zone.records.delete is not implemented yet.")
+    async def display(self, zone: str, record: int) -> DNSRecord:
+        """Retrieve one DNS record for a given zone."""
+        url = f"/2/zones/{zone}/records/{record}"
+        response = await self._client.get(url)
+        return from_dict(DNSRecord, response.json()["data"])
 
-    async def check(self) -> None:
-        """Check whether a DNS record exists and resolves."""
-        raise NotImplementedError("AsyncDNS.zone.records.check is not implemented yet.")
+    async def update(
+        self,
+        zone: str,
+        record: int,
+        target: str,
+        ttl: int,
+        *,
+        with_: str | None = None,
+    ) -> DNSRecord:
+        """Update a DNS record."""
+        url = f"/2/zones/{zone}/records/{record}"
+        params = {"with": with_} if with_ is not None else None
+        response = await self._client.put(url, json={"target": target, "ttl": ttl}, params=params)
+        return from_dict(DNSRecord, response.json()["data"])
+
+    async def delete(self, zone: str, record: int) -> bool:
+        """Delete a DNS record."""
+        url = f"/2/zones/{zone}/records/{record}"
+        response = await self._client.delete(url)
+        return bool(response.json()["data"])
+
+    async def check(self, zone: str, record: int) -> bool:
+        """Verify that a DNS record exists and resolves."""
+        url = f"/2/zones/{zone}/records/{record}/check"
+        response = await self._client.get(url)
+        return bool(response.json()["data"])
+
+    async def match(
+        self,
+        zone: str,
+        source: str,
+        type_: DNSRecordType,
+        target: str,
+        ttl: int = 3600,
+    ) -> DNSRecord:
+        """Ensure one DNS record exists with the expected target and TTL."""
+        normalized_source = self._normalize_source(zone, source)
+        records = await self.list(zone, source=normalized_source, types=[type_])
+        for record in records:
+            if record.source == normalized_source and record.type == type_:
+                if record.target != target or record.ttl != ttl:
+                    return await self.update(zone, record.id, target, ttl)
+                return record
+        return await self.store(zone, target, ttl, type_, source=normalized_source)
+
+    @staticmethod
+    def _normalize_source(zone: str, source: str) -> str:
+        suffix = f".{zone}"
+        if source.endswith(suffix):
+            return source.removesuffix(suffix)
+        return source

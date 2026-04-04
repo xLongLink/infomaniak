@@ -9,6 +9,7 @@ from infomaniak.models.core.user import (
     AccountInvitation,
     AccountInvitationTeam,
 )
+from infomaniak.models.dns import DNSRecord
 from infomaniak.models.newsletter import NewsletterBulkResponse
 
 __all__ = [
@@ -17,5 +18,6 @@ __all__ = [
     "BackupBillingPlan",
     "AccountInvitation",
     "AccountInvitationTeam",
+    "DNSRecord",
     "NewsletterBulkResponse",
 ]
