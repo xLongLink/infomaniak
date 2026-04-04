@@ -5,6 +5,13 @@ from typing import Literal
 
 
 @dataclass(slots=True)
+class DNSSECInfo:
+    """DNSSEC information for a zone."""
+
+    is_enabled: bool
+
+
+@dataclass(slots=True)
 class DNSRecord:
     """
     DNS record payload.
@@ -39,3 +46,19 @@ class DNSRecord:
     dyndns_id: int | None = None
     delegated_zone: dict[str, object] | None = None
     description: dict[str, object] | None = None
+
+
+@dataclass(slots=True)
+class DNSZone:
+    """
+    DNS zone payload.
+
+    OpenAPI schema: `2f8071fd_api_dns_zone`.
+    """
+
+    id: int
+    fqdn: str
+    dnssec: DNSSECInfo
+    nameservers: list[str]
+    skel: str | None = None
+    records: list[DNSRecord] | None = None

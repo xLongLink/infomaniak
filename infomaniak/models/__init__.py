@@ -9,7 +9,7 @@ from infomaniak.models.core.user import (
     AccountInvitation,
     AccountInvitationTeam,
 )
-from infomaniak.models.dns import DNSRecord
+from infomaniak.models.dns import DNSRecord, DNSZone
 from infomaniak.models.domain import Domain, DomainListResponse
 from infomaniak.models.newsletter import NewsletterBulkResponse
 
@@ -20,6 +20,7 @@ __all__ = [
     "AccountInvitation",
     "AccountInvitationTeam",
     "DNSRecord",
+    "DNSZone",
     "Domain",
     "DomainListResponse",
     "NewsletterBulkResponse",
