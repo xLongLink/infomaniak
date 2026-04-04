@@ -102,7 +102,26 @@ export default defineConfig({
       {
         text: 'DNS',
         collapsed: true,
-        items: [{ text: 'Overview', link: '/dns/' }],
+        items: [
+          { text: 'Overview', link: '/dns/' },
+          { text: 'Domain', link: '/dns/domain' },
+          { text: 'TLD', link: '/dns/tld' },
+          { text: 'Zone', link: '/dns/zone' },
+          {
+            text: 'Domain',
+            collapsed: true,
+            items: [
+              { text: 'DNSSEC', link: '/dns/domain/dnssec' },
+              { text: 'Nameservers', link: '/dns/domain/nameservers' },
+              { text: 'Order', link: '/dns/domain/order' },
+            ],
+          },
+          {
+            text: 'Zone',
+            collapsed: true,
+            items: [{ text: 'Records', link: '/dns/zone/records' }],
+          },
+        ],
       },
       {
         text: 'Domain',
