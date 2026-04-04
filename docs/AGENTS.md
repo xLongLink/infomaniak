@@ -13,11 +13,13 @@ Follow these rules when writing documentation pages for VitePress in `docs/src`.
 - Use fenced code blocks with a language identifier whenever possible.
 - For syntax-highlighted examples, use VitePress-compatible fenced blocks such as:
 
-```md
+````md
 ```py
 from infomaniak import Client
 ```
-```
+````
+
+````
 
 - When highlighting specific lines, use the VitePress line highlight syntax:
 
@@ -26,8 +28,9 @@ from infomaniak import Client
 client = Client()
 user = client.core.user
 print(user)
-```
-```
+````
+
+````
 
 ## Custom Containers
 
@@ -54,7 +57,7 @@ Breaking or risky behavior.
 ::: details
 Optional expanded content.
 :::
-```
+````
 
 ## Page Content
 
