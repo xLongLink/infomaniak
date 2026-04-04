@@ -52,20 +52,20 @@ Infomaniak OpenAPI v3.1.0
 
 | Resource                     | Infomaniak Reference                      | Status                                        |
 | ---------------------------- | ----------------------------------------- | --------------------------------------------- |
-| [`ai`](/ai/)                 | AI Tools                                  | <span style="color:red">Low priority</span>   |
-| [`backup`](/backup/)         | Swiss Backup                              | <span style="color:red">Low priority</span>   |
+| `ai`                         | AI Tools                                  | <span style="color:red">Low priority</span>   |
+| `backup`                     | Swiss Backup                              | <span style="color:red">Low priority</span>   |
 | [`cloud`](/cloud/)           | Cloud Overview                            | <span style="color:orange">Planned</span>     |
-| [`core`](/core/)             | Core Resources                            | <span style="color:red">Low priority</span>   |
+| `core`                       | Core Resources                            | <span style="color:red">Low priority</span>   |
 | [`dns`](/dns/)               | Domain and Zones                          | <span style="color:yellow">In progress</span> |
-| [`domain`](/domain/)         | Domain Overview                           | <span style="color:red">Low priority</span>   |
-| [`etickets`](/etickets/)     | [ETickets](https://chk.me/kOM6ZoO)        | <span style="color:red">Low priority</span>   |
-| [`kchat`](/kchat/)           | [kChat](https://chk.me/sXgWvJp)           | <span style="color:red">Low priority</span>   |
-| [`kdrive`](/kdrive/)         | [kDrive](https://chk.me/qlJozmn)          | <span style="color:red">Low priority</span>   |
-| [`kmeet`](/kmeet/)           | [kMeet](https://chk.me/xgAjld6)           | <span style="color:red">Low priority</span>   |
-| [`mail`](/mail/)             | Mail Services                             | <span style="color:red">Low priority</span>   |
-| [`newsletter`](/newsletter/) | Newsletter Overview                       | <span style="color:red">Low priority</span>   |
-| [`radio`](/radio/)           | [Streaming Radio](https://chk.me/u4XqnUZ) | <span style="color:red">Low priority</span>   |
-| [`tickets`](/tickets/)       | Tickets Overview                          | <span style="color:red">Low priority</span>   |
-| [`url`](/url/)               | URL Overview                              | <span style="color:red">Low priority</span>   |
-| [`video`](/video/)           | [Streaming Video](https://chk.me/BWbluEg) | <span style="color:red">Low priority</span>   |
-| [`vod`](/vod/)               | [VOD](https://chk.me/MRAj6ne)             | <span style="color:red">Low priority</span>   |
+| `domain`                     | Domain Overview                           | <span style="color:red">Low priority</span>   |
+| `etickets`                   | [ETickets](https://chk.me/kOM6ZoO)        | <span style="color:red">Low priority</span>   |
+| `kchat`                      | [kChat](https://chk.me/sXgWvJp)           | <span style="color:red">Low priority</span>   |
+| `kdrive`                     | [kDrive](https://chk.me/qlJozmn)          | <span style="color:red">Low priority</span>   |
+| `kmeet`                      | [kMeet](https://chk.me/xgAjld6)           | <span style="color:red">Low priority</span>   |
+| `mail`                       | Mail Services                             | <span style="color:red">Low priority</span>   |
+| `newsletter`                 | Newsletter Overview                       | <span style="color:red">Low priority</span>   |
+| `radio`                      | [Streaming Radio](https://chk.me/u4XqnUZ) | <span style="color:red">Low priority</span>   |
+| `tickets`                    | Tickets Overview                          | <span style="color:red">Low priority</span>   |
+| `url`                        | URL Overview                              | <span style="color:red">Low priority</span>   |
+| `video`                      | [Streaming Video](https://chk.me/BWbluEg) | <span style="color:red">Low priority</span>   |
+| `vod`                        | [VOD](https://chk.me/MRAj6ne)             | <span style="color:red">Low priority</span>   |
