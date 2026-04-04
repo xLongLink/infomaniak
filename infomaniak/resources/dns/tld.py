@@ -19,7 +19,22 @@ class TLD(Resouce):
         time: bool = False,
         groups: list[int] | None = None,
     ) -> list[Tld]:
-        """List all available TLDs."""
+        """
+        List all available top-level domains.
+
+        Args:
+            length: Include allowed domain length constraints when set to ``True``.
+            periods: Include domain lifecycle periods when set to ``True``.
+            group: Include TLD group metadata when set to ``True``.
+            transfer_method: Include transfer method information when set to ``True``.
+            is_idn: Include IDN support information when set to ``True``.
+            support: Include supported feature information when set to ``True``.
+            time: Include registration and transfer timing information when set to ``True``.
+            groups: Filter results to the provided group identifiers.
+
+        Returns:
+            list[Tld]: The list of top-level domains returned by the API.
+        """
         url = "/2/tld"
         params: dict[str, str | list[int]] = {}
         with_values = _with(
@@ -50,7 +65,22 @@ class TLD(Resouce):
         support: bool = False,
         time: bool = False,
     ) -> Tld:
-        """Show one TLD."""
+        """
+        Show one top-level domain.
+
+        Args:
+            tld: TLD code to retrieve, for example ``ch`` or ``com``.
+            length: Include allowed domain length constraints when set to ``True``.
+            periods: Include domain lifecycle periods when set to ``True``.
+            group: Include TLD group metadata when set to ``True``.
+            transfer_method: Include transfer method information when set to ``True``.
+            is_idn: Include IDN support information when set to ``True``.
+            support: Include supported feature information when set to ``True``.
+            time: Include registration and transfer timing information when set to ``True``.
+
+        Returns:
+            Tld: The top-level domain details returned by the API.
+        """
         url = f"/2/tld/{tld}"
         with_values = _with(
             length=length,
@@ -81,7 +111,22 @@ class AsyncTLD(AsyncResource):
         time: bool = False,
         groups: list[int] | None = None,
     ) -> list[Tld]:
-        """List all available TLDs."""
+        """
+        List all available top-level domains.
+
+        Args:
+            length: Include allowed domain length constraints when set to ``True``.
+            periods: Include domain lifecycle periods when set to ``True``.
+            group: Include TLD group metadata when set to ``True``.
+            transfer_method: Include transfer method information when set to ``True``.
+            is_idn: Include IDN support information when set to ``True``.
+            support: Include supported feature information when set to ``True``.
+            time: Include registration and transfer timing information when set to ``True``.
+            groups: Filter results to the provided group identifiers.
+
+        Returns:
+            list[Tld]: The list of top-level domains returned by the API.
+        """
         url = "/2/tld"
         params: dict[str, str | list[int]] = {}
         with_values = _with(
@@ -112,7 +157,22 @@ class AsyncTLD(AsyncResource):
         support: bool = False,
         time: bool = False,
     ) -> Tld:
-        """Show one TLD."""
+        """
+        Show one top-level domain.
+
+        Args:
+            tld: TLD code to retrieve, for example ``ch`` or ``com``.
+            length: Include allowed domain length constraints when set to ``True``.
+            periods: Include domain lifecycle periods when set to ``True``.
+            group: Include TLD group metadata when set to ``True``.
+            transfer_method: Include transfer method information when set to ``True``.
+            is_idn: Include IDN support information when set to ``True``.
+            support: Include supported feature information when set to ``True``.
+            time: Include registration and transfer timing information when set to ``True``.
+
+        Returns:
+            Tld: The top-level domain details returned by the API.
+        """
         url = f"/2/tld/{tld}"
         with_values = _with(
             length=length,
