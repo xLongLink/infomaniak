@@ -26,7 +26,7 @@ pip install infomaniak
 | [`kchat`](/kchat/) | [kChat Overview](/kchat/) | 85 |
 | [`kdrive`](/kdrive/) | [kDrive Overview](/kdrive/) | 64 |
 | [`kmeet`](/kmeet/) | [kMeet Overview](/kmeet/) | 2 |
-| [`mail`](/mail/) | [Mail Overview](/mail/) | 0 |
+| [`mail`](/mail/) | [Mail Overview](/mail/) | 71 |
 | [`newsletter`](/newsletter/) | [Newsletter Overview](/newsletter/) | 74 |
 | [`radio`](/radio/) | [Radio Overview](/radio/) | 85 |
 | [`tickets`](/tickets/) | [Tickets Overview](/tickets/) | 0 |

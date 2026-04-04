@@ -10,6 +10,7 @@ from infomaniak.resources.etickets import AsyncEtickets, Etickets
 from infomaniak.resources.kchat import AsyncKchat, Kchat
 from infomaniak.resources.kdrive import AsyncKdrive, Kdrive
 from infomaniak.resources.kmeet import AsyncKmeet, Kmeet
+from infomaniak.resources.mail import AsyncMail, Mail
 from infomaniak.resources.newsletter import AsyncNewsletter, Newsletter
 from infomaniak.resources.radio import AsyncRadio, Radio
 from infomaniak.resources.url import AsyncUrl, Url
@@ -31,6 +32,7 @@ class Client(BaseClient):
         self.kchat = Kchat(self)
         self.kdrive = Kdrive(self)
         self.kmeet = Kmeet(self)
+        self.mail = Mail(self)
         self.newsletter = Newsletter(self)
         self.radio = Radio(self)
         self.url = Url(self)
@@ -52,6 +54,7 @@ class AsyncClient(AsyncBaseClient):
         self.kchat = AsyncKchat(self)
         self.kdrive = AsyncKdrive(self)
         self.kmeet = AsyncKmeet(self)
+        self.mail = AsyncMail(self)
         self.newsletter = AsyncNewsletter(self)
         self.radio = AsyncRadio(self)
         self.url = AsyncUrl(self)
