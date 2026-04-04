@@ -4,6 +4,7 @@ from infomaniak.clients import AsyncBaseClient, BaseClient
 from infomaniak.resources.backup import AsyncBackup, Backup
 from infomaniak.resources.cloud import AsyncCloud, Cloud
 from infomaniak.resources.core import AsyncCore, Core
+from infomaniak.resources.dns import AsyncDNS, DNS
 from infomaniak.resources.domain import AsyncDomain, Domain
 from infomaniak.resources.kchat import AsyncKchat, Kchat
 from infomaniak.resources.kmeet import AsyncKmeet, Kmeet
@@ -22,6 +23,7 @@ class Client(BaseClient):
         self.backup = Backup(self)
         self.cloud = Cloud(self)
         self.core = Core(self)
+        self.dns = DNS(self)
         self.domain = Domain(self)
         self.kchat = Kchat(self)
         self.kmeet = Kmeet(self)
@@ -40,6 +42,7 @@ class AsyncClient(AsyncBaseClient):
         self.backup = AsyncBackup(self)
         self.cloud = AsyncCloud(self)
         self.core = AsyncCore(self)
+        self.dns = AsyncDNS(self)
         self.domain = AsyncDomain(self)
         self.kchat = AsyncKchat(self)
         self.kmeet = AsyncKmeet(self)

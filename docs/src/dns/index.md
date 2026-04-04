@@ -1,5 +1,9 @@
 # DNS Overview
 
-This section contains the `dns` resources for the Infomaniak Python SDK.
+Manage DNS-related resources from `client.dns`.
 
-Use this overview as the entry point for `dns` endpoints.
+## Nested Resources
+
+- `domain`
+- `tld`
+- `zone`
