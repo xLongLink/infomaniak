@@ -20,7 +20,7 @@ pip install infomaniak
 | [`backup`](/backup/) | [Backup Overview](/backup/) | 17 |
 | [`cloud`](/cloud/) | [Cloud Overview](/cloud/) | 51 |
 | [`core`](/core/) | [Core Overview](/core/) | 48 |
-| [`dns`](/dns/) | [DNS Overview](/dns/) | 0 |
+| [`dns`](/dns/) | [DNS Overview](/dns/) | 24 |
 | [`domain`](/domain/) | [Domain Overview](/domain/) | 10 |
 | [`kchat`](/kchat/) | [kChat Overview](/kchat/) | 85 |
 | [`kdrive`](/kdrive/) | [kDrive Overview](/kdrive/) | 0 |
