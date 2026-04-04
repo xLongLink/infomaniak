@@ -4,10 +4,11 @@ This section contains the `cloud` resources for the Infomaniak Python SDK.
 
 ## Methods
 
-- `config()`
+- `config.get(account_id)`
 
 ## Nested Resources
 
+- `config`
 - `database`
 - `kubernetes`
 - `projects`
@@ -16,7 +17,7 @@ This section contains the `cloud` resources for the Infomaniak Python SDK.
 
 | Resource methods                                                                                                                        | Api Reference | Implemented |
 | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------- |
-| [`cloud.config`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/__init__.py)                              |               | No          |
+| [`cloud.config.get`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/config.py)                           |               | Yes         |
 | [`cloud.database.list`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/database/__init__.py)              |               | No          |
 | [`cloud.database.create`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/database/__init__.py)            |               | No          |
 | [`cloud.database.get`](https://github.com/XLongLink/infomaniak/blob/main/infomaniak/resources/cloud/database/__init__.py)               |               | No          |

@@ -5,6 +5,8 @@ from infomaniak.models.cloud.database import (
     DatabaseServiceListResponse, DatabaseServiceBackupSchedule,
     DatabaseServiceCreationResponse, DatabaseServiceConnectionResponse,
     CreateDatabaseServiceBackupScheduleRequest)
+from infomaniak.models.cloud.config import (PublicCloudConfig,
+                                            PublicCloudConfigResponse)
 from infomaniak.models.cloud.projects import (
     PublicCloudProject, PublicCloudProjectTag, PublicCloudProjectListResponse,
     CreatePublicCloudProjectResponse, PublicCloudProjectInvitationResponse,
@@ -24,6 +26,8 @@ __all__ = [
     "DatabaseServiceConnection",
     "DatabaseServiceConnectionResponse",
     "DatabaseServiceBoolResponse",
+    "PublicCloudConfig",
+    "PublicCloudConfigResponse",
     "PublicCloudProjectTag",
     "PublicCloudProject",
     "PublicCloudProjectAsyncActionResponse",

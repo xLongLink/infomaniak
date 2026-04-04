@@ -1,3 +1,4 @@
+from .config import Config, AsyncConfig
 from .database import Database, AsyncDatabase
 from .projects import Projects, AsyncProjects
 from .kubernetes import Kubernetes, AsyncKubernetes
@@ -9,13 +10,10 @@ class Cloud(Resouce):
 
     def __init__(self, client) -> None:
         super().__init__(client)
+        self.config = Config(client)
         self.database = Database(client)
         self.kubernetes = Kubernetes(client)
         self.projects = Projects(client)
-
-    def config(self) -> None:
-        """Cloud resource for configuration endpoints."""
-        raise NotImplementedError("Cloud config endpoint is not implemented yet.")
 
 
 class AsyncCloud(AsyncResource):
@@ -23,16 +21,15 @@ class AsyncCloud(AsyncResource):
 
     def __init__(self, client) -> None:
         super().__init__(client)
+        self.config = AsyncConfig(client)
         self.database = AsyncDatabase(client)
         self.kubernetes = AsyncKubernetes(client)
         self.projects = AsyncProjects(client)
 
-    async def config(self) -> None:
-        """Async cloud resource for configuration endpoints."""
-        raise NotImplementedError("Cloud config endpoint is not implemented yet.")
-
 
 __all__ = [
+    "Config",
+    "AsyncConfig",
     "Database",
     "Kubernetes",
     "AsyncDatabase",
