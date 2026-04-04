@@ -6,6 +6,10 @@ from infomaniak.models.domain.domain import (
     DomainListResponse,
     DomainOptions,
 )
+from infomaniak.models.domain.nameservers import (
+    UpdateNameserversRequest,
+    UpdateNameserversResponse,
+)
 
 __all__ = [
     "Domain",
@@ -14,4 +18,6 @@ __all__ = [
     "DomainContacts",
     "DomainOptions",
     "DomainListResponse",
+    "UpdateNameserversRequest",
+    "UpdateNameserversResponse",
 ]
