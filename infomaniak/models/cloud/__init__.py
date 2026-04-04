@@ -1,3 +1,5 @@
+from infomaniak.models.cloud.config import (PublicCloudConfig,
+                                            PublicCloudConfigResponse)
 from infomaniak.models.cloud.database import (
     DatabaseService, DatabaseServiceTag, DatabaseServicePack,
     DatabaseServiceBackup, DatabaseServiceProject, DatabaseServiceCreation,
@@ -5,8 +7,6 @@ from infomaniak.models.cloud.database import (
     DatabaseServiceListResponse, DatabaseServiceBackupSchedule,
     DatabaseServiceCreationResponse, DatabaseServiceConnectionResponse,
     CreateDatabaseServiceBackupScheduleRequest)
-from infomaniak.models.cloud.config import (PublicCloudConfig,
-                                            PublicCloudConfigResponse)
 from infomaniak.models.cloud.projects import (
     PublicCloudProject, PublicCloudProjectTag, PublicCloudProjectListResponse,
     CreatePublicCloudProjectResponse, PublicCloudProjectInvitationResponse,
