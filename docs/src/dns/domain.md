@@ -4,10 +4,10 @@ The `dns.domain` resource provides methods to list domains and inspect one domai
 
 ## List Domains
 
-- params
-  - None
-- returns
-  - `None` (currently not implemented in the SDK)
+**params:**
+- None.
+
+**returns:** `None` because this method is currently not implemented in the SDK.
 
 ```py
 from infomaniak import Client
@@ -18,10 +18,10 @@ client.dns.domain.list()
 
 ## Display Domain
 
-- params
-  - None
-- returns
-  - `None` (currently not implemented in the SDK)
+**params:**
+- None.
+
+**returns:** `None` because this method is currently not implemented in the SDK.
 
 ```py
 from infomaniak import Client
