@@ -62,6 +62,7 @@ export default defineConfig({
         text: 'Core',
         collapsed: true,
         items: [
+          { text: 'Countries', link: '/core/countries' },
           { text: 'Timezones', link: '/core/timezones' },
         ],
       },
