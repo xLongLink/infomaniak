@@ -1,25 +1,88 @@
+from __future__ import annotations
+
+from typing import Any
 from infomaniak.resource import Resouce, AsyncResource
 
 
 class Tasks(Resouce):
     """Core tasks endpoints."""
 
-    def list(self) -> None:
-        """List tasks."""
-        raise NotImplementedError("Core.tasks.list is not implemented yet.")
+    def list(
+        self,
+        *,
+        page: int | None = None,
+        per_page: int | None = None,
+    ) -> list[dict[str, Any]]:
+        """
+        List tasks from the core API.
 
-    def display(self) -> None:
-        """Display one task."""
-        raise NotImplementedError("Core.tasks.display is not implemented yet.")
+        Args:
+            page: Optional page number for paginated responses.
+            per_page: Optional number of tasks to return per page.
+
+        Returns:
+            list[dict[str, Any]]: The list of tasks returned by the API.
+        """
+        params: dict[str, int] = {}
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+
+        response = self._client.get("/1/tasks", params=params or None)
+        return response.json()["data"]
+
+    def display(self, task_id: int) -> dict[str, Any]:
+        """
+        Display one task from the core API.
+
+        Args:
+            task_id: The unique identifier of the task.
+
+        Returns:
+            dict[str, Any]: The task payload returned by the API.
+        """
+        response = self._client.get(f"/1/tasks/{task_id}")
+        return response.json()["data"]
 
 
 class AsyncTasks(AsyncResource):
     """Async core tasks endpoints."""
 
-    async def list(self) -> None:
-        """List tasks."""
-        raise NotImplementedError("AsyncCore.tasks.list is not implemented yet.")
+    async def list(
+        self,
+        *,
+        page: int | None = None,
+        per_page: int | None = None,
+    ) -> list[dict[str, Any]]:
+        """
+        List tasks from the core API.
 
-    async def display(self) -> None:
-        """Display one task."""
-        raise NotImplementedError("AsyncCore.tasks.display is not implemented yet.")
+        Args:
+            page: Optional page number for paginated responses.
+            per_page: Optional number of tasks to return per page.
+
+        Returns:
+            list[dict[str, Any]]: The list of tasks returned by the API.
+        """
+        params: dict[str, int] = {}
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+
+        response = await self._client.get("/1/tasks", params=params or None)
+        return response.json()["data"]
+
+    async def display(self, task_id: int) -> dict[str, Any]:
+        """
+        Display one task from the core API.
+
+        Args:
+            task_id: The unique identifier of the task.
+
+        Returns:
+            dict[str, Any]: The task payload returned by the API.
+        """
+        response = await self._client.get(f"/1/tasks/{task_id}")
+        return response.json()["data"]
