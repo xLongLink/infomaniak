@@ -58,6 +58,22 @@ export default defineConfig({
           { text: 'Zone', link: '/dns/zone' }
         ]
       },
+      {
+        text: 'Core',
+        collapsed: true,
+        items: [
+          { text: 'Actions', link: '/core/actions' },
+          { text: 'Countries', link: '/core/countries' },
+          { text: 'Events', link: '/core/events' },
+          { text: 'Timezones', link: '/core/timezones' },
+        ],
+      },
+      { text: 'CHK', link: '/chk', collapsed: false },
+      {
+        text: 'Tasks',
+        link: '/tasks',
+        collapsed: false
+      },
     ],
     search: {
       provider: 'local',

@@ -1,25 +1,48 @@
 # Cloud Database Backups
 
-The `cloud.database.backups` resource manages backup snapshots for a managed cloud database.
+The `cloud.database.backups` resource handles backup snapshots for managed cloud databases.
 
-## Methods
+## List Backups
 
-- `cloud.database.backups.list(...)`
-- `cloud.database.backups.get(...)`
-- `cloud.database.backups.delete(...)`
-- `cloud.database.backups.scheduled.*` (see [Scheduled Backups](/cloud/database/scheduled))
-
-::: warning
-`cloud.database.backups` endpoints are declared in the SDK but not implemented yet.
-:::
-
-## Usage
+- No parameters are currently available in the SDK implementation.
 
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
-
-# Not implemented yet:
-# backups = client.cloud.database.backups.list(...)
+client = Client()
+backups: None = client.cloud.database.backups.list()
 ```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Get Backup
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+backup: None = client.cloud.database.backups.get()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Delete Backup
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+deleted: None = client.cloud.database.backups.delete()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.

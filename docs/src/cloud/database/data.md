@@ -1,24 +1,48 @@
 # Cloud Database Data
 
-The `cloud.database.data` resource exposes reference data used when creating or updating managed database services.
+The `cloud.database.data` resource exposes reference data used by managed cloud databases.
 
-## Methods
+## List Regions
 
-- `cloud.database.data.regions()`
-- `cloud.database.data.packs()`
-- `cloud.database.data.types()`
-
-::: warning
-`cloud.database.data` endpoints are declared in the SDK but not implemented yet.
-:::
-
-## Usage
+- No parameters are currently available in the SDK implementation.
 
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
-
-# Not implemented yet:
-# regions = client.cloud.database.data.regions()
+client = Client()
+regions: None = client.cloud.database.data.regions()
 ```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## List Packs
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+packs: None = client.cloud.database.data.packs()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## List Database Types
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+types_: None = client.cloud.database.data.types()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.

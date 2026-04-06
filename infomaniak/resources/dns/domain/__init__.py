@@ -4,7 +4,7 @@ from typing import Literal
 from .order import Order, AsyncOrder
 from .dnssec import DNSSEC, AsyncDNSSEC
 from .nameservers import Nameservers, AsyncNameservers
-from infomaniak.utils import PaginatedList, parse
+from infomaniak.utils import parse, plist
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.domain import Domain as DomainModel
 
@@ -29,8 +29,8 @@ class Domain(Resouce):
         search: str | None = None,
         tld: str | None = None,
         page: int | None = None,
-        per_page: int | None = None,
-    ) -> PaginatedList[DomainModel]:
+        items: int | None = None,
+    ) -> plist[DomainModel]:
         """
         List domains from `GET /2/domains/domains`.
 
@@ -43,10 +43,10 @@ class Domain(Resouce):
             search: Free-text search string for domains.
             tld: Filter domains by TLD.
             page: Page number when requesting paginated results.
-            per_page: Number of items per page.
+            items: Number of items per page.
 
         Returns:
-            PaginatedList[DomainModel]: The list of domains with pagination metadata.
+            plist[DomainModel]: The list of domains with pagination metadata.
         """
         params: dict[str, str | int] = {}
         if account_id is not None:
@@ -65,16 +65,16 @@ class Domain(Resouce):
             params["tld"] = tld
         if page is not None:
             params["page"] = page
-        if per_page is not None:
-            params["per_page"] = per_page
+        if items is not None:
+            params["items"] = items
 
         response = self._client.get("/2/domains/domains", params=params or None)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(DomainModel, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     def show(self, domain: str) -> DomainModel:
@@ -123,8 +123,8 @@ class AsyncDomain(AsyncResource):
         search: str | None = None,
         tld: str | None = None,
         page: int | None = None,
-        per_page: int | None = None,
-    ) -> PaginatedList[DomainModel]:
+        items: int | None = None,
+    ) -> plist[DomainModel]:
         """
         List domains from `GET /2/domains/domains`.
 
@@ -137,10 +137,10 @@ class AsyncDomain(AsyncResource):
             search: Free-text search string for domains.
             tld: Filter domains by TLD.
             page: Page number when requesting paginated results.
-            per_page: Number of items per page.
+            items: Number of items per page.
 
         Returns:
-            PaginatedList[DomainModel]: The list of domains with pagination metadata.
+            plist[DomainModel]: The list of domains with pagination metadata.
         """
         params: dict[str, str | int] = {}
         if account_id is not None:
@@ -159,16 +159,16 @@ class AsyncDomain(AsyncResource):
             params["tld"] = tld
         if page is not None:
             params["page"] = page
-        if per_page is not None:
-            params["per_page"] = per_page
+        if items is not None:
+            params["items"] = items
 
         response = await self._client.get("/2/domains/domains", params=params or None)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(DomainModel, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     async def show(self, domain: str) -> DomainModel:

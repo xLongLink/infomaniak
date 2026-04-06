@@ -1,26 +1,78 @@
 # Cloud Database Scheduled Backups
 
-The `cloud.database.backups.scheduled` resource manages scheduled backup policies for managed cloud databases.
+The `cloud.database.scheduled` resource manages scheduled backup policies for managed cloud databases.
 
-## Methods
+## List Scheduled Backups
 
-- `cloud.database.backups.scheduled.list(...)`
-- `cloud.database.backups.scheduled.create(...)`
-- `cloud.database.backups.scheduled.get(...)`
-- `cloud.database.backups.scheduled.delete(...)`
-- `cloud.database.backups.scheduled.update(...)`
-
-::: warning
-`cloud.database.backups.scheduled` endpoints are declared in the SDK but not implemented yet.
-:::
-
-## Usage
+- No parameters are currently available in the SDK implementation.
 
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
-
-# Not implemented yet:
-# schedules = client.cloud.database.backups.scheduled.list(...)
+client = Client()
+schedules: None = client.cloud.database.scheduled.list()
 ```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Create Scheduled Backup
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+created: None = client.cloud.database.scheduled.create()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Get Scheduled Backup
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+schedule: None = client.cloud.database.scheduled.get()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Delete Scheduled Backup
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+deleted: None = client.cloud.database.scheduled.delete()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Update Scheduled Backup
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+updated: None = client.cloud.database.scheduled.update()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.

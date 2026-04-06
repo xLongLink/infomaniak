@@ -9,12 +9,12 @@ from dacite.exceptions import DaciteError
 T = TypeVar("T")
 
 
-class PaginatedList(list[T]):
-    def __init__(self, values: Iterable[T] = (), *, page: int = 1, pages: int = 1, items: int = 0,) -> None:
+class plist(list[T]):
+    def __init__(self, values: Iterable[T] = (), *, page: int = 1, pages: int = 1, total: int = 0,) -> None:
         super().__init__(values)
         self.page = page
         self.pages = pages
-        self.items = items
+        self.total = total
 
 
 def parse(model: type[T], data: dict[str, Any]) -> T:
@@ -51,3 +51,19 @@ def _with(**fields: bool) -> str | None:
     """
     values = [key for key, include in fields.items() if include]
     return ",".join(values) if values else None
+
+
+def query_params(**parameters: Any) -> dict[str, Any] | None:
+    """
+    Build query parameters by dropping ``None`` values.
+
+    Args:
+        **parameters: Arbitrary query parameter values.
+
+    Returns:
+        dict[str, Any] | None: Dictionary containing only non-``None`` values, or ``None`` if empty.
+    """
+    cleaned_parameters = {
+        key: value for key, value in parameters.items() if value is not None
+    }
+    return cleaned_parameters or None

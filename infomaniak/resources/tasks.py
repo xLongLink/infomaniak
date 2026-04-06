@@ -5,7 +5,7 @@ from infomaniak.resource import Resouce, AsyncResource
 
 
 class Tasks(Resouce):
-    """Core tasks endpoints."""
+    """Tasks endpoints."""
 
     def list(
         self,
@@ -14,7 +14,7 @@ class Tasks(Resouce):
         items: int | None = None,
     ) -> list[dict[str, Any]]:
         """
-        List tasks from the core API.
+        List asynchronous tasks.
 
         Args:
             page: Optional page number for paginated responses.
@@ -29,25 +29,25 @@ class Tasks(Resouce):
         if items is not None:
             params["items"] = items
 
-        response = self._client.get("/1/tasks", params=params or None)
+        response = self._client.get("/1/async/tasks", params=params or None)
         return response.json()["data"]
 
-    def display(self, task_id: int) -> dict[str, Any]:
+    def get(self, task_uuid: str) -> dict[str, Any]:
         """
-        Display one task from the core API.
+        Get one asynchronous task.
 
         Args:
-            task_id: The unique identifier of the task.
+            task_uuid: The unique identifier of the asynchronous task.
 
         Returns:
             dict[str, Any]: The task payload returned by the API.
         """
-        response = self._client.get(f"/1/tasks/{task_id}")
+        response = self._client.get(f"/1/async/tasks/{task_uuid}")
         return response.json()["data"]
 
 
 class AsyncTasks(AsyncResource):
-    """Async core tasks endpoints."""
+    """Async tasks endpoints."""
 
     async def list(
         self,
@@ -56,7 +56,7 @@ class AsyncTasks(AsyncResource):
         items: int | None = None,
     ) -> list[dict[str, Any]]:
         """
-        List tasks from the core API.
+        List asynchronous tasks.
 
         Args:
             page: Optional page number for paginated responses.
@@ -71,18 +71,18 @@ class AsyncTasks(AsyncResource):
         if items is not None:
             params["items"] = items
 
-        response = await self._client.get("/1/tasks", params=params or None)
+        response = await self._client.get("/1/async/tasks", params=params or None)
         return response.json()["data"]
 
-    async def display(self, task_id: int) -> dict[str, Any]:
+    async def get(self, task_uuid: str) -> dict[str, Any]:
         """
-        Display one task from the core API.
+        Get one asynchronous task.
 
         Args:
-            task_id: The unique identifier of the task.
+            task_uuid: The unique identifier of the asynchronous task.
 
         Returns:
             dict[str, Any]: The task payload returned by the API.
         """
-        response = await self._client.get(f"/1/tasks/{task_id}")
+        response = await self._client.get(f"/1/async/tasks/{task_uuid}")
         return response.json()["data"]

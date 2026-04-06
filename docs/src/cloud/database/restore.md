@@ -2,22 +2,32 @@
 
 The `cloud.database.restore` resource manages restore operations for managed cloud databases.
 
-## Methods
+## Get Restore Status
 
-- `cloud.database.restore.get(...)`
-- `cloud.database.restore.create(...)`
-
-::: warning
-`cloud.database.restore` endpoints are declared in the SDK but not implemented yet.
-:::
-
-## Usage
+- No parameters are currently available in the SDK implementation.
 
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
-
-# Not implemented yet:
-# restore = client.cloud.database.restore.get(...)
+client = Client()
+restore: None = client.cloud.database.restore.get()
 ```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Create Restore
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+created: None = client.cloud.database.restore.create()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.

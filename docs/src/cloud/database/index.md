@@ -4,12 +4,12 @@ The `cloud.database` resource manages managed database services (DBaaS) in a Pub
 
 ## Methods
 
-- `cloud.database.list(public_cloud_id, public_cloud_project_id, with_=None)`
-- `cloud.database.list_all(account_id, with_=None)`
-- `cloud.database.create(public_cloud_id, public_cloud_project_id, name, pack_id, region, type_, version, backup_schedule=None)`
-- `cloud.database.get(public_cloud_id, public_cloud_project_id, dbaas_id, with_=None)`
-- `cloud.database.delete(public_cloud_id, public_cloud_project_id, dbaas_id, keep_backup_files=None)`
-- `cloud.database.update(public_cloud_id, public_cloud_project_id, dbaas_id, name=None, pack_id=None)`
+- `cloud.database.list(public_cloud_id, public_cloud_project_id, with_=...)`
+- `cloud.database.list_all(account_id, with_=...)`
+- `cloud.database.create(public_cloud_id, public_cloud_project_id, name, pack_id, region, type_, version, backup_schedule=...)`
+- `cloud.database.get(public_cloud_id, public_cloud_project_id, dbaas_id, with_=...)`
+- `cloud.database.delete(public_cloud_id, public_cloud_project_id, dbaas_id, keep_backup_files=...)`
+- `cloud.database.update(public_cloud_id, public_cloud_project_id, dbaas_id, name=..., pack_id=...)`
 - `cloud.database.password(public_cloud_id, public_cloud_project_id, dbaas_id)`
 
 ## Nested Resources
@@ -26,15 +26,15 @@ The `cloud.database` resource manages managed database services (DBaaS) in a Pub
 - `public_cloud_project_id`: Unique identifier of the Public Cloud project.
 - `with_`: Optional expansion parameter (for example `projects` or `backups`).
 
-**returns:** `PaginatedList[DatabaseService]` containing services and pagination metadata.
+**returns:** `plist[DatabaseService]` containing services and pagination metadata.
 
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 services = client.cloud.database.list(
-    public_cloud_id=64258,
-    public_cloud_project_id=25454,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
 )
 ```
 
@@ -54,15 +54,15 @@ services = client.cloud.database.list(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 created = client.cloud.database.create(
-    public_cloud_id=64258,
-    public_cloud_project_id=25454,
-    name="orders-db",
-    pack_id="db-1",
-    region="dc3-a",
-    type_="postgresql",
-    version="16",
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    name=...,
+    pack_id=...,
+    region=...,
+    type_=...,
+    version=...,
 )
 ```
 

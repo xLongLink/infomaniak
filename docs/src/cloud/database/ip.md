@@ -1,24 +1,48 @@
 # Cloud Database IP
 
-The `cloud.database.ip` resource manages IP allowlist entries for managed cloud database access.
+The `cloud.database.ip` resource manages IP allowlist entries for managed cloud databases.
 
-## Methods
+## List Allowed IPs
 
-- `cloud.database.ip.list(...)`
-- `cloud.database.ip.create(...)`
-- `cloud.database.ip.remove(...)`
-
-::: warning
-`cloud.database.ip` endpoints are declared in the SDK but not implemented yet.
-:::
-
-## Usage
+- No parameters are currently available in the SDK implementation.
 
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
-
-# Not implemented yet:
-# allowlist = client.cloud.database.ip.list(...)
+client = Client()
+allowlist: None = client.cloud.database.ip.list()
 ```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Create Allowed IP
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+created: None = client.cloud.database.ip.create()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
+
+## Remove Allowed IP
+
+- No parameters are currently available in the SDK implementation.
+
+```py
+from infomaniak import Client
+
+client = Client()
+removed: None = client.cloud.database.ip.remove()
+```
+
+`None`:
+
+- No return object is currently available in the SDK implementation.
