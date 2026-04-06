@@ -55,6 +55,7 @@ Infomaniak OpenAPI v3.1.0
 | `mail`                       | Mail Services                             | <span style="color:red">Low priority</span>   |
 | `newsletter`                 | Newsletter Overview                       | <span style="color:red">Low priority</span>   |
 | `radio`                      | [Streaming Radio](https://chk.me/u4XqnUZ) | <span style="color:red">Low priority</span>   |
+| [`tasks`](/tasks)            | Async Tasks                               | <span style="color:yellow">In progress</span> |
 | `tickets`                    | Tickets Overview                          | <span style="color:red">Low priority</span>   |
 | `url`                        | URL Overview                              | <span style="color:red">Low priority</span>   |
 | `video`                      | [Streaming Video](https://chk.me/BWbluEg) | <span style="color:red">Low priority</span>   |

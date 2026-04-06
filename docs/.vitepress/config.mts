@@ -58,6 +58,11 @@ export default defineConfig({
           { text: 'Zone', link: '/dns/zone' }
         ]
       },
+      {
+        text: 'Tasks',
+        link: '/tasks',
+        collapsed: false
+      },
     ],
     search: {
       provider: 'local',
