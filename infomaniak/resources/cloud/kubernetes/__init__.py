@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import random
 from .ip import Ip, AsyncIp
 from .data import Data, AsyncData
 from typing import Any, Literal
@@ -10,6 +11,12 @@ from infomaniak.resource import Resouce, AsyncResource
 
 class Kubernetes(Resouce):
     """Cloud Kubernetes resources."""
+
+    _DEFAULT_KUBERNETES_VERSION: Literal["1.29", "1.30", "1.31"] = "1.31"
+    _REGIONS: tuple[Literal["dc3-a", "dc4-a"], Literal["dc3-a", "dc4-a"]] = (
+        "dc3-a",
+        "dc4-a",
+    )
 
     def __init__(self, client) -> None:
         super().__init__(client)
@@ -103,10 +110,10 @@ class Kubernetes(Resouce):
         self,
         public_cloud_id: int,
         public_cloud_project_id: int,
-        kaas_pack_id: Literal[1, 2],
-        kubernetes_version: Literal["1.29", "1.30", "1.31"],
         name: str,
-        region: Literal["dc3-a", "dc4-a"],
+        kaas_pack: Literal["shared", "dedicated"] = "shared",
+        kubernetes_version: Literal["1.29", "1.30", "1.31"] | None = None,
+        region: Literal["dc3-a", "dc4-a"] | None = None,
     ) -> dict[str, Any]:
         """
         Create a Kubernetes cluster.
@@ -114,22 +121,33 @@ class Kubernetes(Resouce):
         Args:
             public_cloud_id: The unique identifier of the public cloud product.
             public_cloud_project_id: The unique identifier of the public cloud project.
-            kaas_pack_id: The Kubernetes service pack identifier.
-            kubernetes_version: The Kubernetes version.
+            kaas_pack: The Kubernetes service pack type. Use ``"shared"`` or
+                ``"dedicated"``.
+            kubernetes_version: The Kubernetes version. If omitted, the latest
+                supported version is selected.
             name: The Kubernetes service name.
-            region: The public cloud region.
+            region: The public cloud region. If omitted, a random supported
+                region is selected.
 
         Returns:
             dict[str, Any]: The API response payload for the created cluster.
         """
+        kaas_pack_id = 1 if kaas_pack == "shared" else 2
+        selected_kubernetes_version = (
+            kubernetes_version
+            if kubernetes_version is not None
+            else self._DEFAULT_KUBERNETES_VERSION
+        )
+        selected_region = region if region is not None else random.choice(self._REGIONS)
+
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
         response = self._client.post(
             url,
             json={
                 "kaas_pack_id": kaas_pack_id,
-                "kubernetes_version": kubernetes_version,
+                "kubernetes_version": selected_kubernetes_version,
                 "name": name,
-                "region": region,
+                "region": selected_region,
             },
         )
         return response.json()
@@ -392,10 +410,10 @@ class AsyncKubernetes(AsyncResource):
         self,
         public_cloud_id: int,
         public_cloud_project_id: int,
-        kaas_pack_id: Literal[1, 2],
-        kubernetes_version: Literal["1.29", "1.30", "1.31"],
         name: str,
-        region: Literal["dc3-a", "dc4-a"],
+        kaas_pack: Literal["shared", "dedicated"] = "shared",
+        kubernetes_version: Literal["1.29", "1.30", "1.31"] | None = None,
+        region: Literal["dc3-a", "dc4-a"] | None = None,
     ) -> dict[str, Any]:
         """
         Create a Kubernetes cluster.
@@ -403,22 +421,35 @@ class AsyncKubernetes(AsyncResource):
         Args:
             public_cloud_id: The unique identifier of the public cloud product.
             public_cloud_project_id: The unique identifier of the public cloud project.
-            kaas_pack_id: The Kubernetes service pack identifier.
-            kubernetes_version: The Kubernetes version.
+            kaas_pack: The Kubernetes service pack type. Use ``"shared"`` or
+                ``"dedicated"``.
+            kubernetes_version: The Kubernetes version. If omitted, the latest
+                supported version is selected.
             name: The Kubernetes service name.
-            region: The public cloud region.
+            region: The public cloud region. If omitted, a random supported
+                region is selected.
 
         Returns:
             dict[str, Any]: The API response payload for the created cluster.
         """
+        kaas_pack_id = 1 if kaas_pack == "shared" else 2
+        selected_kubernetes_version = (
+            kubernetes_version
+            if kubernetes_version is not None
+            else Kubernetes._DEFAULT_KUBERNETES_VERSION
+        )
+        selected_region = (
+            region if region is not None else random.choice(Kubernetes._REGIONS)
+        )
+
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
         response = await self._client.post(
             url,
             json={
                 "kaas_pack_id": kaas_pack_id,
-                "kubernetes_version": kubernetes_version,
+                "kubernetes_version": selected_kubernetes_version,
                 "name": name,
-                "region": region,
+                "region": selected_region,
             },
         )
         return response.json()
