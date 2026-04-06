@@ -4,9 +4,19 @@ The `cloud.kubernetes` resource manages managed Kubernetes clusters in Public Cl
 
 ## List Kubernetes Clusters
 
-- `public_cloud_id`: Unique identifier of the Public Cloud account.
-- `public_cloud_project_id`: Unique identifier of the Public Cloud project.
+- `public_cloud_id`: Unique identifier of the Public Cloud account (required when `public_cloud_project_id` is provided).
+- `public_cloud_project_id`: Optional unique identifier of the Public Cloud project. If omitted, the account-wide endpoint is used.
+- `account_id`: Unique identifier of the account (required when listing all Kubernetes services across Public Clouds).
 - `with_`: Optional extra response expansions requested from the API.
+- `filter_`: Optional API filters.
+- `return_`: Optional return mode (for example `total`).
+- `limit`: Optional offset-based pagination limit.
+- `skip`: Optional offset-based pagination offset.
+- `page`: Optional page-based pagination page number.
+- `per_page`: Optional page-based pagination item count.
+- `order_by`: Optional field used for sorting.
+- `order`: Optional sorting direction (`asc` or `desc`).
+- `order_for`: Optional per-field sorting order.
 
 **returns:** `PaginatedList[dict[str, Any]]` containing matching Kubernetes clusters.
 
@@ -17,6 +27,12 @@ client = Client()
 clusters = client.cloud.kubernetes.list(
     public_cloud_id=...,
     public_cloud_project_id=...,
+)
+
+all_clusters = client.cloud.kubernetes.list(
+    account_id=100001,
+    order_by="name",
+    order="asc",
 )
 ```
 

@@ -4,7 +4,7 @@ from .ip import Ip, AsyncIp
 from .data import Data, AsyncData
 from typing import Any
 from .pools import Pools, AsyncPools
-from infomaniak.utils import PaginatedList
+from infomaniak.utils import PaginatedList, query_params
 from infomaniak.resource import Resouce, AsyncResource
 
 
@@ -19,24 +19,75 @@ class Kubernetes(Resouce):
 
     def list(
         self,
-        public_cloud_id: int,
-        public_cloud_project_id: int,
+        public_cloud_id: int | None = None,
+        public_cloud_project_id: int | None = None,
         *,
+        account_id: int | None = None,
         with_: str | None = None,
+        filter_: dict[str, Any] | None = None,
+        return_: str | None = None,
+        limit: int | None = None,
+        skip: int | None = None,
+        page: int | None = None,
+        per_page: int | None = None,
+        order_by: str | None = None,
+        order: str | None = None,
+        order_for: dict[str, str] | None = None,
     ) -> PaginatedList[dict[str, Any]]:
         """
-        List Kubernetes clusters for a public cloud project.
+        List Kubernetes clusters for a public cloud project or for an entire account.
 
         Args:
             public_cloud_id: The unique identifier of the public cloud product.
-            public_cloud_project_id: The unique identifier of the public cloud project.
+            public_cloud_project_id: The unique identifier of the public cloud project. If omitted,
+                the account-wide endpoint is used.
+            account_id: The unique identifier of the account. Required when
+                ``public_cloud_project_id`` is omitted.
             with_: Optional expansion parameter.
+            filter_: Optional API filters.
+            return_: Optional return mode (for example ``total``).
+            limit: Optional limit for offset-based pagination.
+            skip: Optional offset for offset-based pagination.
+            page: Optional page number for page-based pagination.
+            per_page: Optional items per page for page-based pagination.
+            order_by: Optional sort field.
+            order: Optional sort direction.
+            order_for: Optional per-field sort direction mapping.
 
         Returns:
             PaginatedList[dict[str, Any]]: The list of Kubernetes clusters and pagination metadata.
         """
-        url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
-        params = {"with": with_} if with_ is not None else None
+        if public_cloud_project_id is None:
+            if account_id is None:
+                raise ValueError(
+                    "account_id is required when public_cloud_project_id is not provided."
+                )
+
+            url = "/1/public_clouds/kaas"
+            combined_filter = dict(filter_ or {})
+            if public_cloud_id is not None:
+                combined_filter.setdefault("public_cloud_id", public_cloud_id)
+        else:
+            if public_cloud_id is None:
+                raise ValueError(
+                    "public_cloud_id is required when public_cloud_project_id is provided."
+                )
+
+            url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
+            combined_filter = filter_
+
+        params = query_params(
+            account_id=account_id,
+            filter=combined_filter,
+            limit=limit,
+            skip=skip,
+            page=page,
+            per_page=per_page,
+            order_by=order_by,
+            order=order,
+            order_for=order_for,
+            **{"with": with_, "return": return_},
+        )
 
         response = self._client.get(url, params=params)
         payload = response.json()
@@ -231,24 +282,75 @@ class AsyncKubernetes(AsyncResource):
 
     async def list(
         self,
-        public_cloud_id: int,
-        public_cloud_project_id: int,
+        public_cloud_id: int | None = None,
+        public_cloud_project_id: int | None = None,
         *,
+        account_id: int | None = None,
         with_: str | None = None,
+        filter_: dict[str, Any] | None = None,
+        return_: str | None = None,
+        limit: int | None = None,
+        skip: int | None = None,
+        page: int | None = None,
+        per_page: int | None = None,
+        order_by: str | None = None,
+        order: str | None = None,
+        order_for: dict[str, str] | None = None,
     ) -> PaginatedList[dict[str, Any]]:
         """
-        List Kubernetes clusters for a public cloud project.
+        List Kubernetes clusters for a public cloud project or for an entire account.
 
         Args:
             public_cloud_id: The unique identifier of the public cloud product.
-            public_cloud_project_id: The unique identifier of the public cloud project.
+            public_cloud_project_id: The unique identifier of the public cloud project. If omitted,
+                the account-wide endpoint is used.
+            account_id: The unique identifier of the account. Required when
+                ``public_cloud_project_id`` is omitted.
             with_: Optional expansion parameter.
+            filter_: Optional API filters.
+            return_: Optional return mode (for example ``total``).
+            limit: Optional limit for offset-based pagination.
+            skip: Optional offset for offset-based pagination.
+            page: Optional page number for page-based pagination.
+            per_page: Optional items per page for page-based pagination.
+            order_by: Optional sort field.
+            order: Optional sort direction.
+            order_for: Optional per-field sort direction mapping.
 
         Returns:
             PaginatedList[dict[str, Any]]: The list of Kubernetes clusters and pagination metadata.
         """
-        url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
-        params = {"with": with_} if with_ is not None else None
+        if public_cloud_project_id is None:
+            if account_id is None:
+                raise ValueError(
+                    "account_id is required when public_cloud_project_id is not provided."
+                )
+
+            url = "/1/public_clouds/kaas"
+            combined_filter = dict(filter_ or {})
+            if public_cloud_id is not None:
+                combined_filter.setdefault("public_cloud_id", public_cloud_id)
+        else:
+            if public_cloud_id is None:
+                raise ValueError(
+                    "public_cloud_id is required when public_cloud_project_id is provided."
+                )
+
+            url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
+            combined_filter = filter_
+
+        params = query_params(
+            account_id=account_id,
+            filter=combined_filter,
+            limit=limit,
+            skip=skip,
+            page=page,
+            per_page=per_page,
+            order_by=order_by,
+            order=order,
+            order_for=order_for,
+            **{"with": with_, "return": return_},
+        )
 
         response = await self._client.get(url, params=params)
         payload = response.json()
