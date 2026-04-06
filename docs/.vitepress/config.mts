@@ -9,6 +9,16 @@ export default defineConfig({
   themeConfig: {
     socialLinks: [{ icon: 'github', link: 'https://github.com/XLongLink/infomaniak' }],
     sidebar: [
+            {
+        text: 'Overview',
+        link: '/',
+        collapsed: false
+      },
+      {
+        text: 'Pagination',
+        link: '/tutorials/pagination',
+        collapsed: false
+      },
       {
         text: 'Cloud',
         link: '/cloud/',
@@ -18,9 +28,9 @@ export default defineConfig({
           { text: 'Projects', link: '/cloud/projects' },
           {
             text: 'Database',
-            link: '/cloud/database/',
+            collapsed: true,
             items: [
-              { text: 'Overview', link: '/cloud/database/' },
+              { text: 'Index', link: '/cloud/database/' },
               { text: 'Backups', link: '/cloud/database/backups' },
               { text: 'Config', link: '/cloud/database/config' },
               { text: 'Data', link: '/cloud/database/data' },
@@ -31,9 +41,9 @@ export default defineConfig({
           },
           {
             text: 'Kubernetes',
-            link: '/cloud/kubernetes/',
+            collapsed: true,
             items: [
-              { text: 'Overview', link: '/cloud/kubernetes/' },
+              { text: 'Index', link: '/cloud/kubernetes/' },
               { text: 'Data', link: '/cloud/kubernetes/data' },
               { text: 'IP', link: '/cloud/kubernetes/ip' },
               { text: 'Pools', link: '/cloud/kubernetes/pools' },
@@ -41,13 +51,13 @@ export default defineConfig({
           },
         ],
       },
-        text: 'Tutorials',
-        link: '/tutorials/pagination',
-        collapsed: false,
-        items: [{ text: 'Pagination', link: '/tutorials/pagination' }],
+      {
+        text: 'DNS', link: '/dns/', collapsed: true, items: [
+          { text: 'Domain', link: '/dns/domain' },
+          { text: 'Top Level Domain', link: '/dns/tld' },
+          { text: 'Zone', link: '/dns/zone' }
+        ]
       },
-      { text: 'Cloud', link: '/cloud/', collapsed: true, items: [{ text: 'Projects', link: '/cloud/projects' }] },
-      { text: 'DNS', link: '/dns/', collapsed: true, items: [{ text: 'Domain', link: '/dns/domain' }, { text: 'Top Level Domain', link: '/dns/tld' }, { text: 'Zone', link: '/dns/zone' }] },
     ],
     search: {
       provider: 'local',
