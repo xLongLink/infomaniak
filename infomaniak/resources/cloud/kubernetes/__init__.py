@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from .ip import Ip, AsyncIp
 from .data import Data, AsyncData
-from typing import Any
+from typing import Any, Literal
 from .pools import Pools, AsyncPools
 from infomaniak.utils import PaginatedList, query_params
 from infomaniak.resource import Resouce, AsyncResource
@@ -103,7 +103,10 @@ class Kubernetes(Resouce):
         self,
         public_cloud_id: int,
         public_cloud_project_id: int,
-        payload: dict[str, Any],
+        kaas_pack_id: Literal[1, 2],
+        kubernetes_version: Literal["1.29", "1.30", "1.31"],
+        name: str,
+        region: Literal["dc3-a", "dc4-a"],
     ) -> dict[str, Any]:
         """
         Create a Kubernetes cluster.
@@ -111,13 +114,24 @@ class Kubernetes(Resouce):
         Args:
             public_cloud_id: The unique identifier of the public cloud product.
             public_cloud_project_id: The unique identifier of the public cloud project.
-            payload: The Kubernetes cluster creation payload.
+            kaas_pack_id: The Kubernetes service pack identifier.
+            kubernetes_version: The Kubernetes version.
+            name: The Kubernetes service name.
+            region: The public cloud region.
 
         Returns:
             dict[str, Any]: The API response payload for the created cluster.
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
-        response = self._client.post(url, json=payload)
+        response = self._client.post(
+            url,
+            json={
+                "kaas_pack_id": kaas_pack_id,
+                "kubernetes_version": kubernetes_version,
+                "name": name,
+                "region": region,
+            },
+        )
         return response.json()
 
     def get(
@@ -366,7 +380,10 @@ class AsyncKubernetes(AsyncResource):
         self,
         public_cloud_id: int,
         public_cloud_project_id: int,
-        payload: dict[str, Any],
+        kaas_pack_id: Literal[1, 2],
+        kubernetes_version: Literal["1.29", "1.30", "1.31"],
+        name: str,
+        region: Literal["dc3-a", "dc4-a"],
     ) -> dict[str, Any]:
         """
         Create a Kubernetes cluster.
@@ -374,13 +391,24 @@ class AsyncKubernetes(AsyncResource):
         Args:
             public_cloud_id: The unique identifier of the public cloud product.
             public_cloud_project_id: The unique identifier of the public cloud project.
-            payload: The Kubernetes cluster creation payload.
+            kaas_pack_id: The Kubernetes service pack identifier.
+            kubernetes_version: The Kubernetes version.
+            name: The Kubernetes service name.
+            region: The public cloud region.
 
         Returns:
             dict[str, Any]: The API response payload for the created cluster.
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}/kaas"
-        response = await self._client.post(url, json=payload)
+        response = await self._client.post(
+            url,
+            json={
+                "kaas_pack_id": kaas_pack_id,
+                "kubernetes_version": kubernetes_version,
+                "name": name,
+                "region": region,
+            },
+        )
         return response.json()
 
     async def get(
