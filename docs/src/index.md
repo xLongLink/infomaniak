@@ -46,6 +46,7 @@ Infomaniak OpenAPI v3.1.0
 | `backup`                     | Swiss Backup                              | <span style="color:red">Low priority</span>   |
 | [`cloud`](/cloud/)           | Cloud Overview                            | <span style="color:orange">Planned</span>     |
 | `core`                       | Core Resources                            | <span style="color:red">Low priority</span>   |
+| [`chk`](/chk)               | CHK URL Shortener                         | <span style="color:yellow">In progress</span> |
 | [`dns`](/dns/)               | Domain and Zones                          | <span style="color:yellow">In progress</span> |
 | `domain`                     | Domain Overview                           | <span style="color:red">Low priority</span>   |
 | `etickets`                   | [ETickets](https://chk.me/kOM6ZoO)        | <span style="color:red">Low priority</span>   |

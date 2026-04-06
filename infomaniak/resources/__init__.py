@@ -1,5 +1,5 @@
 """Top-level SDK resource groups."""
-
+from infomaniak.resources.chk import Chk, AsyncChk
 from infomaniak.resources.dns import DNS, AsyncDNS
 from infomaniak.resources.url import Url, AsyncUrl
 from infomaniak.resources.core import Core, AsyncCore
