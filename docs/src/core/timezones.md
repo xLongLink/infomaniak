@@ -6,23 +6,23 @@ The `core.timezones` resource lets you list all available API timezones and disp
 
 - `search`: Optional search string used to filter timezone names.
 - `page`: Optional page number for paginated responses.
-- `per_page`: Optional number of items returned per page.
+- `items`: Optional number of items returned per page.
 
 ```py
 from infomaniak import Client
 from infomaniak.models import Timezone
-from infomaniak.utils import PaginatedList
+from infomaniak.utils import plist
 
 client = Client()
-timezones: PaginatedList[Timezone] = client.core.timezones.list(search="Europe", page=1, per_page=15)
+timezones: plist[Timezone] = client.core.timezones.list(search="Europe", page=1, items=15)
 ```
 
-`PaginatedList[Timezone]`:
+`plist[Timezone]`:
 
 - `[]`: A list containing `Timezone` objects.
 - `page`: Current page number.
 - `pages`: Total number of pages.
-- `items`: Total number of items.
+- `total`: Total number of records.
 
 `Timezone`:
 

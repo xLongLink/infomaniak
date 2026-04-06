@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from infomaniak.utils import PaginatedList, parse, query_params
+from infomaniak.utils import parse, plist, query_params
 from infomaniak.models import Timezone
 from infomaniak.resource import Resouce, AsyncResource
 
@@ -13,29 +13,29 @@ class Timezones(Resouce):
         *,
         search: str | None = None,
         page: int | None = None,
-        per_page: int | None = None,
-    ) -> PaginatedList[Timezone]:
+        items: int | None = None,
+    ) -> plist[Timezone]:
         """
         Retrieve all available timezones.
 
         Args:
             search: Optional search string used to filter timezone names.
             page: Optional page number for paginated responses.
-            per_page: Optional number of items returned per page.
+            items: Optional number of items returned per page.
 
         Returns:
-            PaginatedList[Timezone]: The list of timezones and pagination metadata.
+            plist[Timezone]: The list of timezones and pagination metadata.
         """
         response = self._client.get(
             "/1/timezones",
-            params=query_params(search=search, page=page, per_page=per_page),
+            params=query_params(search=search, page=page, items=items),
         )
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(Timezone, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     def display(self, timezone_id: int) -> Timezone:
@@ -60,29 +60,29 @@ class AsyncTimezones(AsyncResource):
         *,
         search: str | None = None,
         page: int | None = None,
-        per_page: int | None = None,
-    ) -> PaginatedList[Timezone]:
+        items: int | None = None,
+    ) -> plist[Timezone]:
         """
         Retrieve all available timezones.
 
         Args:
             search: Optional search string used to filter timezone names.
             page: Optional page number for paginated responses.
-            per_page: Optional number of items returned per page.
+            items: Optional number of items returned per page.
 
         Returns:
-            PaginatedList[Timezone]: The list of timezones and pagination metadata.
+            plist[Timezone]: The list of timezones and pagination metadata.
         """
         response = await self._client.get(
             "/1/timezones",
-            params=query_params(search=search, page=page, per_page=per_page),
+            params=query_params(search=search, page=page, items=items),
         )
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(Timezone, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     async def display(self, timezone_id: int) -> Timezone:
