@@ -20,6 +20,7 @@ client = Client()
 zone = client.dns.zone.display("example.com", records=True)
 ```
 
+
 ## Update Zone
 
 - `zone`: Fully qualified domain name of the DNS zone to update.
