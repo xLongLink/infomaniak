@@ -13,28 +13,68 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
 
             - uses: actions/setup-python@v6
               with:
                   python-version: '3.12'
 
+            - name: Bump patch version
+              id: package_version
+              run: |
+                  python - <<'PY'
+                  import os
+                  import re
+                  import subprocess
+                  from pathlib import Path
+
+                  pyproject_path = Path("pyproject.toml")
+                  pyproject_content = pyproject_path.read_text(encoding="utf-8")
+
+                  match = re.search(r'^version\s*=\s*"(\d+)\.(\d+)\.(\d+)"\s*$', pyproject_content, re.MULTILINE)
+                  if not match:
+                      raise ValueError("Unable to find project version in pyproject.toml")
+
+                  latest_tag = subprocess.check_output(
+                      ["bash", "-lc", "git tag -l 'v*' --sort=-v:refname | head -n1"],
+                      text=True,
+                  ).strip()
+
+                  if latest_tag:
+                      tag_match = re.fullmatch(r"v(\d+)\.(\d+)\.(\d+)", latest_tag)
+                      if not tag_match:
+                          raise ValueError(f"Latest tag '{latest_tag}' does not follow v<major>.<minor>.<patch>")
+                      major, minor, patch = map(int, tag_match.groups())
+                  else:
+                      major, minor, patch = map(int, match.groups())
+
+                  next_version = f"{major}.{minor}.{patch + 1}"
+                  updated_content = re.sub(
+                      r'^version\s*=\s*"\d+\.\d+\.\d+"\s*$',
+                      f'version = "{next_version}"',
+                      pyproject_content,
+                      count=1,
+                      flags=re.MULTILINE,
+                  )
+                  pyproject_path.write_text(updated_content, encoding="utf-8")
+
+                  with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
+                      output.write(f"version={next_version}\n")
+                  PY
+
+            - name: Commit version bump
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git add pyproject.toml
+                  git commit -m "chore: bump version to v${{ steps.package_version.outputs.version }}"
+                  git push
+
             - name: Build package
               run: |
                   pip install build
                   python -m build
-
-            - name: Read package version
-              id: package_version
-              run: |
-                  python - <<'PY'
-                  import tomllib
-                  from pathlib import Path
-                  import os
-
-                  version = tomllib.loads(Path('pyproject.toml').read_text())['project']['version']
-                  with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
-                      output.write(f"version={version}\n")
-                  PY
 
             - name: Publish to PyPI
               uses: pypa/gh-action-pypi-publish@release/v1
