@@ -42,7 +42,7 @@ class Chk(Resouce):
         url: str,
         *,
         expiration_date: int | None = None,
-    ) -> ChkShortUrlResponse:
+    ) -> ChkShortUrl:
         """
         Create a short URL.
 
@@ -51,14 +51,14 @@ class Chk(Resouce):
             expiration_date: Optional Unix timestamp when the short URL expires.
 
         Returns:
-            ChkShortUrlResponse: The created short URL payload.
+            ChkShortUrl: The created short URL payload.
         """
         payload: dict[str, str | int] = {"url": url}
         if expiration_date is not None:
             payload["expiration_date"] = expiration_date
 
         response = self._client.post("/1/url-shortener", json=payload)
-        return _parse_short_url_response(response.json())
+        return _parse_short_url_response(response.json()).data
 
     def list(
         self,
@@ -148,7 +148,7 @@ class AsyncChk(AsyncResource):
         url: str,
         *,
         expiration_date: int | None = None,
-    ) -> ChkShortUrlResponse:
+    ) -> ChkShortUrl:
         """
         Create a short URL.
 
@@ -157,14 +157,14 @@ class AsyncChk(AsyncResource):
             expiration_date: Optional Unix timestamp when the short URL expires.
 
         Returns:
-            ChkShortUrlResponse: The created short URL payload.
+            ChkShortUrl: The created short URL payload.
         """
         payload: dict[str, str | int] = {"url": url}
         if expiration_date is not None:
             payload["expiration_date"] = expiration_date
 
         response = await self._client.post("/1/url-shortener", json=payload)
-        return _parse_short_url_response(response.json())
+        return _parse_short_url_response(response.json()).data
 
     async def list(
         self,

@@ -9,21 +9,16 @@ The `chk` resource lets you create, list, and update short URLs, and inspect you
 
 ```py
 from infomaniak import Client
-from infomaniak.models import ChkShortUrlResponse
+from infomaniak.models import ChkShortUrl
 
 client = Client()
-response: ChkShortUrlResponse = client.chk.create(
+response: ChkShortUrl = client.chk.create(
     url="https://www.infomaniak.com",
     expiration_date=1633435186,
 )
 ```
 
-`ChkShortUrlResponse`:
-
-- `result`: Request result (`success`, `error`, `asynchronous`).
-- `data`: Created short URL object.
-
-`data` (`ChkShortUrl`):
+`ChkShortUrl`:
 
 - `code`: Generated short URL code.
 - `url`: Original URL.
