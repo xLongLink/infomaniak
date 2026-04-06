@@ -10,3 +10,8 @@ from infomaniak.models.cloud.projects import (
     PublicCloudProject, PublicCloudProjectTag, PublicCloudProjectListResponse,
     CreatePublicCloudProjectResponse, PublicCloudProjectInvitationResponse,
     PublicCloudProjectAsyncActionResponse)
+from infomaniak.models.cloud.public_cloud import (PublicCloud, PublicCloudTag,
+                                                  PublicCloudData,
+                                                  PublicCloudRights,
+                                                  PublicCloudStatus,
+                                                  PublicCloudBoolResponse)
