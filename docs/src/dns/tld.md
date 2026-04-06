@@ -17,8 +17,8 @@ The `dns.tld` resource lets you browse TLD metadata and inspect a specific TLD.
 from infomaniak import Client
 from infomaniak.models.dns.tld import Tld
 
-client = Client(token="<token>")
-tlds: list[Tld] = client.dns.tld.list(length=True, periods=True, support=True)
+client = Client()
+tlds: list[Tld] = client.dns.tld.list(length=..., periods=..., support=...)
 ```
 
 `list[Tld]`:
@@ -40,8 +40,8 @@ tlds: list[Tld] = client.dns.tld.list(length=True, periods=True, support=True)
 from infomaniak import Client
 from infomaniak.models.dns.tld import Tld
 
-client = Client(token="<token>")
-ch_tld: Tld = client.dns.tld.show("ch", length=True, support=True, time=True)
+client = Client()
+ch_tld: Tld = client.dns.tld.show("ch", length=..., support=..., time=...)
 ```
 
 `Tld`:

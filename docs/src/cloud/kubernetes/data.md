@@ -9,7 +9,7 @@ The `cloud.kubernetes.data` resource provides reference data for Kubernetes clus
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 data: None = client.cloud.kubernetes.data.list()
 ```
 
@@ -24,7 +24,7 @@ data: None = client.cloud.kubernetes.data.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 versions: None = client.cloud.kubernetes.data.versions()
 ```
 
@@ -39,7 +39,7 @@ versions: None = client.cloud.kubernetes.data.versions()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 regions: None = client.cloud.kubernetes.data.regions()
 ```
 
@@ -54,7 +54,7 @@ regions: None = client.cloud.kubernetes.data.regions()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 regions_alias: None = client.cloud.kubernetes.data.reagions()
 ```
 
@@ -69,7 +69,7 @@ regions_alias: None = client.cloud.kubernetes.data.reagions()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 zones: None = client.cloud.kubernetes.data.zones()
 ```
 
@@ -84,7 +84,7 @@ zones: None = client.cloud.kubernetes.data.zones()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 flavors: None = client.cloud.kubernetes.data.flavors()
 ```
 

@@ -10,7 +10,7 @@ Allows to manage Public Cloud resources
 from infomaniak import Client
 
 client = Client()
-plist: PaginatedList[PublicCloud] = client.cloud.list(account_id=12345)
+plist: PaginatedList[PublicCloud] = client.cloud.list(account_id=...)
 ```
 
 `PaginatedList[PublicCloud]`:
@@ -61,7 +61,7 @@ plist: PaginatedList[PublicCloud] = client.cloud.list(account_id=12345)
 from infomaniak import Client
 
 client = Client()
-cloud: PublicCloud = client.cloud.get(public_cloud_id=64258)
+cloud: PublicCloud = client.cloud.get(public_cloud_id=...)
 ```
 
 ## Update Public Cloud
@@ -76,9 +76,9 @@ from infomaniak import Client
 
 client = Client()
 updated: PublicCloudBoolResponse = client.cloud.update(
-    public_cloud_id=64258,
-    customer_name="Acme Team",
-    description="Main production cloud",
+    public_cloud_id=...,
+    customer_name=...,
+    description=...,
 )
 ```
 

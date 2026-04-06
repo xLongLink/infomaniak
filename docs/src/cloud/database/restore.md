@@ -9,7 +9,7 @@ The `cloud.database.restore` resource manages restore operations for managed clo
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 restore: None = client.cloud.database.restore.get()
 ```
 
@@ -24,7 +24,7 @@ restore: None = client.cloud.database.restore.get()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 created: None = client.cloud.database.restore.create()
 ```
 

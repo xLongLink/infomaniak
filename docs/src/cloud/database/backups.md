@@ -9,7 +9,7 @@ The `cloud.database.backups` resource handles backup snapshots for managed cloud
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 backups: None = client.cloud.database.backups.list()
 ```
 
@@ -24,7 +24,7 @@ backups: None = client.cloud.database.backups.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 backup: None = client.cloud.database.backups.get()
 ```
 
@@ -39,7 +39,7 @@ backup: None = client.cloud.database.backups.get()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 deleted: None = client.cloud.database.backups.delete()
 ```
 

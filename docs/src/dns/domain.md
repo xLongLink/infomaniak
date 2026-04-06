@@ -19,8 +19,8 @@ from infomaniak import Client
 from infomaniak.pagination import PaginatedList
 from infomaniak.models.dns.domain import Domain
 
-client = Client(token="<token>")
-domains: PaginatedList[Domain] = client.dns.domain.list(account_id=12345, page=1, per_page=20)
+client = Client()
+domains: PaginatedList[Domain] = client.dns.domain.list(account_id=..., page=..., per_page=...)
 ```
 
 `PaginatedList[Domain]`:
@@ -38,7 +38,7 @@ domains: PaginatedList[Domain] = client.dns.domain.list(account_id=12345, page=1
 from infomaniak import Client
 from infomaniak.models.dns.domain import Domain
 
-client = Client(token="<token>")
+client = Client()
 domain: Domain = client.dns.domain.show("example.com")
 ```
 

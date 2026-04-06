@@ -9,7 +9,7 @@ The `cloud.kubernetes.ip` resource manages API server IP filter rules for a Kube
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 rules: None = client.cloud.kubernetes.ip.list()
 ```
 
@@ -24,7 +24,7 @@ rules: None = client.cloud.kubernetes.ip.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 created: None = client.cloud.kubernetes.ip.create()
 ```
 
@@ -39,7 +39,7 @@ created: None = client.cloud.kubernetes.ip.create()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 updated: None = client.cloud.kubernetes.ip.update()
 ```
 
@@ -54,7 +54,7 @@ updated: None = client.cloud.kubernetes.ip.update()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 removed: None = client.cloud.kubernetes.ip.remove()
 ```
 

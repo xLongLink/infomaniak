@@ -9,7 +9,7 @@ The `cloud.database.ip` resource manages IP allowlist entries for managed cloud 
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 allowlist: None = client.cloud.database.ip.list()
 ```
 
@@ -24,7 +24,7 @@ allowlist: None = client.cloud.database.ip.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 created: None = client.cloud.database.ip.create()
 ```
 
@@ -39,7 +39,7 @@ created: None = client.cloud.database.ip.create()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 removed: None = client.cloud.database.ip.remove()
 ```
 

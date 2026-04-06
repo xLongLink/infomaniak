@@ -18,7 +18,7 @@ The SDK supports two clients a `synchronous` and a `asynchronous`
 ```python
 from infomaniak import Client
 
-client = Client(token="your-token")
+client = Client()
 ```
 
 
@@ -27,7 +27,7 @@ import asyncio
 from infomaniak import AsyncClient
 
 async def main() -> None:
-    client = AsyncClient(token="your-token")
+    client = AsyncClient()
     await client.domain.list()
 
 asyncio.run(main())

@@ -16,7 +16,7 @@ from infomaniak import Client
 from infomaniak.models.dns.zone import DNSZone
 
 client = Client()
-zone: DNSZone = client.dns.zone.display("example.com", records=True)
+zone: DNSZone = client.dns.zone.display("example.com", records=...)
 ```
 
 `DNSZone`:
@@ -65,7 +65,7 @@ from infomaniak import Client
 from infomaniak.models.dns.zone import DNSZone
 
 client = Client()
-created: DNSZone = client.dns.zone.store("example.com", zone_skel="$ORIGIN example.com.")
+created: DNSZone = client.dns.zone.store("example.com", zone_skel=...)
 ```
 
 `DNSZone`:

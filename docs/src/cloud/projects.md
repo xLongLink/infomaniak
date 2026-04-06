@@ -14,11 +14,11 @@ The `cloud.projects` resource manages Public Cloud projects.
 from infomaniak import Client
 from infomaniak.models.cloud import CreatePublicCloudProjectResponse
 
-client = Client(token="<token>")
+client = Client()
 created: CreatePublicCloudProjectResponse = client.cloud.projects.create(
-    public_cloud_id=64258,
-    project_name="MyProject",
-    user_password="Example123",
+    public_cloud_id=...,
+    project_name=...,
+    user_password=...,
 )
 ```
 
@@ -38,11 +38,11 @@ created: CreatePublicCloudProjectResponse = client.cloud.projects.create(
 from infomaniak import Client
 from infomaniak.models.cloud import PublicCloudProjectInvitationResponse
 
-client = Client(token="<token>")
+client = Client()
 invited: PublicCloudProjectInvitationResponse = client.cloud.projects.create_with_invitation(
-    public_cloud_id=64258,
-    project_name="MyProject",
-    user_email="user@example.com",
+    public_cloud_id=...,
+    project_name=...,
+    user_email=...,
 )
 ```
 
@@ -61,11 +61,11 @@ invited: PublicCloudProjectInvitationResponse = client.cloud.projects.create_wit
 from infomaniak import Client
 from infomaniak.models.cloud import PublicCloudProjectAsyncActionResponse
 
-client = Client(token="<token>")
+client = Client()
 updated: PublicCloudProjectAsyncActionResponse = client.cloud.projects.update(
-    public_cloud_id=64258,
-    public_cloud_project_id=25454,
-    name="RenamedProject",
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    name=...,
 )
 ```
 
@@ -83,10 +83,10 @@ updated: PublicCloudProjectAsyncActionResponse = client.cloud.projects.update(
 from infomaniak import Client
 from infomaniak.models.cloud import PublicCloudProjectAsyncActionResponse
 
-client = Client(token="<token>")
+client = Client()
 removed: PublicCloudProjectAsyncActionResponse = client.cloud.projects.delete(
-    public_cloud_id=64258,
-    public_cloud_project_id=25454,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
 )
 ```
 
@@ -104,8 +104,8 @@ removed: PublicCloudProjectAsyncActionResponse = client.cloud.projects.delete(
 from infomaniak import Client
 from infomaniak.models.cloud import PublicCloudProjectListResponse
 
-client = Client(token="<token>")
-projects: PublicCloudProjectListResponse = client.cloud.projects.list(public_cloud_id=64258)
+client = Client()
+projects: PublicCloudProjectListResponse = client.cloud.projects.list(public_cloud_id=...)
 ```
 
 `PublicCloudProjectListResponse`:
@@ -123,10 +123,10 @@ projects: PublicCloudProjectListResponse = client.cloud.projects.list(public_clo
 from infomaniak import Client
 from infomaniak.models.cloud import PublicCloudProject
 
-client = Client(token="<token>")
+client = Client()
 project: PublicCloudProject = client.cloud.projects.get(
-    public_cloud_id=64258,
-    public_cloud_project_id=25454,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
 )
 ```
 

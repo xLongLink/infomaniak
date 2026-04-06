@@ -11,7 +11,7 @@ from infomaniak import Client
 from infomaniak.models.cloud import PublicCloudConfig
 
 client = Client()
-config: PublicCloudConfig = client.cloud.config.get(account_id=64258)
+config: PublicCloudConfig = client.cloud.config.get(account_id=...)
 ```
 
 `PublicCloudConfig`:

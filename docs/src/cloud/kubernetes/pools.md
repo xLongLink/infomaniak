@@ -9,7 +9,7 @@ The `cloud.kubernetes.pools` resource manages worker node pools in a Kubernetes 
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 pools: None = client.cloud.kubernetes.pools.list()
 ```
 
@@ -24,7 +24,7 @@ pools: None = client.cloud.kubernetes.pools.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 created: None = client.cloud.kubernetes.pools.create()
 ```
 
@@ -39,7 +39,7 @@ created: None = client.cloud.kubernetes.pools.create()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 pool: None = client.cloud.kubernetes.pools.get()
 ```
 
@@ -54,7 +54,7 @@ pool: None = client.cloud.kubernetes.pools.get()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 updated: None = client.cloud.kubernetes.pools.update()
 ```
 
@@ -69,7 +69,7 @@ updated: None = client.cloud.kubernetes.pools.update()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 deleted: None = client.cloud.kubernetes.pools.delete()
 ```
 

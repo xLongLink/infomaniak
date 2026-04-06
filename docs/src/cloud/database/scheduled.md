@@ -9,7 +9,7 @@ The `cloud.database.scheduled` resource manages scheduled backup policies for ma
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 schedules: None = client.cloud.database.scheduled.list()
 ```
 
@@ -24,7 +24,7 @@ schedules: None = client.cloud.database.scheduled.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 created: None = client.cloud.database.scheduled.create()
 ```
 
@@ -39,7 +39,7 @@ created: None = client.cloud.database.scheduled.create()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 schedule: None = client.cloud.database.scheduled.get()
 ```
 
@@ -54,7 +54,7 @@ schedule: None = client.cloud.database.scheduled.get()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 deleted: None = client.cloud.database.scheduled.delete()
 ```
 
@@ -69,7 +69,7 @@ deleted: None = client.cloud.database.scheduled.delete()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 updated: None = client.cloud.database.scheduled.update()
 ```
 

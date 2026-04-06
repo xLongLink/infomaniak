@@ -9,7 +9,7 @@ The `cloud.database.config` resource handles configuration entries for a managed
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 entry: None = client.cloud.database.config.get()
 ```
 
@@ -24,7 +24,7 @@ entry: None = client.cloud.database.config.get()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 entries: None = client.cloud.database.config.list()
 ```
 
@@ -39,7 +39,7 @@ entries: None = client.cloud.database.config.list()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 created: None = client.cloud.database.config.create()
 ```
 
@@ -54,7 +54,7 @@ created: None = client.cloud.database.config.create()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 updated: None = client.cloud.database.config.update()
 ```
 
@@ -69,7 +69,7 @@ updated: None = client.cloud.database.config.update()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 removed: None = client.cloud.database.config.remove()
 ```
 

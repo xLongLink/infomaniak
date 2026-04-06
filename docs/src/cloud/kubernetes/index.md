@@ -13,10 +13,10 @@ The `cloud.kubernetes` resource manages managed Kubernetes clusters in Public Cl
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 clusters = client.cloud.kubernetes.list(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
 )
 ```
 
@@ -31,15 +31,11 @@ clusters = client.cloud.kubernetes.list(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 created = client.cloud.kubernetes.create(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
-    payload={
-        "name": "prod-cluster",
-        "region": "dc3",
-        "version": "1.30",
-    },
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    payload=...,
 )
 ```
 
@@ -55,11 +51,11 @@ created = client.cloud.kubernetes.create(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 cluster = client.cloud.kubernetes.get(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
-    kubernetes_id=98765,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kubernetes_id=...,
 )
 ```
 
@@ -74,11 +70,11 @@ cluster = client.cloud.kubernetes.get(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 removed = client.cloud.kubernetes.delete(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
-    kubernetes_id=98765,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kubernetes_id=...,
 )
 ```
 
@@ -94,12 +90,12 @@ removed = client.cloud.kubernetes.delete(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 updated = client.cloud.kubernetes.update(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
-    kubernetes_id=98765,
-    payload={"name": "renamed-cluster"},
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kubernetes_id=...,
+    payload=...,
 )
 ```
 
@@ -114,11 +110,11 @@ updated = client.cloud.kubernetes.update(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 kubeconfig = client.cloud.kubernetes.download(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
-    kubernetes_id=98765,
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kubernetes_id=...,
 )
 ```
 
@@ -134,12 +130,12 @@ kubeconfig = client.cloud.kubernetes.download(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 patched = client.cloud.kubernetes.patch(
-    public_cloud_id=64258,
-    public_cloud_project_id=123456,
-    kubernetes_id=98765,
-    payload={"maintenance_window": {"day": "monday"}},
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kubernetes_id=...,
+    payload=...,
 )
 ```
 
@@ -152,8 +148,8 @@ patched = client.cloud.kubernetes.patch(
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
-templates = client.cloud.kubernetes.kaas(account_id=100001)
+client = Client()
+templates = client.cloud.kubernetes.kaas(account_id=...)
 ```
 
 ## Nested Resources

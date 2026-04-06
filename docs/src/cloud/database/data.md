@@ -9,7 +9,7 @@ The `cloud.database.data` resource exposes reference data used by managed cloud 
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 regions: None = client.cloud.database.data.regions()
 ```
 
@@ -24,7 +24,7 @@ regions: None = client.cloud.database.data.regions()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 packs: None = client.cloud.database.data.packs()
 ```
 
@@ -39,7 +39,7 @@ packs: None = client.cloud.database.data.packs()
 ```py
 from infomaniak import Client
 
-client = Client(token="<token>")
+client = Client()
 types_: None = client.cloud.database.data.types()
 ```
 
