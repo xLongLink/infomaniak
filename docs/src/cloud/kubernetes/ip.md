@@ -1,63 +1,68 @@
 # Cloud Kubernetes IP
 
-The `cloud.kubernetes.ip` resource manages API server IP filter rules for a Kubernetes cluster.
+The `cloud.kubernetes.ip` resource manages API server IP filters for a Kubernetes cluster.
 
-## List IP Rules
+## List IP Filters
 
-- No parameters are currently available in the SDK implementation.
-
-```py
-from infomaniak import Client
-
-client = Client()
-rules: None = client.cloud.kubernetes.ip.list()
-```
-
-`None`:
-
-- No return object is currently available in the SDK implementation.
-
-## Create IP Rule
-
-- No parameters are currently available in the SDK implementation.
+- `public_cloud_id`: Unique identifier of the Public Cloud account.
+- `public_cloud_project_id`: Unique identifier of the Public Cloud project.
+- `kaas_id`: Unique identifier of the Kubernetes service.
 
 ```py
 from infomaniak import Client
 
 client = Client()
-created: None = client.cloud.kubernetes.ip.create()
+ip_filters: list[str] = client.cloud.kubernetes.ip.list(
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kaas_id=...,
+)
 ```
 
-`None`:
+`list[str]`:
 
-- No return object is currently available in the SDK implementation.
+- List of configured IP filter CIDRs.
 
-## Update IP Rule
+## Match IP Filters
 
-- No parameters are currently available in the SDK implementation.
+- `public_cloud_id`: Unique identifier of the Public Cloud account.
+- `public_cloud_project_id`: Unique identifier of the Public Cloud project.
+- `kaas_id`: Unique identifier of the Kubernetes service.
+- `ip_filters`: List of whitelist IP filters to apply.
 
 ```py
 from infomaniak import Client
 
 client = Client()
-updated: None = client.cloud.kubernetes.ip.update()
+matched: bool = client.cloud.kubernetes.ip.match(
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kaas_id=...,
+    ip_filters=["192.0.2.0/24"],
+)
 ```
 
-`None`:
+`bool`:
 
-- No return object is currently available in the SDK implementation.
+- Operation result returned by the API.
 
-## Remove IP Rule
+## Remove IP Filters
 
-- No parameters are currently available in the SDK implementation.
+- `public_cloud_id`: Unique identifier of the Public Cloud account.
+- `public_cloud_project_id`: Unique identifier of the Public Cloud project.
+- `kaas_id`: Unique identifier of the Kubernetes service.
 
 ```py
 from infomaniak import Client
 
 client = Client()
-removed: None = client.cloud.kubernetes.ip.remove()
+removed: bool = client.cloud.kubernetes.ip.remove(
+    public_cloud_id=...,
+    public_cloud_project_id=...,
+    kaas_id=...,
+)
 ```
 
-`None`:
+`bool`:
 
-- No return object is currently available in the SDK implementation.
+- Operation result returned by the API.
