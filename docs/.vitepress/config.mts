@@ -23,6 +23,7 @@ export default defineConfig({
         text: 'Cloud',
         collapsed: true,
         items: [
+          { text: 'Index', link: '/cloud/' },
           { text: 'Config', link: '/cloud/config' },
           { text: 'Projects', link: '/cloud/projects' },
           {
