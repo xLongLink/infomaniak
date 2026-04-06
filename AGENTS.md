@@ -4,6 +4,8 @@
 - Target Python 3.11+ and use modern type-hint syntax everywhere, such as `str | None`, `list[str]`, and `dict[str, Any]`.
 - Follow the API structure in `openapi.json` for the type hints, the docstrings, and the method signatures.
 - Each function must include a Google-style docstring with a short summary plus explicit `Args:` and `Returns:` sections.
+- For every paginated list function in resources, use `page` and `items` as pagination parameters.
+- For `plist` pagination metadata, use `total` (not `items`) for the total number of records.
 
 Example:
 

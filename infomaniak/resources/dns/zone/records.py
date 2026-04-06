@@ -37,7 +37,7 @@ class Records(Resouce):
         search: str | None = None,
         with_: str | None = None,
         page: int | None = None,
-        per_page: int | None = None,
+        items: int | None = None,
         order_by: (
             Literal[
                 "id",
@@ -65,8 +65,8 @@ class Records(Resouce):
             params["with"] = with_
         if page is not None:
             params["page"] = page
-        if per_page is not None:
-            params["per_page"] = per_page
+        if items is not None:
+            params["items"] = items
         if order_by is not None:
             params["order_by"] = order_by
         if order is not None:
@@ -78,7 +78,7 @@ class Records(Resouce):
             [parse(DNSRecord, record) for record in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     def store(
@@ -185,7 +185,7 @@ class AsyncRecords(AsyncResource):
         search: str | None = None,
         with_: str | None = None,
         page: int | None = None,
-        per_page: int | None = None,
+        items: int | None = None,
         order_by: (
             Literal[
                 "id",
@@ -213,8 +213,8 @@ class AsyncRecords(AsyncResource):
             params["with"] = with_
         if page is not None:
             params["page"] = page
-        if per_page is not None:
-            params["per_page"] = per_page
+        if items is not None:
+            params["items"] = items
         if order_by is not None:
             params["order_by"] = order_by
         if order is not None:
@@ -226,7 +226,7 @@ class AsyncRecords(AsyncResource):
             [parse(DNSRecord, record) for record in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     async def store(

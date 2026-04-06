@@ -11,14 +11,14 @@ class Tasks(Resouce):
         self,
         *,
         page: int | None = None,
-        per_page: int | None = None,
+        items: int | None = None,
     ) -> list[dict[str, Any]]:
         """
         List asynchronous tasks.
 
         Args:
             page: Optional page number for paginated responses.
-            per_page: Optional number of tasks to return per page.
+            items: Optional number of tasks to return per page.
 
         Returns:
             list[dict[str, Any]]: The list of tasks returned by the API.
@@ -26,8 +26,8 @@ class Tasks(Resouce):
         params: dict[str, int] = {}
         if page is not None:
             params["page"] = page
-        if per_page is not None:
-            params["per_page"] = per_page
+        if items is not None:
+            params["items"] = items
 
         response = self._client.get("/1/async/tasks", params=params or None)
         return response.json()["data"]
@@ -53,14 +53,14 @@ class AsyncTasks(AsyncResource):
         self,
         *,
         page: int | None = None,
-        per_page: int | None = None,
+        items: int | None = None,
     ) -> list[dict[str, Any]]:
         """
         List asynchronous tasks.
 
         Args:
             page: Optional page number for paginated responses.
-            per_page: Optional number of tasks to return per page.
+            items: Optional number of tasks to return per page.
 
         Returns:
             list[dict[str, Any]]: The list of tasks returned by the API.
@@ -68,8 +68,8 @@ class AsyncTasks(AsyncResource):
         params: dict[str, int] = {}
         if page is not None:
             params["page"] = page
-        if per_page is not None:
-            params["per_page"] = per_page
+        if items is not None:
+            params["items"] = items
 
         response = await self._client.get("/1/async/tasks", params=params or None)
         return response.json()["data"]

@@ -10,11 +10,11 @@ T = TypeVar("T")
 
 
 class plist(list[T]):
-    def __init__(self, values: Iterable[T] = (), *, page: int = 1, pages: int = 1, items: int = 0,) -> None:
+    def __init__(self, values: Iterable[T] = (), *, page: int = 1, pages: int = 1, total: int = 0,) -> None:
         super().__init__(values)
         self.page = page
         self.pages = pages
-        self.items = items
+        self.total = total
 
 
 def parse(model: type[T], data: dict[str, Any]) -> T:

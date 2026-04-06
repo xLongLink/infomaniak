@@ -29,7 +29,7 @@ class Kubernetes(Resouce):
         limit: int | None = None,
         skip: int | None = None,
         page: int | None = None,
-        per_page: int | None = None,
+        items: int | None = None,
         order_by: str | None = None,
         order: str | None = None,
         order_for: dict[str, str] | None = None,
@@ -49,7 +49,7 @@ class Kubernetes(Resouce):
             limit: Optional limit for offset-based pagination.
             skip: Optional offset for offset-based pagination.
             page: Optional page number for page-based pagination.
-            per_page: Optional items per page for page-based pagination.
+            items: Optional items per page for page-based pagination.
             order_by: Optional sort field.
             order: Optional sort direction.
             order_for: Optional per-field sort direction mapping.
@@ -82,7 +82,7 @@ class Kubernetes(Resouce):
             limit=limit,
             skip=skip,
             page=page,
-            per_page=per_page,
+            items=items,
             order_by=order_by,
             order=order,
             order_for=order_for,
@@ -96,7 +96,7 @@ class Kubernetes(Resouce):
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     def create(
@@ -263,17 +263,29 @@ class Kubernetes(Resouce):
         response = self._client.patch(url, json=payload)
         return response.json()
 
-    def kaas(self, *, account_id: int) -> plist[dict[str, Any]]:
+    def kaas(
+        self,
+        *,
+        account_id: int,
+        page: int | None = None,
+        items: int | None = None,
+    ) -> plist[dict[str, Any]]:
         """
         List available managed Kubernetes service templates.
 
         Args:
             account_id: Account identifier used to scope available templates.
+            page: Optional page number for paginated responses.
+            items: Optional number of items to return per page.
 
         Returns:
             plist[dict[str, Any]]: The list of available Kubernetes templates.
         """
-        params = {"account_id": account_id}
+        params: dict[str, int] = {"account_id": account_id}
+        if page is not None:
+            params["page"] = page
+        if items is not None:
+            params["items"] = items
         response = self._client.get("/1/public_clouds/kaas", params=params)
         payload = response.json()
 
@@ -281,7 +293,7 @@ class Kubernetes(Resouce):
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
 
@@ -306,7 +318,7 @@ class AsyncKubernetes(AsyncResource):
         limit: int | None = None,
         skip: int | None = None,
         page: int | None = None,
-        per_page: int | None = None,
+        items: int | None = None,
         order_by: str | None = None,
         order: str | None = None,
         order_for: dict[str, str] | None = None,
@@ -326,7 +338,7 @@ class AsyncKubernetes(AsyncResource):
             limit: Optional limit for offset-based pagination.
             skip: Optional offset for offset-based pagination.
             page: Optional page number for page-based pagination.
-            per_page: Optional items per page for page-based pagination.
+            items: Optional items per page for page-based pagination.
             order_by: Optional sort field.
             order: Optional sort direction.
             order_for: Optional per-field sort direction mapping.
@@ -359,7 +371,7 @@ class AsyncKubernetes(AsyncResource):
             limit=limit,
             skip=skip,
             page=page,
-            per_page=per_page,
+            items=items,
             order_by=order_by,
             order=order,
             order_for=order_for,
@@ -373,7 +385,7 @@ class AsyncKubernetes(AsyncResource):
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     async def create(
@@ -540,17 +552,29 @@ class AsyncKubernetes(AsyncResource):
         response = await self._client.patch(url, json=payload)
         return response.json()
 
-    async def kaas(self, *, account_id: int) -> plist[dict[str, Any]]:
+    async def kaas(
+        self,
+        *,
+        account_id: int,
+        page: int | None = None,
+        items: int | None = None,
+    ) -> plist[dict[str, Any]]:
         """
         List available managed Kubernetes service templates.
 
         Args:
             account_id: Account identifier used to scope available templates.
+            page: Optional page number for paginated responses.
+            items: Optional number of items to return per page.
 
         Returns:
             plist[dict[str, Any]]: The list of available Kubernetes templates.
         """
-        params = {"account_id": account_id}
+        params: dict[str, int] = {"account_id": account_id}
+        if page is not None:
+            params["page"] = page
+        if items is not None:
+            params["items"] = items
         response = await self._client.get("/1/public_clouds/kaas", params=params)
         payload = response.json()
 
@@ -558,5 +582,5 @@ class AsyncKubernetes(AsyncResource):
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )

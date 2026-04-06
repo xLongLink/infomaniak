@@ -19,26 +19,37 @@ class Cloud(Resouce):
         self.kubernetes = Kubernetes(client)
         self.projects = Projects(client)
 
-    def list(self, account_id: int) -> plist[PublicCloud]:
+    def list(
+        self,
+        account_id: int,
+        *,
+        page: int | None = None,
+        items: int | None = None,
+    ) -> plist[PublicCloud]:
         """
         List all public cloud products linked to an account.
 
         Args:
             account_id: The unique identifier of the account related to the resource.
+            page: Optional page number for paginated responses.
+            items: Optional number of items to return per page.
 
         Returns:
             plist[PublicCloud]: The list of public cloud products and pagination metadata.
         """
-        response = self._client.get(
-            "/1/public_clouds",
-            params={"account_id": account_id},
-        )
+        params: dict[str, int] = {"account_id": account_id}
+        if page is not None:
+            params["page"] = page
+        if items is not None:
+            params["items"] = items
+
+        response = self._client.get("/1/public_clouds", params=params)
         payload = response.json()
         return plist(
             [parse(PublicCloud, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     def get(self, public_cloud_id: int) -> PublicCloud:
@@ -96,26 +107,37 @@ class AsyncCloud(AsyncResource):
         self.kubernetes = AsyncKubernetes(client)
         self.projects = AsyncProjects(client)
 
-    async def list(self, account_id: int) -> plist[PublicCloud]:
+    async def list(
+        self,
+        account_id: int,
+        *,
+        page: int | None = None,
+        items: int | None = None,
+    ) -> plist[PublicCloud]:
         """
         List all public cloud products linked to an account.
 
         Args:
             account_id: The unique identifier of the account related to the resource.
+            page: Optional page number for paginated responses.
+            items: Optional number of items to return per page.
 
         Returns:
             plist[PublicCloud]: The list of public cloud products and pagination metadata.
         """
-        response = await self._client.get(
-            "/1/public_clouds",
-            params={"account_id": account_id},
-        )
+        params: dict[str, int] = {"account_id": account_id}
+        if page is not None:
+            params["page"] = page
+        if items is not None:
+            params["items"] = items
+
+        response = await self._client.get("/1/public_clouds", params=params)
         payload = response.json()
         return plist(
             [parse(PublicCloud, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
-            items=payload.get("total") or 0,
+            total=payload.get("total") or 0,
         )
 
     async def get(self, public_cloud_id: int) -> PublicCloud:
