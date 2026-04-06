@@ -8,13 +8,6 @@ The `cloud` resource exposes top-level Public Cloud product endpoints and nested
 - `cloud.get(public_cloud_id)`
 - `cloud.update(public_cloud_id, bill_reference=None, customer_name=None, description=None)`
 
-## Nested Resources
-
-- [Config](/cloud/config)
-- [Projects](/cloud/projects)
-- [Database](/cloud/database/)
-- [Kubernetes](/cloud/kubernetes/)
-
 ## List Public Clouds
 
 - `account_id`: Unique identifier of the account.
