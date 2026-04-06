@@ -62,7 +62,9 @@ export default defineConfig({
         text: 'Core',
         collapsed: true,
         items: [
+          { text: 'Actions', link: '/core/actions' },
           { text: 'Countries', link: '/core/countries' },
+          { text: 'Events', link: '/core/events' },
           { text: 'Timezones', link: '/core/timezones' },
         ],
       },
