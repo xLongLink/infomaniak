@@ -59,6 +59,13 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Core',
+        collapsed: true,
+        items: [
+          { text: 'Timezones', link: '/core/timezones' },
+        ],
+      },
+      {
         text: 'Tasks',
         link: '/tasks',
         collapsed: false
