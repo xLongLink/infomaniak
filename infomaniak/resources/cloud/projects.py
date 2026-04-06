@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from infomaniak.utils import PaginatedList, parse
+from infomaniak.utils import parse, plist
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.cloud import (PublicCloudProject,
                                      CreatePublicCloudProjectResponse,
@@ -134,7 +134,7 @@ class Projects(Resouce):
         public_cloud_id: int,
         *,
         with_: str | None = None,
-    ) -> PaginatedList[PublicCloudProject]:
+    ) -> plist[PublicCloudProject]:
         """
         List all projects of a public cloud product.
 
@@ -143,14 +143,14 @@ class Projects(Resouce):
             with_ (str | None): Optional expansion parameter, such as ``services``.
 
         Returns:
-            PaginatedList[PublicCloudProject]: The list of public cloud projects and pagination metadata.
+            plist[PublicCloudProject]: The list of public cloud projects and pagination metadata.
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects"
         params = {"with": with_} if with_ is not None else None
 
         response = self._client.get(url, params=params)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(PublicCloudProject, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -308,7 +308,7 @@ class AsyncProjects(AsyncResource):
         public_cloud_id: int,
         *,
         with_: str | None = None,
-    ) -> PaginatedList[PublicCloudProject]:
+    ) -> plist[PublicCloudProject]:
         """
         List all projects of a public cloud product.
 
@@ -317,14 +317,14 @@ class AsyncProjects(AsyncResource):
             with_ (str | None): Optional expansion parameter, such as ``services``.
 
         Returns:
-            PaginatedList[PublicCloudProject]: The list of public cloud projects and pagination metadata.
+            plist[PublicCloudProject]: The list of public cloud projects and pagination metadata.
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects"
         params = {"with": with_} if with_ is not None else None
 
         response = await self._client.get(url, params=params)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(PublicCloudProject, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,

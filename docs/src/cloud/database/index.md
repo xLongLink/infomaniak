@@ -26,7 +26,7 @@ The `cloud.database` resource manages managed database services (DBaaS) in a Pub
 - `public_cloud_project_id`: Unique identifier of the Public Cloud project.
 - `with_`: Optional expansion parameter (for example `projects` or `backups`).
 
-**returns:** `PaginatedList[DatabaseService]` containing services and pagination metadata.
+**returns:** `plist[DatabaseService]` containing services and pagination metadata.
 
 ```py
 from infomaniak import Client

@@ -18,7 +18,7 @@ The `cloud.kubernetes` resource manages managed Kubernetes clusters in Public Cl
 - `order`: Optional sorting direction (`asc` or `desc`).
 - `order_for`: Optional per-field sorting order.
 
-**returns:** `PaginatedList[dict[str, Any]]` containing matching Kubernetes clusters.
+**returns:** `plist[dict[str, Any]]` containing matching Kubernetes clusters.
 
 ```py
 from infomaniak import Client
@@ -159,7 +159,7 @@ patched = client.cloud.kubernetes.patch(
 
 - `account_id`: Optional account identifier to scope available templates.
 
-**returns:** `PaginatedList[dict[str, Any]]` containing available templates.
+**returns:** `plist[dict[str, Any]]` containing available templates.
 
 ```py
 from infomaniak import Client

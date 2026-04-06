@@ -4,7 +4,7 @@ from .config import Config, AsyncConfig
 from .database import Database, AsyncDatabase
 from .projects import Projects, AsyncProjects
 from .kubernetes import Kubernetes, AsyncKubernetes
-from infomaniak.utils import PaginatedList, parse
+from infomaniak.utils import parse, plist
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.cloud import PublicCloud, PublicCloudBoolResponse
 
@@ -19,7 +19,7 @@ class Cloud(Resouce):
         self.kubernetes = Kubernetes(client)
         self.projects = Projects(client)
 
-    def list(self, account_id: int) -> PaginatedList[PublicCloud]:
+    def list(self, account_id: int) -> plist[PublicCloud]:
         """
         List all public cloud products linked to an account.
 
@@ -27,14 +27,14 @@ class Cloud(Resouce):
             account_id: The unique identifier of the account related to the resource.
 
         Returns:
-            PaginatedList[PublicCloud]: The list of public cloud products and pagination metadata.
+            plist[PublicCloud]: The list of public cloud products and pagination metadata.
         """
         response = self._client.get(
             "/1/public_clouds",
             params={"account_id": account_id},
         )
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(PublicCloud, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -96,7 +96,7 @@ class AsyncCloud(AsyncResource):
         self.kubernetes = AsyncKubernetes(client)
         self.projects = AsyncProjects(client)
 
-    async def list(self, account_id: int) -> PaginatedList[PublicCloud]:
+    async def list(self, account_id: int) -> plist[PublicCloud]:
         """
         List all public cloud products linked to an account.
 
@@ -104,14 +104,14 @@ class AsyncCloud(AsyncResource):
             account_id: The unique identifier of the account related to the resource.
 
         Returns:
-            PaginatedList[PublicCloud]: The list of public cloud products and pagination metadata.
+            plist[PublicCloud]: The list of public cloud products and pagination metadata.
         """
         response = await self._client.get(
             "/1/public_clouds",
             params={"account_id": account_id},
         )
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(PublicCloud, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,

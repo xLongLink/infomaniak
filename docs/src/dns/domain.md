@@ -16,19 +16,19 @@ The `dns.domain` resource lists domains and retrieves one domain.
 
 ```py
 from infomaniak import Client
-from infomaniak.pagination import PaginatedList
+from infomaniak.utils import plist
 from infomaniak.models.dns.domain import Domain
 
 client = Client()
-domains: PaginatedList[Domain] = client.dns.domain.list(account_id=..., page=..., per_page=...)
+domains: plist[Domain] = client.dns.domain.list(account_id=..., page=..., per_page=...)
 ```
 
-`PaginatedList[Domain]`:
+`plist[Domain]`:
 
-- `items`: Domain items for the current page.
 - `page`: Current page number.
 - `pages`: Total page count.
-- `total`: Total domain count.
+- `items`: Total domain count across all pages.
+- Iteration values: `Domain` objects for the current page.
 
 ## Show Domain
 

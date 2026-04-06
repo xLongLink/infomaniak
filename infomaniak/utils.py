@@ -9,7 +9,7 @@ from dacite.exceptions import DaciteError
 T = TypeVar("T")
 
 
-class PaginatedList(list[T]):
+class plist(list[T]):
     def __init__(self, values: Iterable[T] = (), *, page: int = 1, pages: int = 1, items: int = 0,) -> None:
         super().__init__(values)
         self.page = page

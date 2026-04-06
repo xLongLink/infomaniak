@@ -8,12 +8,14 @@ Allows to manage Public Cloud resources
 
 ```py
 from infomaniak import Client
+from infomaniak.models.cloud import PublicCloud
+from infomaniak.utils import plist
 
 client = Client()
-plist: PaginatedList[PublicCloud] = client.cloud.list(account_id=...)
+clouds: plist[PublicCloud] = client.cloud.list(account_id=...)
 ```
 
-`PaginatedList[PublicCloud]`:
+`plist[PublicCloud]`:
 
 - `page`: Current page number returned by the API.
 - `pages`: Total number of available pages.

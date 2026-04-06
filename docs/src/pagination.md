@@ -1,38 +1,37 @@
 # Pagination
 
-Some endpoints are paginated. To keep it simple and pythonic, all the functions retuns a 
+Some SDK endpoints return paginated responses. These methods return a `plist[T]`, which is a list subclass that also includes pagination metadata.
 
+## Paginated return type
 
-## Basic pagination
+`plist[T]` behaves like a normal list and exposes:
+
+- `page`: Current page number.
+- `pages`: Total number of available pages.
+- `items`: Total number of items available across all pages.
+
+## Example
 
 ```py
 from infomaniak import Client
-from infomaniak.utils.pagination import paginate
+from infomaniak.models.dns.domain import Domain
+from infomaniak.utils import plist
 
 client = Client()
-
-for item in paginate(client.mail.mailboxes.list, account_id=..., per_page=...):
-    print(item)
-```
-
-## Pagination with filtering (`functools.partial`)
-
-You can pre-apply filters with `functools.partial` and keep using the same helper.
-
-```py
-from functools import partial
-
-from infomaniak import Client
-from infomaniak.utils.pagination import paginate
-
-client = Client()
-
-active_domains = partial(
-    client.domain.domains.list,
-    account_id=...,
-    status=...,
+domains: plist[Domain] = client.dns.domain.list(
+    account_id=..., 
+    page=1,
+    per_page=20,
 )
 
-for domain in paginate(active_domains, per_page=...):
-    print(domain)
+print(domains.page)
+print(domains.pages)
+print(domains.items)
+
+for domain in domains:
+    print(domain.name)
 ```
+
+::: tip
+Use `page` and `per_page` in list methods that support pagination to navigate through results.
+:::

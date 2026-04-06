@@ -5,7 +5,7 @@ from typing import Literal
 from .order import Order, AsyncOrder
 from .dnssec import DNSSEC, AsyncDNSSEC
 from .nameservers import Nameservers, AsyncNameservers
-from infomaniak.utils import PaginatedList, parse
+from infomaniak.utils import parse, plist
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.domain import Domain as DomainModel
 
@@ -37,7 +37,7 @@ class Domain(Resouce):
         tld: str | None = None,
         page: int | None = None,
         per_page: int | None = None,
-    ) -> PaginatedList[DomainModel]:
+    ) -> plist[DomainModel]:
         """List domains from `GET /2/domains/domains`."""
         params: dict[str, str | int] = {}
         if account_id is not None:
@@ -61,7 +61,7 @@ class Domain(Resouce):
 
         response = self._client.get("/2/domains/domains", params=params or None)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(DomainModel, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -96,7 +96,7 @@ class AsyncDomain(AsyncResource):
         tld: str | None = None,
         page: int | None = None,
         per_page: int | None = None,
-    ) -> PaginatedList[DomainModel]:
+    ) -> plist[DomainModel]:
         """List domains from `GET /2/domains/domains`."""
         params: dict[str, str | int] = {}
         if account_id is not None:
@@ -120,7 +120,7 @@ class AsyncDomain(AsyncResource):
 
         response = await self._client.get("/2/domains/domains", params=params or None)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(DomainModel, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,

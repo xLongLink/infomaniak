@@ -4,7 +4,7 @@ from .ip import Ip, AsyncIp
 from .data import Data, AsyncData
 from typing import Any
 from .pools import Pools, AsyncPools
-from infomaniak.utils import PaginatedList, query_params
+from infomaniak.utils import plist, query_params
 from infomaniak.resource import Resouce, AsyncResource
 
 
@@ -33,7 +33,7 @@ class Kubernetes(Resouce):
         order_by: str | None = None,
         order: str | None = None,
         order_for: dict[str, str] | None = None,
-    ) -> PaginatedList[dict[str, Any]]:
+    ) -> plist[dict[str, Any]]:
         """
         List Kubernetes clusters for a public cloud project or for an entire account.
 
@@ -55,7 +55,7 @@ class Kubernetes(Resouce):
             order_for: Optional per-field sort direction mapping.
 
         Returns:
-            PaginatedList[dict[str, Any]]: The list of Kubernetes clusters and pagination metadata.
+            plist[dict[str, Any]]: The list of Kubernetes clusters and pagination metadata.
         """
         if public_cloud_project_id is None:
             if account_id is None:
@@ -92,7 +92,7 @@ class Kubernetes(Resouce):
         response = self._client.get(url, params=params)
         payload = response.json()
 
-        return PaginatedList(
+        return plist(
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -249,7 +249,7 @@ class Kubernetes(Resouce):
         response = self._client.patch(url, json=payload)
         return response.json()
 
-    def kaas(self, *, account_id: int) -> PaginatedList[dict[str, Any]]:
+    def kaas(self, *, account_id: int) -> plist[dict[str, Any]]:
         """
         List available managed Kubernetes service templates.
 
@@ -257,13 +257,13 @@ class Kubernetes(Resouce):
             account_id: Account identifier used to scope available templates.
 
         Returns:
-            PaginatedList[dict[str, Any]]: The list of available Kubernetes templates.
+            plist[dict[str, Any]]: The list of available Kubernetes templates.
         """
         params = {"account_id": account_id}
         response = self._client.get("/1/public_clouds/kaas", params=params)
         payload = response.json()
 
-        return PaginatedList(
+        return plist(
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -296,7 +296,7 @@ class AsyncKubernetes(AsyncResource):
         order_by: str | None = None,
         order: str | None = None,
         order_for: dict[str, str] | None = None,
-    ) -> PaginatedList[dict[str, Any]]:
+    ) -> plist[dict[str, Any]]:
         """
         List Kubernetes clusters for a public cloud project or for an entire account.
 
@@ -318,7 +318,7 @@ class AsyncKubernetes(AsyncResource):
             order_for: Optional per-field sort direction mapping.
 
         Returns:
-            PaginatedList[dict[str, Any]]: The list of Kubernetes clusters and pagination metadata.
+            plist[dict[str, Any]]: The list of Kubernetes clusters and pagination metadata.
         """
         if public_cloud_project_id is None:
             if account_id is None:
@@ -355,7 +355,7 @@ class AsyncKubernetes(AsyncResource):
         response = await self._client.get(url, params=params)
         payload = response.json()
 
-        return PaginatedList(
+        return plist(
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -512,7 +512,7 @@ class AsyncKubernetes(AsyncResource):
         response = await self._client.patch(url, json=payload)
         return response.json()
 
-    async def kaas(self, *, account_id: int) -> PaginatedList[dict[str, Any]]:
+    async def kaas(self, *, account_id: int) -> plist[dict[str, Any]]:
         """
         List available managed Kubernetes service templates.
 
@@ -520,13 +520,13 @@ class AsyncKubernetes(AsyncResource):
             account_id: Account identifier used to scope available templates.
 
         Returns:
-            PaginatedList[dict[str, Any]]: The list of available Kubernetes templates.
+            plist[dict[str, Any]]: The list of available Kubernetes templates.
         """
         params = {"account_id": account_id}
         response = await self._client.get("/1/public_clouds/kaas", params=params)
         payload = response.json()
 
-        return PaginatedList(
+        return plist(
             payload["data"],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,

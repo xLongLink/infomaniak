@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import Literal
-from infomaniak.utils import PaginatedList, parse
+from infomaniak.utils import parse, plist
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.dns.zone import DNSRecord
 
@@ -50,7 +50,7 @@ class Records(Resouce):
             | None
         ) = None,
         order: Literal["asc", "desc"] | None = None,
-    ) -> PaginatedList[DNSRecord]:
+    ) -> plist[DNSRecord]:
         """Retrieve all DNS records for a given zone."""
         url = f"/2/zones/{zone}/records"
         params: dict[str, str | int | list[str]] = {}
@@ -74,7 +74,7 @@ class Records(Resouce):
 
         response = self._client.get(url, params=params or None)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(DNSRecord, record) for record in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
@@ -198,7 +198,7 @@ class AsyncRecords(AsyncResource):
             | None
         ) = None,
         order: Literal["asc", "desc"] | None = None,
-    ) -> PaginatedList[DNSRecord]:
+    ) -> plist[DNSRecord]:
         """Retrieve all DNS records for a given zone."""
         url = f"/2/zones/{zone}/records"
         params: dict[str, str | int | list[str]] = {}
@@ -222,7 +222,7 @@ class AsyncRecords(AsyncResource):
 
         response = await self._client.get(url, params=params or None)
         payload = response.json()
-        return PaginatedList(
+        return plist(
             [parse(DNSRecord, record) for record in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
