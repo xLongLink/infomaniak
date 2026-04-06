@@ -8,6 +8,7 @@ from infomaniak.resources.cloud import Cloud, AsyncCloud
 from infomaniak.resources.kchat import Kchat, AsyncKchat
 from infomaniak.resources.kmeet import Kmeet, AsyncKmeet
 from infomaniak.resources.radio import Radio, AsyncRadio
+from infomaniak.resources.tasks import Tasks, AsyncTasks
 from infomaniak.resources.video import Video, AsyncVideo
 from infomaniak.resources.backup import Backup, AsyncBackup
 from infomaniak.resources.domain import Domain, AsyncDomain
