@@ -16,7 +16,7 @@ export default defineConfig({
       },
       {
         text: 'Pagination',
-        link: '/tutorials/pagination',
+        link: '/pagination',
         collapsed: false
       },
       {

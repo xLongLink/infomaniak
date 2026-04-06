@@ -1,18 +1,33 @@
 # Overview
 
-::: warning
-This SDK and its documentation are currently in active development. Endpoints, method signatures, and coverage can change without notice.
-:::
-
-## How to install
-
 ```bash
 pip install xinfomaniak
 ```
 
-## Tutorials
+## Usage
 
-For pagination walkthroughs and examples, see the [Pagination tutorial](/tutorials/pagination).
+The SDK supports two clients a `synchronous` and a `asynchronous`
+
+```python
+from infomaniak import Client
+
+client = Client(token="your-token")
+```
+
+
+```python
+import asyncio
+from infomaniak import AsyncClient
+
+async def main() -> None:
+    client = AsyncClient(token="your-token")
+    await client.domain.list()
+
+asyncio.run(main())
+```
+
+If the `INFOMANIAK_API_TOKEN` environment variable is set, the token is automatically parsed
+
 
 ## API Resources
 

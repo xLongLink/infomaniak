@@ -1,6 +1,7 @@
 # Pagination
 
-Use the shared pagination helper to iterate over all pages returned by list endpoints.
+Some endpoints are paginated. To keep it simple and pythonic, all the functions retuns a 
+
 
 ## Basic pagination
 
