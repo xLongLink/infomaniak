@@ -17,7 +17,7 @@ The `cloud` resource exposes top-level Public Cloud product endpoints and nested
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 clouds = client.cloud.list(account_id=12345)
 ```
 
@@ -30,7 +30,7 @@ clouds = client.cloud.list(account_id=12345)
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 cloud = client.cloud.get(public_cloud_id=64258)
 ```
 
@@ -46,7 +46,7 @@ cloud = client.cloud.get(public_cloud_id=64258)
 ```py
 from infomaniak import Client
 
-client = Client(token="YOUR_TOKEN")
+client = Client()
 updated = client.cloud.update(
     public_cloud_id=64258,
     customer_name="Acme Team",
