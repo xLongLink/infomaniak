@@ -1,30 +1,42 @@
+from __future__ import annotations
+
 from typing import TypeVar
 from collections.abc import Callable, Iterator
 
 TPage = TypeVar("TPage")
-TCursor = TypeVar("TCursor")
 
 
 def pages(
-    fetch_page: Callable[[TCursor | None], tuple[TPage, TCursor | None]],
-    cursor: TCursor | None = None,
+    fetch_page: Callable[..., TPage],
+    *,
+    page: int = 1,
+    items: int | None = None,
 ) -> Iterator[TPage]:
-    """Iterate over API pages until no data or cursor is returned.
+    """Iterate over all pages returned by a paginated SDK list function.
 
     Args:
-        fetch_page: Function receiving the current cursor and returning
-            ``(data, next_cursor)``.
-        cursor: Optional starting cursor.
+        fetch_page: Function that accepts ``page`` and optional ``items`` keyword
+            arguments, and returns a page payload (typically ``plist[T]``).
+        page: First page number to request.
+        items: Optional number of items per page.
 
     Yields:
-        Each page payload returned by ``fetch_page``.
+        TPage: Each page payload returned by ``fetch_page``.
     """
+    current_page = page
+
     while True:
-        data, cursor = fetch_page(cursor)
-        if not data:
+        page_data = fetch_page(page=current_page, items=items)
+
+        if not page_data:
             break
 
-        yield data
+        yield page_data
 
-        if cursor is None:
+        current = getattr(page_data, "page", current_page)
+        total_pages = getattr(page_data, "pages", current)
+
+        if current >= total_pages:
             break
+
+        current_page = current + 1

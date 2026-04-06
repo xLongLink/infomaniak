@@ -8,30 +8,56 @@ Some SDK endpoints return paginated responses. These methods return a `plist[T]`
 
 - `page`: Current page number.
 - `pages`: Total number of available pages.
-- `items`: Total number of items available across all pages.
+- `total`: Total number of items available across all pages.
 
-## Example
+## Single page example
 
 ```py
 from infomaniak import Client
-from infomaniak.models.dns.domain import Domain
+from infomaniak.models import Timezone
 from infomaniak.utils import plist
 
 client = Client()
-domains: plist[Domain] = client.dns.domain.list(
-    account_id=..., 
+timezones: plist[Timezone] = client.core.timezones.list(
     page=1,
-    per_page=20,
+    items=20,
 )
 
-print(domains.page)
-print(domains.pages)
-print(domains.items)
+print(timezones.page)
+print(timezones.pages)
+print(timezones.total)
 
-for domain in domains:
-    print(domain.name)
+for timezone in timezones:
+    print(timezone.name)
 ```
 
-::: tip
-Use `page` and `per_page` in list methods that support pagination to navigate through results.
-:::
+## Iterate over all pages with `pages`
+
+- `fetch_page`: A callable that accepts `page` and `items` keyword parameters.
+- `page`: The first page number to fetch.
+- `items`: Number of records to fetch on each page.
+
+```py
+from infomaniak import Client, pages
+from infomaniak.models import Timezone
+from infomaniak.utils import plist
+
+client = Client()
+
+fn = lambda *, page, items: client.core.timezones.list(
+    search="Europe",
+    page=page,
+    items=items,
+)
+
+for timezone_page in pages(fn, page=1, items=100):
+    typed_page: plist[Timezone] = timezone_page
+    for timezone in typed_page:
+        print(timezone.name)
+```
+
+`pages` returns an iterator of `plist[Timezone]` values:
+
+- `page`: Current page index.
+- `pages`: Total number of pages.
+- `total`: Total number of matching timezones.
