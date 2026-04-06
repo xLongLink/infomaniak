@@ -4,6 +4,13 @@ from infomaniak.constants import API
 
 
 class RootClient:
+    _ERROR_MESSAGE_MAP: dict[str, str] = {
+        "validation.password_unified": "must satisfy the password policy",
+        "validation.password_unified_min": "is too short",
+        "validation.password_unified_upper": "must contain at least one uppercase letter",
+        "validation.password_unified_numeric": "must contain at least one number",
+    }
+
     def __init__(
         self,
         token: str | None = None,
@@ -67,18 +74,42 @@ class RootClient:
 
                     detail_description = item.get("description")
                     context = item.get("context")
+                    translated_description = self._translate_api_error_message(detail_description)
 
-                    if isinstance(detail_description, str) and detail_description.strip():
+                    if translated_description is not None:
                         if isinstance(context, dict):
                             attribute = context.get("attribute")
                             if isinstance(attribute, str) and attribute.strip():
-                                detail_messages.append(f"{detail_description} (attribute: {attribute})")
+                                detail_messages.append(
+                                    f"{translated_description} (attribute: {attribute})"
+                                )
                             else:
-                                detail_messages.append(detail_description)
+                                detail_messages.append(translated_description)
                         else:
-                            detail_messages.append(detail_description)
+                            detail_messages.append(translated_description)
 
                 if detail_messages:
                     message = f"{message}: {'; '.join(detail_messages)}"
 
         raise ValueError(message)
+
+    def _translate_api_error_message(self, description: object) -> str | None:
+        """
+        Translate known API validation keys into human-readable messages.
+
+        Args:
+            description: The raw API error description value.
+
+        Returns:
+            str | None: A readable message when the description is a known key, the
+            original string when it is already human-readable, or ``None`` when the
+            value cannot be rendered.
+        """
+        if not isinstance(description, str):
+            return None
+
+        cleaned_description = description.strip()
+        if not cleaned_description:
+            return None
+
+        return self._ERROR_MESSAGE_MAP.get(cleaned_description, cleaned_description)

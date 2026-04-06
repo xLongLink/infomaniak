@@ -32,14 +32,14 @@ class PublicCloudProject:
         "ok",
         "updating",
     ]
-    price_updated_at: int
+    price_updated_at: int | None
     billing_start_at: int
     billing_end_at: int
     created_at: int
     updated_at: int
     user_count: int
     tags: list[PublicCloudProjectTag]
-    meta: list[Any]
+    meta: dict[str, Any] | list[Any]
     services: list[dict[str, Any]] | None = None
 
 

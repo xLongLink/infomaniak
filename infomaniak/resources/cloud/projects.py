@@ -26,7 +26,7 @@ class Projects(Resouce):
         Args:
             public_cloud_id (int): The unique identifier of the public cloud product.
             project_name (str): The project name.
-            user_password (str): The user password for the initial project user.
+            user_password (str): The user password for the initial project user. It must satisfy the Public Cloud password policy.
             user_description (str | None): Optional user description.
             user_email (str | None): Optional email for the initial project user.
 
@@ -200,7 +200,7 @@ class AsyncProjects(AsyncResource):
         Args:
             public_cloud_id (int): The unique identifier of the public cloud product.
             project_name (str): The project name.
-            user_password (str): The user password for the initial project user.
+            user_password (str): The user password for the initial project user. It must satisfy the Public Cloud password policy.
             user_description (str | None): Optional user description.
             user_email (str | None): Optional email for the initial project user.
 

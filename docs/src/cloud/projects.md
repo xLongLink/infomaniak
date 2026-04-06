@@ -6,7 +6,7 @@ The `cloud.projects` resource manages Public Cloud projects for a specific Publi
 
 - `public_cloud_id`: Unique identifier of the Public Cloud account.
 - `project_name`: Name to assign to the new project.
-- `user_password`: Password for the default project user.
+- `user_password`: Password for the default project user. It must satisfy the Public Cloud password policy.
 - `user_description`: Optional description for the default project user.
 - `user_email`: Optional email for the default project user.
 
@@ -19,7 +19,7 @@ client = Client(token="YOUR_TOKEN")
 created = client.cloud.projects.create(
     public_cloud_id=64258,
     project_name="MyProject",
-    user_password="example",
+    user_password="Example123",
 )
 ```
 

@@ -12,7 +12,6 @@ from infomaniak import Client
 
 client = Client()
 config: PublicCloudConfig = client.cloud.config.get(account_id=...)
-print(config)
 ```
 
 `PublicCloudConfig`:

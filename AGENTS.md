@@ -21,7 +21,7 @@ def example(self, foo: int, bar: float) -> bool:
     """
 ```
 
-- Follow the `docs/src/dns/zone.md` for an example of how the markdown pages for the documentation should look like.
+- Follow the `docs/src/cloud/config.md` for an example of how the markdown pages for the documentation should look like.
 
 ## Pre commit
 
