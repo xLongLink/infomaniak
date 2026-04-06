@@ -40,10 +40,10 @@ all_clusters = client.cloud.kubernetes.list(
 
 - `public_cloud_id`: Unique identifier of the Public Cloud account.
 - `public_cloud_project_id`: Unique identifier of the Public Cloud project.
-- `kaas_pack_id`: Kubernetes Service Pack Identifier. Possible values: `1`, `2`.
-- `kubernetes_version`: Kubernetes Version. Possible values: `1.29`, `1.30`, `1.31`.
+- `kaas_pack`: Kubernetes service pack type. Possible values: `shared`, `dedicated`. Default: `shared`.
+- `kubernetes_version`: Kubernetes version. Possible values: `1.29`, `1.30`, `1.31`. If omitted, the latest supported version is selected.
 - `name`: Kubernetes Service Name (maximum `40` characters).
-- `region`: Public Cloud Region. Possible values: `dc3-a`, `dc4-a`.
+- `region`: Public Cloud region. Possible values: `dc3-a`, `dc4-a`. If omitted, a random supported region is selected.
 
 **returns:** `dict[str, Any]` containing the API creation response.
 
@@ -54,10 +54,7 @@ client = Client()
 created = client.cloud.kubernetes.create(
     public_cloud_id=...,
     public_cloud_project_id=...,
-    kaas_pack_id=1,
-    kubernetes_version="1.29",
     name="My Kubernetes Service",
-    region="dc4-a",
 )
 ```
 
