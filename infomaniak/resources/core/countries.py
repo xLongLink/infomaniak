@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from infomaniak.utils import parse, query_params
+from infomaniak.utils import parse
 from infomaniak.models import Country
 from infomaniak.resource import Resouce, AsyncResource
 
@@ -27,13 +27,17 @@ class Countries(Resouce):
         Returns:
             list[Country]: The list of countries returned by the API.
         """
+        params: dict[str, bool | str | list[int]] = {}
+        if only_enabled is not None:
+            params["only_enabled"] = only_enabled
+        if only_enabled_exception is not None:
+            params["only_enabled_exception[]"] = only_enabled_exception
+        if search is not None:
+            params["search"] = search
+
         response = self._client.get(
             "/1/countries",
-            params=query_params(
-                only_enabled=only_enabled,
-                only_enabled_exception=only_enabled_exception,
-                search=search,
-            ),
+            params=params or None,
         )
         return [parse(Country, item) for item in response.json()["data"]]
 
@@ -73,13 +77,17 @@ class AsyncCountries(AsyncResource):
         Returns:
             list[Country]: The list of countries returned by the API.
         """
+        params: dict[str, bool | str | list[int]] = {}
+        if only_enabled is not None:
+            params["only_enabled"] = only_enabled
+        if only_enabled_exception is not None:
+            params["only_enabled_exception[]"] = only_enabled_exception
+        if search is not None:
+            params["search"] = search
+
         response = await self._client.get(
             "/1/countries",
-            params=query_params(
-                only_enabled=only_enabled,
-                only_enabled_exception=only_enabled_exception,
-                search=search,
-            ),
+            params=params or None,
         )
         return [parse(Country, item) for item in response.json()["data"]]
 
