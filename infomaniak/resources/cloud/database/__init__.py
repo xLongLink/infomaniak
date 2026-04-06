@@ -2,11 +2,10 @@ from __future__ import annotations
 
 from .ip import Ip, AsyncIp
 from .data import Data, AsyncData
-from dacite import from_dict
 from .config import Config, AsyncConfig
 from .backups import Backups, AsyncBackups
 from .restore import Restore, AsyncRestore
-from infomaniak.utils import PaginatedList
+from infomaniak.utils import PaginatedList, parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.cloud import (
     DatabaseService, DatabaseServiceBoolResponse,
@@ -50,7 +49,7 @@ class Database(Resouce):
         payload = response.json()
 
         return PaginatedList(
-            [from_dict(DatabaseService, item) for item in payload["data"]],
+            [parse(DatabaseService, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -81,7 +80,7 @@ class Database(Resouce):
         payload = response.json()
 
         return PaginatedList(
-            [from_dict(DatabaseService, item) for item in payload["data"]],
+            [parse(DatabaseService, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -132,7 +131,7 @@ class Database(Resouce):
             }
 
         response = self._client.post(url, json=payload)
-        return from_dict(DatabaseServiceCreationResponse, response.json())
+        return parse(DatabaseServiceCreationResponse, response.json())
 
     def get(
         self,
@@ -158,7 +157,7 @@ class Database(Resouce):
         params = {"with": with_} if with_ is not None else None
 
         response = self._client.get(url, params=params)
-        return from_dict(DatabaseService, response.json()["data"])
+        return parse(DatabaseService, response.json()["data"])
 
     def delete(
         self,
@@ -184,7 +183,7 @@ class Database(Resouce):
         params = {"keep_backup_files": keep_backup_files} if keep_backup_files is not None else None
 
         response = self._client.delete(url, params=params)
-        return from_dict(DatabaseServiceBoolResponse, response.json())
+        return parse(DatabaseServiceBoolResponse, response.json())
 
     def update(
         self,
@@ -214,7 +213,7 @@ class Database(Resouce):
             url,
             json={key: value for key, value in payload.items() if value is not None},
         )
-        return from_dict(DatabaseServiceBoolResponse, response.json())
+        return parse(DatabaseServiceBoolResponse, response.json())
 
     def password(
         self,
@@ -238,7 +237,7 @@ class Database(Resouce):
             f"{public_cloud_project_id}/dbaas/{dbaas_id}/reset_password"
         )
         response = self._client.post(url)
-        return from_dict(DatabaseServiceConnectionResponse, response.json())
+        return parse(DatabaseServiceConnectionResponse, response.json())
 
 
 class AsyncDatabase(AsyncResource):
@@ -277,7 +276,7 @@ class AsyncDatabase(AsyncResource):
         payload = response.json()
 
         return PaginatedList(
-            [from_dict(DatabaseService, item) for item in payload["data"]],
+            [parse(DatabaseService, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -308,7 +307,7 @@ class AsyncDatabase(AsyncResource):
         payload = response.json()
 
         return PaginatedList(
-            [from_dict(DatabaseService, item) for item in payload["data"]],
+            [parse(DatabaseService, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -359,7 +358,7 @@ class AsyncDatabase(AsyncResource):
             }
 
         response = await self._client.post(url, json=payload)
-        return from_dict(DatabaseServiceCreationResponse, response.json())
+        return parse(DatabaseServiceCreationResponse, response.json())
 
     async def get(
         self,
@@ -385,7 +384,7 @@ class AsyncDatabase(AsyncResource):
         params = {"with": with_} if with_ is not None else None
 
         response = await self._client.get(url, params=params)
-        return from_dict(DatabaseService, response.json()["data"])
+        return parse(DatabaseService, response.json()["data"])
 
     async def delete(
         self,
@@ -411,7 +410,7 @@ class AsyncDatabase(AsyncResource):
         params = {"keep_backup_files": keep_backup_files} if keep_backup_files is not None else None
 
         response = await self._client.delete(url, params=params)
-        return from_dict(DatabaseServiceBoolResponse, response.json())
+        return parse(DatabaseServiceBoolResponse, response.json())
 
     async def update(
         self,
@@ -441,7 +440,7 @@ class AsyncDatabase(AsyncResource):
             url,
             json={key: value for key, value in payload.items() if value is not None},
         )
-        return from_dict(DatabaseServiceBoolResponse, response.json())
+        return parse(DatabaseServiceBoolResponse, response.json())
 
     async def password(
         self,
@@ -465,4 +464,4 @@ class AsyncDatabase(AsyncResource):
             f"{public_cloud_project_id}/dbaas/{dbaas_id}/reset_password"
         )
         response = await self._client.post(url)
-        return from_dict(DatabaseServiceConnectionResponse, response.json())
+        return parse(DatabaseServiceConnectionResponse, response.json())

@@ -1,5 +1,4 @@
-from dacite import from_dict
-from infomaniak.utils import _with
+from infomaniak.utils import _with, parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.dns.tld import Tld
 
@@ -51,7 +50,7 @@ class TLD(Resouce):
         if groups is not None:
             params["groups"] = groups
         response = self._client.get(url, params=params or None)
-        return [from_dict(Tld, item) for item in response.json()["data"]]
+        return [parse(Tld, item) for item in response.json()["data"]]
 
     def show(
         self,
@@ -93,7 +92,7 @@ class TLD(Resouce):
         )
         params = {"with": with_values} if with_values is not None else None
         response = self._client.get(url, params=params)
-        return from_dict(Tld, response.json()["data"])
+        return parse(Tld, response.json()["data"])
 
 
 class AsyncTLD(AsyncResource):
@@ -143,7 +142,7 @@ class AsyncTLD(AsyncResource):
         if groups is not None:
             params["groups"] = groups
         response = await self._client.get(url, params=params or None)
-        return [from_dict(Tld, item) for item in response.json()["data"]]
+        return [parse(Tld, item) for item in response.json()["data"]]
 
     async def show(
         self,
@@ -185,4 +184,4 @@ class AsyncTLD(AsyncResource):
         )
         params = {"with": with_values} if with_values is not None else None
         response = await self._client.get(url, params=params)
-        return from_dict(Tld, response.json()["data"])
+        return parse(Tld, response.json()["data"])

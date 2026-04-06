@@ -4,6 +4,13 @@
 pip install xinfomaniak
 ```
 
+## Goals
+
+- Provide a simple and intuitive interface to interact with the Infomaniak API.
+- Support both synchronous and asynchronous programming paradigms.
+- Type annotations for better developer experience and code quality.
+
+
 ## Usage
 
 The SDK supports two clients a `synchronous` and a `asynchronous`

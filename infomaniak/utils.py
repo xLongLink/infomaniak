@@ -1,6 +1,10 @@
 from __future__ import annotations
 
-from typing import TypeVar, Iterable
+import sys
+import json
+from dacite import from_dict
+from typing import Any, TypeVar, Iterable
+from dacite.exceptions import DaciteError
 
 T = TypeVar("T")
 
@@ -11,6 +15,28 @@ class PaginatedList(list[T]):
         self.page = page
         self.pages = pages
         self.items = items
+
+
+def parse(model: type[T], data: dict[str, Any]) -> T:
+    """
+    Parse an API payload into a typed dataclass instance.
+
+    Args:
+        model: The dataclass type to instantiate.
+        data: The JSON payload to parse.
+
+    Returns:
+        T: The parsed dataclass instance.
+    """
+    try:
+        return from_dict(model, data)
+    except DaciteError as exc:
+        print(
+            f"Failed to parse {model.__name__}: {exc}\nPayload:\n"
+            f"{json.dumps(data, indent=2, sort_keys=True)}",
+            file=sys.stderr,
+        )
+        raise
 
 
 def _with(**fields: bool) -> str | None:

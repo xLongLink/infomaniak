@@ -45,11 +45,7 @@ client = Client(token="your-token")
 import asyncio
 from infomaniak import AsyncClient
 
-async def main() -> None:
-    client = AsyncClient(token="your-token")
-    await client.domain.list()
-
-asyncio.run(main())
+client = AsyncClient(token="your-token")
 ```
 
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dacite import from_dict
+from infomaniak.utils import parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.cloud import PublicCloudConfig
 
@@ -22,7 +22,7 @@ class Config(Resouce):
             "/1/public_clouds/config",
             params={"account_id": account_id},
         )
-        return from_dict(PublicCloudConfig, response.json()["data"])
+        return parse(PublicCloudConfig, response.json()["data"])
 
 
 class AsyncConfig(AsyncResource):
@@ -42,4 +42,4 @@ class AsyncConfig(AsyncResource):
             "/1/public_clouds/config",
             params={"account_id": account_id},
         )
-        return from_dict(PublicCloudConfig, response.json()["data"])
+        return parse(PublicCloudConfig, response.json()["data"])

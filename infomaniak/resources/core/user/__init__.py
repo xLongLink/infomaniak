@@ -1,9 +1,7 @@
-from dacite import from_dict
 from typing import Literal
 from .teams import UserTeams, AsyncUserTeams
 from .accounts import UserAccounts, AsyncUserAccounts
 from infomaniak.resource import Resouce, AsyncResource
-from infomaniak.models.core.user import AccountInvitation
 
 
 class User(Resouce):
@@ -30,53 +28,17 @@ class User(Resouce):
         strict: bool | None = None,
         teams: list[int] | None = None,
         with_: str | None = None,
-    ) -> AccountInvitation:
+    ) -> None:
         """Invite a user in an account."""
-        url = f"/1/accounts/{account}/invitations"
-        params = {"with": with_} if with_ is not None else None
-
-        payload: dict[str, object] = {
-            "email": email,
-            "first_name": first_name,
-            "last_name": last_name,
-            "locale": locale,
-            "role_type": role_type,
-        }
-
-        notifications: dict[str, bool] = {}
-        if notifications_billing is not None:
-            notifications["billing"] = notifications_billing
-        if notifications_products is not None:
-            notifications["products"] = notifications_products
-        if notifications:
-            payload["notifications"] = notifications
-
-        permissions: dict[str, bool] = {}
-        if permissions_billing is not None:
-            permissions["billing"] = permissions_billing
-        if permissions:
-            payload["permissions"] = permissions
-
-        if silent is not None:
-            payload["silent"] = silent
-        if strict is not None:
-            payload["strict"] = strict
-        if teams is not None:
-            payload["teams"] = teams
-
-        response = self._client.post(url, json=payload, params=params)
-        return from_dict(AccountInvitation, response.json()["data"])
+        raise NotImplementedError("Core.user.invite is not implemented yet.")
 
     def cancel(self, account: int, invitation: int) -> bool:
         """Cancel an invitation to join an account."""
-        return self.revoke(account, invitation)
+        raise NotImplementedError("Core.user.cancel is not implemented yet.")
 
     def revoke(self, account: int, invitation: int) -> bool:
         """Revoke an invitation to join an account."""
-        url = f"/1/accounts/{account}/invitations/{invitation}"
-        response = self._client.delete(url)
-        payload = response.json()
-        return bool(payload.get("result") == "success")
+        raise NotImplementedError("Core.user.revoke is not implemented yet.")
 
 
 class AsyncUser(AsyncResource):
@@ -103,50 +65,14 @@ class AsyncUser(AsyncResource):
         strict: bool | None = None,
         teams: list[int] | None = None,
         with_: str | None = None,
-    ) -> AccountInvitation:
+    ) -> None:
         """Invite a user in an account."""
-        url = f"/1/accounts/{account}/invitations"
-        params = {"with": with_} if with_ is not None else None
-
-        payload: dict[str, object] = {
-            "email": email,
-            "first_name": first_name,
-            "last_name": last_name,
-            "locale": locale,
-            "role_type": role_type,
-        }
-
-        notifications: dict[str, bool] = {}
-        if notifications_billing is not None:
-            notifications["billing"] = notifications_billing
-        if notifications_products is not None:
-            notifications["products"] = notifications_products
-        if notifications:
-            payload["notifications"] = notifications
-
-        permissions: dict[str, bool] = {}
-        if permissions_billing is not None:
-            permissions["billing"] = permissions_billing
-        if permissions:
-            payload["permissions"] = permissions
-
-        if silent is not None:
-            payload["silent"] = silent
-        if strict is not None:
-            payload["strict"] = strict
-        if teams is not None:
-            payload["teams"] = teams
-
-        response = await self._client.post(url, json=payload, params=params)
-        return from_dict(AccountInvitation, response.json()["data"])
+        raise NotImplementedError("AsyncCore.user.invite is not implemented yet.")
 
     async def cancel(self, account: int, invitation: int) -> bool:
         """Cancel an invitation to join an account."""
-        return await self.revoke(account, invitation)
+        raise NotImplementedError("AsyncCore.user.cancel is not implemented yet.")
 
     async def revoke(self, account: int, invitation: int) -> bool:
         """Revoke an invitation to join an account."""
-        url = f"/1/accounts/{account}/invitations/{invitation}"
-        response = await self._client.delete(url)
-        payload = response.json()
-        return bool(payload.get("result") == "success")
+        raise NotImplementedError("AsyncCore.user.revoke is not implemented yet.")

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from dacite import from_dict
 from typing import Literal
 from .order import Order, AsyncOrder
 from .dnssec import DNSSEC, AsyncDNSSEC
 from .nameservers import Nameservers, AsyncNameservers
-from infomaniak.utils import PaginatedList
+from infomaniak.utils import PaginatedList, parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.domain import Domain as DomainModel
 
@@ -72,7 +71,7 @@ class Domain(Resouce):
         response = self._client.get("/2/domains/domains", params=params or None)
         payload = response.json()
         return PaginatedList(
-            [from_dict(DomainModel, item) for item in payload["data"]],
+            [parse(DomainModel, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -89,7 +88,7 @@ class Domain(Resouce):
             DomainModel: The matching domain details.
         """
         response = self._client.get(f"/2/domains/domains/{domain}")
-        return from_dict(DomainModel, response.json()["data"])
+        return parse(DomainModel, response.json()["data"])
 
     def display(self, domain: str) -> DomainModel:
         """
@@ -166,7 +165,7 @@ class AsyncDomain(AsyncResource):
         response = await self._client.get("/2/domains/domains", params=params or None)
         payload = response.json()
         return PaginatedList(
-            [from_dict(DomainModel, item) for item in payload["data"]],
+            [parse(DomainModel, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -183,7 +182,7 @@ class AsyncDomain(AsyncResource):
             DomainModel: The matching domain details.
         """
         response = await self._client.get(f"/2/domains/domains/{domain}")
-        return from_dict(DomainModel, response.json()["data"])
+        return parse(DomainModel, response.json()["data"])
 
     async def display(self, domain: str) -> DomainModel:
         """

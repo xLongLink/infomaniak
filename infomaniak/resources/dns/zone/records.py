@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from dacite import from_dict
 from typing import Literal
-from infomaniak.utils import PaginatedList
+from infomaniak.utils import PaginatedList, parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.dns.zone import DNSRecord
 
@@ -76,7 +75,7 @@ class Records(Resouce):
         response = self._client.get(url, params=params or None)
         payload = response.json()
         return PaginatedList(
-            [from_dict(DNSRecord, record) for record in payload["data"]],
+            [parse(DNSRecord, record) for record in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -103,13 +102,13 @@ class Records(Resouce):
         if source is not None:
             payload["source"] = self._normalize_source(zone, source)
         response = self._client.post(url, json=payload, params=params)
-        return from_dict(DNSRecord, response.json()["data"])
+        return parse(DNSRecord, response.json()["data"])
 
     def display(self, zone: str, record: int) -> DNSRecord:
         """Retrieve one DNS record for a given zone."""
         url = f"/2/zones/{zone}/records/{record}"
         response = self._client.get(url)
-        return from_dict(DNSRecord, response.json()["data"])
+        return parse(DNSRecord, response.json()["data"])
 
     def update(
         self,
@@ -128,7 +127,7 @@ class Records(Resouce):
             json={"target": target, "ttl": ttl},
             params=params,
         )
-        return from_dict(DNSRecord, response.json()["data"])
+        return parse(DNSRecord, response.json()["data"])
 
     def delete(self, zone: str, record: int) -> bool:
         """Delete a DNS record."""
@@ -224,7 +223,7 @@ class AsyncRecords(AsyncResource):
         response = await self._client.get(url, params=params or None)
         payload = response.json()
         return PaginatedList(
-            [from_dict(DNSRecord, record) for record in payload["data"]],
+            [parse(DNSRecord, record) for record in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -251,13 +250,13 @@ class AsyncRecords(AsyncResource):
         if source is not None:
             payload["source"] = self._normalize_source(zone, source)
         response = await self._client.post(url, json=payload, params=params)
-        return from_dict(DNSRecord, response.json()["data"])
+        return parse(DNSRecord, response.json()["data"])
 
     async def display(self, zone: str, record: int) -> DNSRecord:
         """Retrieve one DNS record for a given zone."""
         url = f"/2/zones/{zone}/records/{record}"
         response = await self._client.get(url)
-        return from_dict(DNSRecord, response.json()["data"])
+        return parse(DNSRecord, response.json()["data"])
 
     async def update(
         self,
@@ -276,7 +275,7 @@ class AsyncRecords(AsyncResource):
             json={"target": target, "ttl": ttl},
             params=params,
         )
-        return from_dict(DNSRecord, response.json()["data"])
+        return parse(DNSRecord, response.json()["data"])
 
     async def delete(self, zone: str, record: int) -> bool:
         """Delete a DNS record."""

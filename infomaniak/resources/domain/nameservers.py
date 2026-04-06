@@ -1,4 +1,4 @@
-from dacite import from_dict
+from infomaniak.utils import parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.domain import (UpdateNameserversRequest,
                                       UpdateNameserversResponse)
@@ -49,7 +49,7 @@ class Nameservers(Resouce):
             f"/2/domains/domains/{domain}/nameservers",
             json=json_payload,
         )
-        return from_dict(UpdateNameserversResponse, response.json())
+        return parse(UpdateNameserversResponse, response.json())
 
 
 class AsyncNameservers(AsyncResource):
@@ -96,4 +96,4 @@ class AsyncNameservers(AsyncResource):
             f"/2/domains/domains/{domain}/nameservers",
             json=json_payload,
         )
-        return from_dict(UpdateNameserversResponse, response.json())
+        return parse(UpdateNameserversResponse, response.json())

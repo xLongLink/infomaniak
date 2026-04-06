@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from dacite import from_dict
-from infomaniak.utils import PaginatedList
+from infomaniak.utils import PaginatedList, parse
 from infomaniak.resource import Resouce, AsyncResource
 from infomaniak.models.cloud import (PublicCloudProject,
                                      CreatePublicCloudProjectResponse,
@@ -45,7 +44,7 @@ class Projects(Resouce):
             payload["user_email"] = user_email
 
         response = self._client.post(url, json=payload)
-        return from_dict(
+        return parse(
             CreatePublicCloudProjectResponse,
             response.json(),
         )
@@ -79,7 +78,7 @@ class Projects(Resouce):
             payload["user_description"] = user_description
 
         response = self._client.post(url, json=payload)
-        return from_dict(
+        return parse(
             PublicCloudProjectInvitationResponse,
             response.json(),
         )
@@ -103,7 +102,7 @@ class Projects(Resouce):
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}"
         response = self._client.patch(url, json={"name": name})
-        return from_dict(
+        return parse(
             PublicCloudProjectAsyncActionResponse,
             response.json(),
         )
@@ -125,7 +124,7 @@ class Projects(Resouce):
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}"
         response = self._client.delete(url)
-        return from_dict(
+        return parse(
             PublicCloudProjectAsyncActionResponse,
             response.json(),
         )
@@ -152,7 +151,7 @@ class Projects(Resouce):
         response = self._client.get(url, params=params)
         payload = response.json()
         return PaginatedList(
-            [from_dict(PublicCloudProject, item) for item in payload["data"]],
+            [parse(PublicCloudProject, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -180,7 +179,7 @@ class Projects(Resouce):
         params = {"with": with_} if with_ is not None else None
 
         response = self._client.get(url, params=params)
-        return from_dict(PublicCloudProject, response.json()["data"])
+        return parse(PublicCloudProject, response.json()["data"])
 
 
 class AsyncProjects(AsyncResource):
@@ -219,7 +218,7 @@ class AsyncProjects(AsyncResource):
             payload["user_email"] = user_email
 
         response = await self._client.post(url, json=payload)
-        return from_dict(
+        return parse(
             CreatePublicCloudProjectResponse,
             response.json(),
         )
@@ -253,7 +252,7 @@ class AsyncProjects(AsyncResource):
             payload["user_description"] = user_description
 
         response = await self._client.post(url, json=payload)
-        return from_dict(
+        return parse(
             PublicCloudProjectInvitationResponse,
             response.json(),
         )
@@ -277,7 +276,7 @@ class AsyncProjects(AsyncResource):
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}"
         response = await self._client.patch(url, json={"name": name})
-        return from_dict(
+        return parse(
             PublicCloudProjectAsyncActionResponse,
             response.json(),
         )
@@ -299,7 +298,7 @@ class AsyncProjects(AsyncResource):
         """
         url = f"/1/public_clouds/{public_cloud_id}/projects/{public_cloud_project_id}"
         response = await self._client.delete(url)
-        return from_dict(
+        return parse(
             PublicCloudProjectAsyncActionResponse,
             response.json(),
         )
@@ -326,7 +325,7 @@ class AsyncProjects(AsyncResource):
         response = await self._client.get(url, params=params)
         payload = response.json()
         return PaginatedList(
-            [from_dict(PublicCloudProject, item) for item in payload["data"]],
+            [parse(PublicCloudProject, item) for item in payload["data"]],
             page=payload.get("page") or 1,
             pages=payload.get("pages") or 1,
             items=payload.get("total") or 0,
@@ -354,4 +353,4 @@ class AsyncProjects(AsyncResource):
         params = {"with": with_} if with_ is not None else None
 
         response = await self._client.get(url, params=params)
-        return from_dict(PublicCloudProject, response.json()["data"])
+        return parse(PublicCloudProject, response.json()["data"])
