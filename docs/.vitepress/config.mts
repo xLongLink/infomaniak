@@ -68,6 +68,7 @@ export default defineConfig({
           { text: 'Timezones', link: '/core/timezones' },
         ],
       },
+      { text: 'CHK', link: '/chk', collapsed: false },
       {
         text: 'Tasks',
         link: '/tasks',

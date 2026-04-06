@@ -1,4 +1,5 @@
 from infomaniak.clients import BaseClient, AsyncBaseClient
+from infomaniak.resources.chk import Chk, AsyncChk
 from infomaniak.resources.dns import DNS, AsyncDNS
 from infomaniak.resources.url import Url, AsyncUrl
 from infomaniak.resources.core import Core, AsyncCore
@@ -25,6 +26,7 @@ class Client(BaseClient):
 
         self.backup = Backup(self)
         self.cloud = Cloud(self)
+        self.chk = Chk(self)
         self.core = Core(self)
         self.dns = DNS(self)
         self.domain = Domain(self)
@@ -48,6 +50,7 @@ class AsyncClient(AsyncBaseClient):
 
         self.backup = AsyncBackup(self)
         self.cloud = AsyncCloud(self)
+        self.chk = AsyncChk(self)
         self.core = AsyncCore(self)
         self.dns = AsyncDNS(self)
         self.domain = AsyncDomain(self)
