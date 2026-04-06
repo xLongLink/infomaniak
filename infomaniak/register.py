@@ -7,6 +7,7 @@ from infomaniak.resources.cloud import Cloud, AsyncCloud
 from infomaniak.resources.kchat import Kchat, AsyncKchat
 from infomaniak.resources.kmeet import Kmeet, AsyncKmeet
 from infomaniak.resources.radio import Radio, AsyncRadio
+from infomaniak.resources.tasks import Tasks, AsyncTasks
 from infomaniak.resources.video import Video, AsyncVideo
 # Load and connect resources to the clients
 from infomaniak.resources.backup import Backup, AsyncBackup
@@ -34,6 +35,7 @@ class Client(BaseClient):
         self.mail = Mail(self)
         self.newsletter = Newsletter(self)
         self.radio = Radio(self)
+        self.tasks = Tasks(self)
         self.url = Url(self)
         self.video = Video(self)
 
@@ -56,5 +58,6 @@ class AsyncClient(AsyncBaseClient):
         self.mail = AsyncMail(self)
         self.newsletter = AsyncNewsletter(self)
         self.radio = AsyncRadio(self)
+        self.tasks = AsyncTasks(self)
         self.url = AsyncUrl(self)
         self.video = AsyncVideo(self)
