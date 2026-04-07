@@ -186,7 +186,7 @@ class Kubernetes(Resouce):
         public_cloud_id: int,
         public_cloud_project_id: int,
         kaas_id: int,
-    ) -> dict[str, Any]:
+    ) -> bool:
         """
         Delete a Kubernetes cluster.
 
@@ -196,14 +196,21 @@ class Kubernetes(Resouce):
             kaas_id: The unique identifier of the Kubernetes cluster.
 
         Returns:
-            dict[str, Any]: The API operation result payload.
+            bool: ``True`` when the delete operation is successful.
+
+        Raises:
+            ValueError: If the API reports an unsuccessful delete operation.
         """
         url = (
             f"/1/public_clouds/{public_cloud_id}/projects/"
             f"{public_cloud_project_id}/kaas/{kaas_id}"
         )
         response = self._client.delete(url)
-        return response.json()
+        payload = response.json()
+        if not payload.get("data"):
+            raise ValueError("Kubernetes cluster delete operation failed.")
+
+        return True
 
     def update(
         self,
@@ -488,7 +495,7 @@ class AsyncKubernetes(AsyncResource):
         public_cloud_id: int,
         public_cloud_project_id: int,
         kaas_id: int,
-    ) -> dict[str, Any]:
+    ) -> bool:
         """
         Delete a Kubernetes cluster.
 
@@ -498,14 +505,21 @@ class AsyncKubernetes(AsyncResource):
             kaas_id: The unique identifier of the Kubernetes cluster.
 
         Returns:
-            dict[str, Any]: The API operation result payload.
+            bool: ``True`` when the delete operation is successful.
+
+        Raises:
+            ValueError: If the API reports an unsuccessful delete operation.
         """
         url = (
             f"/1/public_clouds/{public_cloud_id}/projects/"
             f"{public_cloud_project_id}/kaas/{kaas_id}"
         )
         response = await self._client.delete(url)
-        return response.json()
+        payload = response.json()
+        if not payload.get("data"):
+            raise ValueError("Kubernetes cluster delete operation failed.")
+
+        return True
 
     async def update(
         self,

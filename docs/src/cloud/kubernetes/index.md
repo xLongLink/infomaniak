@@ -82,18 +82,18 @@ cluster = client.cloud.kubernetes.get(
 
 - `public_cloud_id`: Unique identifier of the Public Cloud account.
 - `public_cloud_project_id`: Unique identifier of the Public Cloud project.
-- `kubernetes_id`: Unique identifier of the Kubernetes cluster.
+- `kaas_id`: Unique identifier of the Kubernetes cluster.
 
-**returns:** `dict[str, Any]` with operation status.
+**returns:** `bool`. Returns `True` when deletion succeeds, otherwise raises a `ValueError`.
 
 ```py
 from infomaniak import Client
 
 client = Client()
-removed = client.cloud.kubernetes.delete(
+deleted: bool = client.cloud.kubernetes.delete(
     public_cloud_id=...,
     public_cloud_project_id=...,
-    kubernetes_id=...,
+    kaas_id=...,
 )
 ```
 
